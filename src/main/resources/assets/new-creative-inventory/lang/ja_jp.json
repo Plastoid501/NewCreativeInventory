@@ -1,0 +1,18 @@
+{
+  "plastoid501.newItemGroup.buildingBlocks": "建築ブロック",
+  "plastoid501.newItemGroup.coloredBlocks": "色付きブロック",
+  "plastoid501.newItemGroup.natural": "天然ブロック",
+  "plastoid501.newItemGroup.functional": "機能的ブロック",
+  "plastoid501.newItemGroup.redstone": "レッドストーン系ブロック",
+  "plastoid501.newItemGroup.hotbar": "保存したホットバー",
+  "plastoid501.newItemGroup.search": "アイテム検索",
+  "plastoid501.newItemGroup.tools": "道具と実用品",
+  "plastoid501.newItemGroup.combat": "戦闘",
+  "plastoid501.newItemGroup.foodAndDrink": "食べ物と飲み物",
+  "plastoid501.newItemGroup.ingredients": "材料",
+  "plastoid501.newItemGroup.spawnEggs": "スポーンエッグ",
+  "plastoid501.newItemGroup.op": "管理者用アイテム",
+  "plastoid501.newItemGroup.inventory": "サバイバルインベントリ",
+
+  "painting.random": "ランダムな絵画"
+}

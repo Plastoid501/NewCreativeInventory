@@ -1,0 +1,10 @@
+accessWidener v2 named
+
+accessible class net/minecraft/client/gui/screen/ingame/CreativeInventoryScreen$CreativeSlot
+
+accessible method net/minecraft/client/gui/screen/ingame/CreativeInventoryScreen search ()V
+accessible method net/minecraft/client/gui/screen/ingame/CreativeInventoryScreen hasScrollbar ()Z
+accessible method net/minecraft/client/gui/screen/ingame/CreativeInventoryScreen isClickInScrollbar (DD)Z
+
+accessible field net/minecraft/client/gui/screen/ingame/CreativeInventoryScreen searchResultTags Ljava/util/Set;
+
