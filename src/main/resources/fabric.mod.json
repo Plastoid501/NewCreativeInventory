@@ -3,15 +3,15 @@
 	"id": "new-creative-inventory",
 	"version": "${version}",
 	"name": "New Creative Inventory",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Creative Inventory in version 1.19.3",
 	"authors": [
-		"Me!"
+		"Plastoid501"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/Plastoid501/",
+		"sources": "https://github.com/Plastoid501/NewCreativeInventory"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/new-creative-inventory/icon.png",
 	"environment": "*",
 	"entrypoints": {

@@ -9,6 +9,7 @@ import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
+import net.minecraft.potion.Potions;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
@@ -111,7 +112,7 @@ public class NewItemGroup {
 
     public boolean containsItemStack(Collection<ItemStack> list, ItemStack itemStack) {
         for (ItemStack itemStack2 : list) {
-            if (ItemStack.areEqual(itemStack, itemStack2)) {
+            if (ItemStack.areItemsEqual(itemStack, itemStack2)) {
                 return true;
             }
         }
@@ -186,9 +187,10 @@ public class NewItemGroup {
 
     public void addPotions(Item item) {
         for (Potion potion : Registry.POTION) {
-            if (!potion.getEffects().isEmpty()) {
-                this.add(PotionUtil.setPotion(new ItemStack(item), potion));
+            if (potion == Potions.EMPTY) {
+                continue;
             }
+            this.add(PotionUtil.setPotion(new ItemStack(item), potion));
         }
     }
 

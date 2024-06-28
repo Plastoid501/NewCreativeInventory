@@ -25,6 +25,7 @@ import net.plastoid501.nci.item.NewItemGroup;
 import net.plastoid501.nci.item.NewItemGroups;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -36,15 +37,14 @@ import java.util.List;
 @Mixin(CreativeInventoryScreen.class)
 public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScreen<CreativeInventoryScreen.CreativeScreenHandler> {
     @Shadow private static int selectedTab;
-
+    @Shadow private float scrollPosition;
+    @Shadow private TextFieldWidget searchBox;
+    @Shadow public abstract boolean hasScrollbar();
     @Shadow protected abstract void renderTabIcon(MatrixStack matrices, ItemGroup group);
 
-    @Shadow private TextFieldWidget searchBox;
-    @Shadow private float scrollPosition;
-
-    @Shadow public abstract boolean hasScrollbar();
-
     private static final Identifier TEXTURE = new Identifier("textures/gui/container/creative_inventory/tabs.png");
+    private static final int TAB_WIDTH = 26;
+    private static final int TAB_HEIGHT = 32;
     private static final ItemGroup[] GROUPS;
     private static final ItemGroup BUILDING_BLOCKS;
     private static final ItemGroup COLORED_BLOCKS;
@@ -61,37 +61,117 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     private static final ItemGroup OPERATOR;
     private static final ItemGroup INVENTORY2;
 
-    private static final int TAB_WIDTH = 26;
-    private static final int TAB_HEIGHT = 32;
-
-
     public CreativeInventoryScreenMixin(CreativeInventoryScreen.CreativeScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
         super(screenHandler, playerInventory, text);
     }
 
     @Redirect(method = "onMouseClick", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
-    protected int modifyGetIndex1(ItemGroup instance) {
+    protected int modifyOnMouseClick1(ItemGroup instance) {
         return NewItemGroups.INVENTORY.getIndex();
     }
 
+    @Inject(method = "onMouseClick", at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/PlayerScreenHandler;getStacks()Lnet/minecraft/util/collection/DefaultedList;"))
+    private void modifyOnMouseClick2(Slot slot, int slotId, int button, SlotActionType actionType, CallbackInfo ci) {
+        if (this.client == null || this.client.player == null) {
+            return;
+        }
+        this.client.player.getInventory().clear();
+    }
+
+    @Redirect(method = "init()V", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
+    protected ItemGroup[] modifyInit() {
+        return GROUPS;
+    }
+
     @Redirect(method = "charTyped", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
-    private int modifyGetIndex2(ItemGroup instance) {
+    private int modifyCharTyped(ItemGroup instance) {
         return NewItemGroups.SEARCH.getIndex();
     }
 
     @Redirect(method = "keyPressed", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
-    private int modifyGetIndex3(ItemGroup instance) {
+    private int modifyKeyPressed1(ItemGroup instance) {
         return NewItemGroups.SEARCH.getIndex();
     }
 
-    @Redirect(method = "init()V", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
-    protected ItemGroup[] modifySetSelectedTab1() {
+    @Redirect(method = "keyPressed", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;SEARCH:Lnet/minecraft/item/ItemGroup;"))
+    private ItemGroup modifyKeyPressed2() {
+        return SEARCH;
+    }
+
+    @Redirect(method = "search", at = @At(value = "INVOKE", target = "Ljava/util/Iterator;hasNext()Z"))
+    private boolean modifySearch(Iterator<Item> instance) {
+        for (NewItemGroup itemGroup : NewItemGroups.GROUPS) {
+            for (ItemStack itemStack : itemGroup.getItemGroup()) {
+                itemGroup.appendStacksWithoutSameItemStack(this.handler.itemList, itemStack);
+            }
+        }
+        return false;
+    }
+
+    @Redirect(method = "drawForeground", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
+    protected ItemGroup[] modifyDrawForeground1() {
         return GROUPS;
     }
 
-    @Redirect(method = "keyPressed", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;SEARCH:Lnet/minecraft/item/ItemGroup;"))
+    @Redirect(method = "drawForeground", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;shouldRenderName()Z"))
+    protected boolean modifyDrawForeground2(ItemGroup instance) {
+        return instance != INVENTORY2;
+    }
+
+    @Redirect(method = "drawForeground", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getDisplayName()Lnet/minecraft/text/Text;"))
+    protected Text modifyDrawForeground3(ItemGroup instance) {
+        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].getDisplayName();
+    }
+
+    @Redirect(method = "mouseClicked", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
+    public ItemGroup[] modifyMouseClicked1() {
+        return GROUPS;
+    }
+
+    @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
+    public int modifyMouseClicked2(ItemGroup instance) {
+        return NewItemGroups.INVENTORY.getIndex();
+    }
+
+    @Redirect(method = "mouseReleased", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
+    public ItemGroup[] modifyMouseReleased1() {
+        return GROUPS;
+    }
+
+    @Inject(method = "hasScrollbar", at = @At("HEAD"), cancellable = true)
+    private void modifyHasScrollbar(CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(selectedTab != NewItemGroups.INVENTORY.getIndex() && this.handler.shouldShowScrollbar());
+        cir.cancel();
+    }
+
+    @Redirect(method = "setSelectedTab", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;HOTBAR:Lnet/minecraft/item/ItemGroup;"))
+    private ItemGroup modifySetSelectedTab1() {
+        return HOTBAR;
+    }
+
+    @Redirect(method = "setSelectedTab", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;SEARCH:Lnet/minecraft/item/ItemGroup;"))
     private ItemGroup modifySetSelectedTab2() {
         return SEARCH;
+    }
+
+    @Redirect(method = "setSelectedTab", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;appendStacks(Lnet/minecraft/util/collection/DefaultedList;)V"))
+    private void modifySetSelectedTab3(ItemGroup instance, DefaultedList<ItemStack> stacks) {
+        NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].appendStacks(stacks);
+    }
+
+    @Redirect(method = "setSelectedTab", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;INVENTORY:Lnet/minecraft/item/ItemGroup;"))
+    private ItemGroup modifySetSelectedTab4() {
+        return INVENTORY2;
+    }
+
+    @ModifyConstant(method = "setSelectedTab", constant = @Constant(intValue = 6))
+    private int modifySetSelectedTab5(int constant) {
+        return 7;
+    }
+
+    @Redirect(method = "setSelectedTab", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
+    private int modifySetSelectedTab6(ItemGroup instance) {
+        return instance.getIcon().getCount() - 1;
     }
 
     @Redirect(method = "isClickOutsideBounds", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
@@ -99,82 +179,63 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         return GROUPS;
     }
 
-    @Redirect(method = "setSelectedTab", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;HOTBAR:Lnet/minecraft/item/ItemGroup;"))
-    private ItemGroup modifySetSelectedTab3() {
-        return HOTBAR;
-    }
-
-    @Redirect(method = "setSelectedTab", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;SEARCH:Lnet/minecraft/item/ItemGroup;"))
-    private ItemGroup modifySetSelectedTab4() {
-        return SEARCH;
-    }
-
-    @Redirect(method = "setSelectedTab", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;appendStacks(Lnet/minecraft/util/collection/DefaultedList;)V"))
-    private void modifySetSelectedTab5(ItemGroup instance, DefaultedList<ItemStack> stacks) {
-        NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].appendStacks(stacks);
-    }
-
-    @Redirect(method = "setSelectedTab", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;INVENTORY:Lnet/minecraft/item/ItemGroup;"))
-    private ItemGroup modifySetSelectedTab6() {
-        return INVENTORY2;
-    }
-
-    @ModifyConstant(method = "setSelectedTab", constant = @Constant(intValue = 6))
-    private int modifySetSelectedTab7(int constant) {
-        return 7;
-    }
-
-    @Redirect(method = "setSelectedTab", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
-    private int modifySetSelectedTab8(ItemGroup instance) {
-        return instance.getIcon().getCount() - 1;
-    }
-
-    @Redirect(method = "search", at = @At(value = "INVOKE", target = "Ljava/util/Iterator;hasNext()Z"))
-    private boolean modifyAppendStacks(Iterator<Item> instance) {
-        for (NewItemGroup itemGroup : NewItemGroups.GROUPS) {
-            for (ItemStack itemStack : itemGroup.getItemGroup()) {
-                itemGroup.appendStacksWithoutSameItemStack(this.handler.itemList, itemStack);
-            }
-        }
-
-        return false;
-    }
-
-    @Inject(method = "onMouseClick", at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/PlayerScreenHandler;getStacks()Lnet/minecraft/util/collection/DefaultedList;"))
-    private void modifyInventoryClear(Slot slot, int slotId, int button, SlotActionType actionType, CallbackInfo ci) {
-        if (this.client == null || this.client.player == null) {
-            return;
-        }
-        this.client.player.getInventory().clear();
-
-    }
-
-    /*
-    @Redirect(method = "drawBackground", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
-    public ItemGroup[] modifyDrawBackground1() {
+    @Redirect(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
+    public ItemGroup[] modifyRender1() {
         return GROUPS;
     }
 
-    @Redirect(method = "drawBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getTexture()Ljava/lang/String;"))
-    public String modifyDrawBackground2(ItemGroup instance) {
-        for (int i = 0; i < NewItemGroups.GROUPS.length; i++) {
-            if (NewItemGroups.GROUPS[i].getId().equals(instance.getName())) {
-                return NewItemGroups.GROUPS[i].getTexture();
-            }
+    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
+    public int modifyRender2(ItemGroup instance) {
+        return NewItemGroups.INVENTORY.getIndex();
+    }
+
+    @Redirect(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
+    private int modifyRenderTooltip1(ItemGroup instance) {
+        if (selectedTab == NewItemGroups.SEARCH.getIndex() || selectedTab == NewItemGroups.INVENTORY.getIndex() || (this.focusedSlot != null && this.focusedSlot.id >= 45)) {
+            return selectedTab;
+        }
+        return -1;
+    }
+
+    @Redirect(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;getGroup()Lnet/minecraft/item/ItemGroup;"))
+    private ItemGroup modifyRenderTooltip2(Item instance) {
+        return null;
+    }
+
+    @Redirect(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z"))
+    private boolean modifyRenderTooltip3(ItemStack instance, Item item) {
+        return false;
+    }
+
+    @Inject(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen;renderTooltip(Lnet/minecraft/client/util/math/MatrixStack;Ljava/util/List;Ljava/util/Optional;II)V"))
+    private void modifyRenderTooltip4(MatrixStack matrices, ItemStack stack, int x, int y, CallbackInfo ci, @Local(ordinal = 1) LocalRef<List<Text>> localRef) {
+        List<Text> newItemGroup = this.getNewItemGroup(stack);
+        List<Text> list2 = localRef.get();
+        for (Text text : newItemGroup) {
+            list2.add(1, text.shallowCopy().formatted(Formatting.BLUE));
+        }
+        localRef.set(list2);
+    }
+
+    @Unique
+    private List<Text> getNewItemGroup(ItemStack itemStack) {
+        List<Text> groups = new ArrayList<>();
+        if (itemStack.isOf(Items.ENCHANTED_BOOK)) {
+            groups.add(NewItemGroups.INGREDIENTS.getDisplayName());
+            return groups;
         }
 
-        return instance.getTexture();
+        for (int i = NewItemGroups.GROUPS.length - 1; 0 <= i; i--) {
+            NewItemGroup itemGroup = NewItemGroups.GROUPS[i];
+            if (itemGroup.containsItemStack(itemGroup.getItemGroup(), itemStack)) {
+                groups.add(itemGroup.getDisplayName());
+            }
+        }
+        return groups;
     }
-
-    @Redirect(method = "drawBackground", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;INVENTORY:Lnet/minecraft/item/ItemGroup;"))
-    public ItemGroup modifyDrawBackground3() {
-        return INVENTORY2;
-    }
-
-     */
 
     @Inject(method = "drawBackground", at = @At(value = "HEAD"), cancellable = true)
-    private void cancelDrawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY, CallbackInfo ci) {
+    private void modifyDrawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY, CallbackInfo ci) {
         ci.cancel();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         ItemGroup itemGroup = GROUPS[selectedTab];
@@ -211,6 +272,61 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
 
     @Override
     public void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
+    }
+
+    @ModifyConstant(method = "isClickInTab", constant = @Constant(intValue = 28))
+    private int modifyIsClickInTab1(int constant) {
+        return TAB_WIDTH;
+    }
+
+    @ModifyConstant(method = "isClickInTab", constant = @Constant(intValue = 6))
+    private int modifyIsClickInTab2(int constant) {
+        return 7;
+    }
+
+    @Redirect(method = "isClickInTab", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getColumn()I"))
+    private int modifyIsClickInTab3(ItemGroup instance) {
+        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].getColumn();
+    }
+
+    @Redirect(method = "isClickInTab", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;isSpecial()Z"))
+    private boolean modifyIsClickInTab4(ItemGroup instance) {
+        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].isSpecial();
+    }
+
+    @Redirect(method = "isClickInTab", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;isTopRow()Z"))
+    private boolean modifyIsClickInTab5(ItemGroup instance) {
+        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].isTopRow();
+    }
+
+    @ModifyConstant(method = "renderTabTooltipIfHovered", constant = @Constant(intValue = 28))
+    private int modifyRenderTabTooltipIfHovered1(int constant) {
+        return TAB_WIDTH;
+    }
+
+    @ModifyConstant(method = "renderTabTooltipIfHovered", constant = @Constant(intValue = 6))
+    private int modifyRenderTabTooltipIfHovered2(int constant) {
+        return 7;
+    }
+
+    @Redirect(method = "renderTabTooltipIfHovered", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getColumn()I"))
+    private int modifyRenderTabTooltipIfHovered3(ItemGroup instance) {
+        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].getColumn();
+    }
+
+    @Redirect(method = "renderTabTooltipIfHovered", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;isSpecial()Z"))
+    private boolean modifyRenderTabTooltipIfHovered4(ItemGroup instance) {
+        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].isSpecial();
+    }
+
+    @Redirect(method = "renderTabTooltipIfHovered", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;isTopRow()Z"))
+    private boolean modifyRenderTabTooltipIfHovered5(ItemGroup instance) {
+        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].isTopRow();
+    }
+
+    @Redirect(method = "renderTabTooltipIfHovered", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getDisplayName()Lnet/minecraft/text/Text;"))
+    private Text modifyRenderTabTooltipIfHovered6(ItemGroup instance) {
+        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].getDisplayName();
     }
 
     @Redirect(method = "renderTabIcon", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
@@ -266,167 +382,20 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         return stack;
     }
 
+    @Unique
     private int getTabX(NewItemGroup group) {
         int i = group.getColumn();
         int k = (TAB_WIDTH + 1) * i;
         if (group.isSpecial()) {
             k = this.backgroundWidth - (TAB_WIDTH + 1) * (7 - i) + 1;
         }
-
         return k;
     }
 
+    @Unique
     private void renderTab(MatrixStack matrices, int x, int y, int u, int v) {
         this.drawTexture(matrices, x, y, u, v, 5, TAB_HEIGHT);
         this.drawTexture(matrices, x + 5, y, u + 7, v, TAB_WIDTH - 5, TAB_HEIGHT);
-    }
-
-
-    private List<Text> getNewItemGroup(ItemStack itemStack) {
-        List<Text> groups = new ArrayList<>();
-        if (itemStack.isOf(Items.ENCHANTED_BOOK)) {
-            groups.add(NewItemGroups.INGREDIENTS.getDisplayName());
-            return groups;
-        }
-
-        for (int i = NewItemGroups.GROUPS.length - 1; 0 <= i; i--) {
-            NewItemGroup itemGroup = NewItemGroups.GROUPS[i];
-            if (itemGroup.containsItemStack(itemGroup.getItemGroup(), itemStack)) {
-                groups.add(itemGroup.getDisplayName());
-            }
-        }
-        return groups;
-    }
-
-    @Redirect(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
-    private int modifyRenderTooltip1(ItemGroup instance) {
-        if (selectedTab == NewItemGroups.INVENTORY.getIndex() || (this.focusedSlot != null && this.focusedSlot.id >= 45)) {
-            return selectedTab;
-        }
-
-        return instance.getIcon().getCount() - 1;
-    }
-
-    @Redirect(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;getGroup()Lnet/minecraft/item/ItemGroup;"))
-    private ItemGroup modifyRenderTooltip2(Item instance) {
-        return null;
-    }
-
-    @Redirect(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z"))
-    private boolean modifyRenderTooltip3(ItemStack instance, Item item) {
-        return false;
-    }
-
-    @Inject(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen;renderTooltip(Lnet/minecraft/client/util/math/MatrixStack;Ljava/util/List;Ljava/util/Optional;II)V"))
-    private void modifyRenderTooltip4(MatrixStack matrices, ItemStack stack, int x, int y, CallbackInfo ci, @Local(ordinal = 1) LocalRef<List<Text>> localRef) {
-        List<Text> newItemGroup = this.getNewItemGroup(stack);
-        List<Text> list2 = localRef.get();
-        for (Text text : newItemGroup) {
-            list2.add(1, text.shallowCopy().formatted(Formatting.BLUE));
-        }
-        localRef.set(list2);
-    }
-
-    @Redirect(method = "drawForeground", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
-    protected ItemGroup[] modifyDrawForeground1() {
-        return GROUPS;
-    }
-
-    @Redirect(method = "drawForeground", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;shouldRenderName()Z"))
-    protected boolean modifyDrawForeground2(ItemGroup instance) {
-        return instance != INVENTORY2;
-    }
-
-    @Redirect(method = "drawForeground", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getDisplayName()Lnet/minecraft/text/Text;"))
-    protected Text modifyDrawForeground3(ItemGroup instance) {
-        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].getDisplayName();
-    }
-
-    @Redirect(method = "mouseClicked", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
-    public ItemGroup[] modifyMouseClicked1() {
-        return GROUPS;
-    }
-
-    @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
-    public int modifyMouseClicked2(ItemGroup instance) {
-        return NewItemGroups.INVENTORY.getIndex();
-    }
-
-    @ModifyConstant(method = "isClickInTab", constant = @Constant(intValue = 28))
-    private int modifyIsClickInTab1(int constant) {
-        return TAB_WIDTH;
-    }
-
-    @ModifyConstant(method = "isClickInTab", constant = @Constant(intValue = 6))
-    private int modifyIsClickInTab2(int constant) {
-        return 7;
-    }
-
-    @Redirect(method = "isClickInTab", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getColumn()I"))
-    private int modifyIsClickInTab3(ItemGroup instance) {
-        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].getColumn();
-    }
-
-    @Redirect(method = "isClickInTab", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;isSpecial()Z"))
-    private boolean modifyIsClickInTab4(ItemGroup instance) {
-        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].isSpecial();
-    }
-
-    @Redirect(method = "isClickInTab", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;isTopRow()Z"))
-    private boolean modifyIsClickInTab5(ItemGroup instance) {
-        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].isTopRow();
-    }
-
-
-    @Inject(method = "hasScrollbar", at = @At("HEAD"), cancellable = true)
-    private void modifyHasScrollbar(CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(selectedTab != NewItemGroups.INVENTORY.getIndex() && this.handler.shouldShowScrollbar());
-        cir.cancel();
-    }
-
-    @Redirect(method = "mouseReleased", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
-    public ItemGroup[] modifyMouseReleased1() {
-        return GROUPS;
-    }
-
-    @Redirect(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
-    public ItemGroup[] modifyRender1() {
-        return GROUPS;
-    }
-
-    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
-    public int modifyRender2(ItemGroup instance) {
-        return NewItemGroups.INVENTORY.getIndex();
-    }
-
-    @ModifyConstant(method = "renderTabTooltipIfHovered", constant = @Constant(intValue = 28))
-    private int modifyRenderTabTooltipIfHovered1(int constant) {
-        return TAB_WIDTH;
-    }
-
-    @ModifyConstant(method = "renderTabTooltipIfHovered", constant = @Constant(intValue = 6))
-    private int modifyRenderTabTooltipIfHovered2(int constant) {
-        return 7;
-    }
-
-    @Redirect(method = "renderTabTooltipIfHovered", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getColumn()I"))
-    private int modifyRenderTabTooltipIfHovered3(ItemGroup instance) {
-        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].getColumn();
-    }
-
-    @Redirect(method = "renderTabTooltipIfHovered", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;isSpecial()Z"))
-    private boolean modifyRenderTabTooltipIfHovered4(ItemGroup instance) {
-        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].isSpecial();
-    }
-
-    @Redirect(method = "renderTabTooltipIfHovered", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;isTopRow()Z"))
-    private boolean modifyRenderTabTooltipIfHovered5(ItemGroup instance) {
-        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].isTopRow();
-    }
-
-    @Redirect(method = "renderTabTooltipIfHovered", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getDisplayName()Lnet/minecraft/text/Text;"))
-    private Text modifyRenderTabTooltipIfHovered6(ItemGroup instance) {
-        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].getDisplayName();
     }
 
     @Redirect(method = "<clinit>", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
@@ -549,7 +518,4 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         };
         GROUPS = new ItemGroup[]{BUILDING_BLOCKS, COLORED_BLOCKS, NATURAL, FUNCTIONAL, REDSTONE, HOTBAR, SEARCH, TOOLS, COMBAT, FOOD_AND_DRINK, INGREDIENTS, SPAWN_EGGS, OPERATOR, INVENTORY2};
     }
-
-
-
 }
