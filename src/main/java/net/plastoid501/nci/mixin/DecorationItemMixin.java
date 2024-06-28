@@ -4,14 +4,13 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.decoration.AbstractDecorationEntity;
-import net.minecraft.entity.decoration.painting.PaintingMotive;
+import net.minecraft.entity.decoration.painting.PaintingVariant;
 import net.minecraft.item.DecorationItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -39,16 +38,16 @@ public class DecorationItemMixin extends Item {
             NbtCompound nbtCompound2 = nbtCompound.getCompound("EntityTag");
             if (nbtCompound2 != null && nbtCompound2.contains("Motive", NbtElement.STRING_TYPE)) {
                 String title = nbtCompound2.getString("Motive");
-                PaintingMotive paintingMotive = Registry.PAINTING_MOTIVE.get(new Identifier(title));
+                PaintingVariant paintingMotive = Registry.PAINTING_VARIANT.get(new Identifier(title));
                 title = title.replace(":", ".");
-                tooltip.add((new TranslatableText("painting." + title + ".title")).formatted(Formatting.YELLOW));
-                tooltip.add((new TranslatableText("painting." + title + ".author")).formatted(Formatting.GRAY));
+                tooltip.add((Text.translatable("painting." + title + ".title")).formatted(Formatting.YELLOW));
+                tooltip.add((Text.translatable("painting." + title + ".author")).formatted(Formatting.GRAY));
 
-                tooltip.add(new TranslatableText("painting.dimensions", MathHelper.ceilDiv(paintingMotive.getWidth(), 16), MathHelper.ceilDiv(paintingMotive.getHeight(), 16)));
+                tooltip.add(Text.translatable("painting.dimensions", MathHelper.ceilDiv(paintingMotive.getWidth(), 16), MathHelper.ceilDiv(paintingMotive.getHeight(), 16)));
             } else {
                 MinecraftClient client = MinecraftClient.getInstance();
                 if (client.player != null && client.player.isCreative()) {
-                    tooltip.add((new TranslatableText("painting.random")).formatted(Formatting.GRAY));
+                    tooltip.add((Text.translatable("painting.random")).formatted(Formatting.GRAY));
                 }
             }
         }

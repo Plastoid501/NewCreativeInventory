@@ -3,25 +3,25 @@ package net.plastoid501.nci.item;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.village.raid.Raid;
 
 public class NewItemGroups {
     public static final NewItemGroup[] GROUPS = new NewItemGroup[14];
-    public static final NewItemGroup BUILDING_BLOCKS = new NewItemGroup("building_blocks", 0, new TranslatableText("plastoid501.newItemGroup.buildingBlocks"), new ItemStack(Blocks.BRICKS));
-    public static final NewItemGroup COLORED_BLOCKS = new NewItemGroup("colored_blocks", 1, new TranslatableText("plastoid501.newItemGroup.coloredBlocks"), new ItemStack(Blocks.CYAN_WOOL));
-    public static final NewItemGroup NATURAL = new NewItemGroup("natural_blocks", 2, new TranslatableText("plastoid501.newItemGroup.natural"), new ItemStack(Blocks.GRASS_BLOCK));
-    public static final NewItemGroup FUNCTIONAL = new NewItemGroup("functional_blocks", 3, new TranslatableText("plastoid501.newItemGroup.functional"), new ItemStack(Items.OAK_SIGN));
-    public static final NewItemGroup REDSTONE = new NewItemGroup("redstone_blocks", 4, new TranslatableText("plastoid501.newItemGroup.redstone"), new ItemStack(Items.REDSTONE));
-    public static final NewItemGroup HOTBAR = new NewItemGroup("hotbar", 5, new TranslatableText("plastoid501.newItemGroup.hotbar"), new ItemStack(Blocks.BOOKSHELF));
-    public static final NewItemGroup SEARCH = new NewItemGroup("search", 6, new TranslatableText("plastoid501.newItemGroup.search"), new ItemStack(Items.COMPASS));
-    public static final NewItemGroup TOOLS = new NewItemGroup("tools_and_utilities", 7, new TranslatableText("plastoid501.newItemGroup.tools"), new ItemStack(Items.DIAMOND_PICKAXE));
-    public static final NewItemGroup COMBAT = new NewItemGroup("combat", 8, new TranslatableText("plastoid501.newItemGroup.combat"), new ItemStack(Items.NETHERITE_SWORD));
-    public static final NewItemGroup FOOD_AND_DRINK = new NewItemGroup("food_and_drinks", 9, new TranslatableText("plastoid501.newItemGroup.foodAndDrink"), new ItemStack(Items.GOLDEN_APPLE));
-    public static final NewItemGroup INGREDIENTS = new NewItemGroup("ingredients", 10, new TranslatableText("plastoid501.newItemGroup.ingredients"), new ItemStack(Items.IRON_INGOT));
-    public static final NewItemGroup SPAWN_EGGS = new NewItemGroup("spawn_eggs", 11, new TranslatableText("plastoid501.newItemGroup.spawnEggs"), new ItemStack(Items.PIG_SPAWN_EGG));
-    public static final NewItemGroup OPERATOR = new NewItemGroup("op_blocks", 12, new TranslatableText("plastoid501.newItemGroup.op"), new ItemStack(Items.COMMAND_BLOCK));
-    public static final NewItemGroup INVENTORY = new NewItemGroup("inventory", 13, new TranslatableText("plastoid501.newItemGroup.inventory"), new ItemStack(Blocks.CHEST));
+    public static final NewItemGroup BUILDING_BLOCKS = new NewItemGroup("building_blocks", 0, Text.translatable("plastoid501.newItemGroup.buildingBlocks"), new ItemStack(Blocks.BRICKS));
+    public static final NewItemGroup COLORED_BLOCKS = new NewItemGroup("colored_blocks", 1, Text.translatable("plastoid501.newItemGroup.coloredBlocks"), new ItemStack(Blocks.CYAN_WOOL));
+    public static final NewItemGroup NATURAL = new NewItemGroup("natural_blocks", 2, Text.translatable("plastoid501.newItemGroup.natural"), new ItemStack(Blocks.GRASS_BLOCK));
+    public static final NewItemGroup FUNCTIONAL = new NewItemGroup("functional_blocks", 3, Text.translatable("plastoid501.newItemGroup.functional"), new ItemStack(Items.OAK_SIGN));
+    public static final NewItemGroup REDSTONE = new NewItemGroup("redstone_blocks", 4, Text.translatable("plastoid501.newItemGroup.redstone"), new ItemStack(Items.REDSTONE));
+    public static final NewItemGroup HOTBAR = new NewItemGroup("hotbar", 5, Text.translatable("plastoid501.newItemGroup.hotbar"), new ItemStack(Blocks.BOOKSHELF));
+    public static final NewItemGroup SEARCH = new NewItemGroup("search", 6, Text.translatable("plastoid501.newItemGroup.search"), new ItemStack(Items.COMPASS));
+    public static final NewItemGroup TOOLS = new NewItemGroup("tools_and_utilities", 7, Text.translatable("plastoid501.newItemGroup.tools"), new ItemStack(Items.DIAMOND_PICKAXE));
+    public static final NewItemGroup COMBAT = new NewItemGroup("combat", 8, Text.translatable("plastoid501.newItemGroup.combat"), new ItemStack(Items.NETHERITE_SWORD));
+    public static final NewItemGroup FOOD_AND_DRINK = new NewItemGroup("food_and_drinks", 9, Text.translatable("plastoid501.newItemGroup.foodAndDrink"), new ItemStack(Items.GOLDEN_APPLE));
+    public static final NewItemGroup INGREDIENTS = new NewItemGroup("ingredients", 10, Text.translatable("plastoid501.newItemGroup.ingredients"), new ItemStack(Items.IRON_INGOT));
+    public static final NewItemGroup SPAWN_EGGS = new NewItemGroup("spawn_eggs", 11, Text.translatable("plastoid501.newItemGroup.spawnEggs"), new ItemStack(Items.PIG_SPAWN_EGG));
+    public static final NewItemGroup OPERATOR = new NewItemGroup("op_blocks", 12, Text.translatable("plastoid501.newItemGroup.op"), new ItemStack(Items.COMMAND_BLOCK));
+    public static final NewItemGroup INVENTORY = new NewItemGroup("inventory", 13, Text.translatable("plastoid501.newItemGroup.inventory"), new ItemStack(Blocks.CHEST));
 
     static {
         BUILDING_BLOCKS.add(Items.OAK_LOG);
@@ -102,19 +102,19 @@ public class NewItemGroups {
         BUILDING_BLOCKS.add(Items.DARK_OAK_TRAPDOOR);
         BUILDING_BLOCKS.add(Items.DARK_OAK_PRESSURE_PLATE);
         BUILDING_BLOCKS.add(Items.DARK_OAK_BUTTON);
-        //BUILDING_BLOCKS.add(Items.MANGROVE_LOG);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_WOOD);//1.19
-        //BUILDING_BLOCKS.add(Items.STRIPPED_MANGROVE_LOG);//1.19
-        //BUILDING_BLOCKS.add(Items.STRIPPED_MANGROVE_WOOD);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_PLANKS);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_STAIRS);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_SLAB);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_FENCE);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_FENCE_GATE);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_DOOR);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_TRAPDOOR);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_PRESSURE_PLATE);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_BUTTON);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_LOG);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_WOOD);//1.19
+        BUILDING_BLOCKS.add(Items.STRIPPED_MANGROVE_LOG);//1.19
+        BUILDING_BLOCKS.add(Items.STRIPPED_MANGROVE_WOOD);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_PLANKS);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_STAIRS);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_SLAB);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_FENCE);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_FENCE_GATE);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_DOOR);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_TRAPDOOR);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_PRESSURE_PLATE);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_BUTTON);//1.19
         BUILDING_BLOCKS.add(Items.CRIMSON_STEM);
         BUILDING_BLOCKS.add(Items.CRIMSON_HYPHAE);
         BUILDING_BLOCKS.add(Items.STRIPPED_CRIMSON_STEM);
@@ -207,16 +207,16 @@ public class NewItemGroups {
         BUILDING_BLOCKS.add(Items.DEEPSLATE_TILE_STAIRS);
         BUILDING_BLOCKS.add(Items.DEEPSLATE_TILE_SLAB);
         BUILDING_BLOCKS.add(Items.DEEPSLATE_TILE_WALL);
-        //BUILDING_BLOCKS.add(Items.REINFORCED_DEEPSLATE);//1.19
+        BUILDING_BLOCKS.add(Items.REINFORCED_DEEPSLATE);//1.19
         BUILDING_BLOCKS.add(Items.BRICKS);
         BUILDING_BLOCKS.add(Items.BRICK_STAIRS);
         BUILDING_BLOCKS.add(Items.BRICK_SLAB);
         BUILDING_BLOCKS.add(Items.BRICK_WALL);
-        //BUILDING_BLOCKS.add(Items.PACKED_MUD);//1.19
-        //BUILDING_BLOCKS.add(Items.MUD_BRICKS);//1.19
-        //BUILDING_BLOCKS.add(Items.MUD_BRICK_STAIRS);//1.19
-        //BUILDING_BLOCKS.add(Items.MUD_BRICK_SLAB);//1.19
-        //BUILDING_BLOCKS.add(Items.MUD_BRICK_WALL);//1.19
+        BUILDING_BLOCKS.add(Items.PACKED_MUD);//1.19
+        BUILDING_BLOCKS.add(Items.MUD_BRICKS);//1.19
+        BUILDING_BLOCKS.add(Items.MUD_BRICK_STAIRS);//1.19
+        BUILDING_BLOCKS.add(Items.MUD_BRICK_SLAB);//1.19
+        BUILDING_BLOCKS.add(Items.MUD_BRICK_WALL);//1.19
         BUILDING_BLOCKS.add(Items.SANDSTONE);
         BUILDING_BLOCKS.add(Items.SANDSTONE_STAIRS);
         BUILDING_BLOCKS.add(Items.SANDSTONE_SLAB);
@@ -553,7 +553,7 @@ public class NewItemGroups {
         NATURAL.add(Items.COARSE_DIRT);
         NATURAL.add(Items.ROOTED_DIRT);
         NATURAL.add(Items.FARMLAND);
-        //NATURAL.add(Items.MUD);//1.19
+        NATURAL.add(Items.MUD);//1.19
         NATURAL.add(Items.CLAY);
         NATURAL.add(Items.GRAVEL);
         NATURAL.add(Items.SAND);
@@ -625,9 +625,9 @@ public class NewItemGroups {
         NATURAL.add(Items.JUNGLE_LOG);
         NATURAL.add(Items.ACACIA_LOG);
         NATURAL.add(Items.DARK_OAK_LOG);
-        //NATURAL.add(Items.MANGROVE_LOG);//1.19
-        //NATURAL.add(Items.MANGROVE_ROOTS);//1.19
-        //NATURAL.add(Items.MUDDY_MANGROVE_ROOTS);//1.19
+        NATURAL.add(Items.MANGROVE_LOG);//1.19
+        NATURAL.add(Items.MANGROVE_ROOTS);//1.19
+        NATURAL.add(Items.MUDDY_MANGROVE_ROOTS);//1.19
         NATURAL.add(Items.MUSHROOM_STEM);
         NATURAL.add(Items.CRIMSON_STEM);
         NATURAL.add(Items.WARPED_STEM);
@@ -637,7 +637,7 @@ public class NewItemGroups {
         NATURAL.add(Items.JUNGLE_LEAVES);
         NATURAL.add(Items.ACACIA_LEAVES);
         NATURAL.add(Items.DARK_OAK_LEAVES);
-        //NATURAL.add(Items.MANGROVE_LEAVES);//1.19
+        NATURAL.add(Items.MANGROVE_LEAVES);//1.19
         NATURAL.add(Items.AZALEA_LEAVES);
         NATURAL.add(Items.FLOWERING_AZALEA_LEAVES);
         NATURAL.add(Items.BROWN_MUSHROOM_BLOCK);
@@ -651,7 +651,7 @@ public class NewItemGroups {
         NATURAL.add(Items.JUNGLE_SAPLING);
         NATURAL.add(Items.ACACIA_SAPLING);
         NATURAL.add(Items.DARK_OAK_SAPLING);
-        //NATURAL.add(Items.MANGROVE_PROPAGULE);//1.19
+        NATURAL.add(Items.MANGROVE_PROPAGULE);//1.19
         NATURAL.add(Items.AZALEA);
         NATURAL.add(Items.FLOWERING_AZALEA);
         NATURAL.add(Items.BROWN_MUSHROOM);
@@ -696,7 +696,7 @@ public class NewItemGroups {
         NATURAL.add(Items.CHORUS_FLOWER);
         NATURAL.add(Items.GLOW_LICHEN);
         NATURAL.add(Items.HANGING_ROOTS);
-        //NATURAL.add(Items.FROGSPAWN);//1.19
+        NATURAL.add(Items.FROGSPAWN);//1.19
         NATURAL.add(Items.TURTLE_EGG);
         NATURAL.add(Items.WHEAT_SEEDS);
         NATURAL.add(Items.COCOA_BEANS);
@@ -752,14 +752,14 @@ public class NewItemGroups {
         NATURAL.add(Items.HONEYCOMB_BLOCK);
         NATURAL.add(Items.SLIME_BLOCK);
         NATURAL.add(Items.HONEY_BLOCK);
-        //NATURAL.add(Items.OCHRE_FROGLIGHT);//1.19
-        //NATURAL.add(Items.VERDANT_FROGLIGHT);//1.19
-        //NATURAL.add(Items.PEARLESCENT_FROGLIGHT);//1.19
-        //NATURAL.add(Items.SCULK);//1.19
-        //NATURAL.add(Items.SCULK_VEIN);//1.19
-        //NATURAL.add(Items.SCULK_CATALYST);//1.19
-        //NATURAL.add(Items.SCULK_SHRIEKER);//1.19
-        //NATURAL.add(Items.SCULK_SENSOR);//1.19
+        NATURAL.add(Items.OCHRE_FROGLIGHT);//1.19
+        NATURAL.add(Items.VERDANT_FROGLIGHT);//1.19
+        NATURAL.add(Items.PEARLESCENT_FROGLIGHT);//1.19
+        NATURAL.add(Items.SCULK);//1.19
+        NATURAL.add(Items.SCULK_VEIN);//1.19
+        NATURAL.add(Items.SCULK_CATALYST);//1.19
+        NATURAL.add(Items.SCULK_SHRIEKER);//1.19
+        NATURAL.add(Items.SCULK_SENSOR);//1.19
         NATURAL.add(Items.COBWEB);
         NATURAL.add(Items.BEDROCK);
 
@@ -774,9 +774,9 @@ public class NewItemGroups {
         FUNCTIONAL.add(Items.REDSTONE_LAMP);
         FUNCTIONAL.add(Items.GLOWSTONE);
         FUNCTIONAL.add(Items.SHROOMLIGHT);
-        //FUNCTIONAL.add(Items.OCHRE_FROGLIGHT);//1.19
-        //FUNCTIONAL.add(Items.VERDANT_FROGLIGHT);//1.19
-        //FUNCTIONAL.add(Items.PEARLESCENT_FROGLIGHT);//1.19
+        FUNCTIONAL.add(Items.OCHRE_FROGLIGHT);//1.19
+        FUNCTIONAL.add(Items.VERDANT_FROGLIGHT);//1.19
+        FUNCTIONAL.add(Items.PEARLESCENT_FROGLIGHT);//1.19
         FUNCTIONAL.add(Items.CRYING_OBSIDIAN);
         FUNCTIONAL.add(Items.GLOW_LICHEN);
         FUNCTIONAL.add(Items.MAGMA_BLOCK);
@@ -826,7 +826,7 @@ public class NewItemGroups {
         FUNCTIONAL.add(Items.JUNGLE_SIGN);
         FUNCTIONAL.add(Items.ACACIA_SIGN);
         FUNCTIONAL.add(Items.DARK_OAK_SIGN);
-        //FUNCTIONAL.add(Items.MANGROVE_SIGN);//1.19
+        FUNCTIONAL.add(Items.MANGROVE_SIGN);//1.19
         FUNCTIONAL.add(Items.CRIMSON_SIGN);
         FUNCTIONAL.add(Items.WARPED_SIGN);
         FUNCTIONAL.add(Items.CHEST);
@@ -930,8 +930,8 @@ public class NewItemGroups {
         REDSTONE.add(Items.STONE_PRESSURE_PLATE);
         REDSTONE.add(Items.LIGHT_WEIGHTED_PRESSURE_PLATE);
         REDSTONE.add(Items.HEAVY_WEIGHTED_PRESSURE_PLATE);
-        //REDSTONE.add(Items.SCULK_SENSOR);//1.19
-        //REDSTONE.add(Items.SCULK_SHRIEKER);//1.19
+        REDSTONE.add(Items.SCULK_SENSOR);//1.19
+        REDSTONE.add(Items.SCULK_SHRIEKER);//1.19
         REDSTONE.add(Items.AMETHYST_BLOCK);
         REDSTONE.add(Items.WHITE_WOOL);
         REDSTONE.add(Items.TRIPWIRE_HOOK);
@@ -964,7 +964,7 @@ public class NewItemGroups {
         REDSTONE.add(Items.CHEST_MINECART);
         REDSTONE.add(Items.FURNACE_MINECART);
         REDSTONE.add(Items.TNT_MINECART);
-        //REDSTONE.add(Items.OAK_CHEST_BOAT);//1.19
+        REDSTONE.add(Items.OAK_CHEST_BOAT);//1.19
         REDSTONE.add(Items.OAK_DOOR);
         REDSTONE.add(Items.IRON_DOOR);
         REDSTONE.add(Items.OAK_FENCE_GATE);
@@ -1008,7 +1008,7 @@ public class NewItemGroups {
         TOOLS.add(Items.TROPICAL_FISH_BUCKET);
         TOOLS.add(Items.PUFFERFISH_BUCKET);
         TOOLS.add(Items.AXOLOTL_BUCKET);
-        //TOOLS.add(Items.TADPOLE_BUCKET);//1.19
+        TOOLS.add(Items.TADPOLE_BUCKET);//1.19
         TOOLS.add(Items.LAVA_BUCKET);
         TOOLS.add(Items.POWDER_SNOW_BUCKET);
         TOOLS.add(Items.MILK_BUCKET);
@@ -1019,9 +1019,9 @@ public class NewItemGroups {
         TOOLS.add(Items.SHEARS);
         TOOLS.add(Items.NAME_TAG);
         TOOLS.add(Items.LEAD);
-        //TOOLS.add(Items.BUNDLE);
+        //TOOLS.add(Items.BUNDLE);//x.x.x
         TOOLS.add(Items.COMPASS);
-        //TOOLS.add(Items.RECOVERY_COMPASS);//1.19
+        TOOLS.add(Items.RECOVERY_COMPASS);//1.19
         TOOLS.add(Items.CLOCK);
         TOOLS.add(Items.SPYGLASS);
         TOOLS.add(Items.MAP);
@@ -1034,19 +1034,19 @@ public class NewItemGroups {
         TOOLS.add(Items.CARROT_ON_A_STICK);
         TOOLS.add(Items.WARPED_FUNGUS_ON_A_STICK);
         TOOLS.add(Items.OAK_BOAT);
-        //TOOLS.add(Items.OAK_CHEST_BOAT);//1.19
+        TOOLS.add(Items.OAK_CHEST_BOAT);//1.19
         TOOLS.add(Items.SPRUCE_BOAT);
-        //TOOLS.add(Items.SPRUCE_CHEST_BOAT);//1.19
+        TOOLS.add(Items.SPRUCE_CHEST_BOAT);//1.19
         TOOLS.add(Items.BIRCH_BOAT);
-        //TOOLS.add(Items.BIRCH_CHEST_BOAT);//1.19
+        TOOLS.add(Items.BIRCH_CHEST_BOAT);//1.19
         TOOLS.add(Items.JUNGLE_BOAT);
-        //TOOLS.add(Items.JUNGLE_CHEST_BOAT);//1.19
+        TOOLS.add(Items.JUNGLE_CHEST_BOAT);//1.19
         TOOLS.add(Items.ACACIA_BOAT);
-        //TOOLS.add(Items.ACACIA_CHEST_BOAT);//1.19
+        TOOLS.add(Items.ACACIA_CHEST_BOAT);//1.19
         TOOLS.add(Items.DARK_OAK_BOAT);
-        //TOOLS.add(Items.DARK_OAK_CHEST_BOAT);//1.19
-        //TOOLS.add(Items.MANGROVE_BOAT);//1.19
-        //TOOLS.add(Items.MANGROVE_CHEST_BOAT);//1.19
+        TOOLS.add(Items.DARK_OAK_CHEST_BOAT);//1.19
+        TOOLS.add(Items.MANGROVE_BOAT);//1.19
+        TOOLS.add(Items.MANGROVE_CHEST_BOAT);//1.19
         TOOLS.add(Items.RAIL);
         TOOLS.add(Items.POWERED_RAIL);
         TOOLS.add(Items.DETECTOR_RAIL);
@@ -1056,7 +1056,7 @@ public class NewItemGroups {
         TOOLS.add(Items.CHEST_MINECART);
         TOOLS.add(Items.FURNACE_MINECART);
         TOOLS.add(Items.TNT_MINECART);
-        //TOOLS.addInstruments();//1.19
+        TOOLS.addInstruments();//1.19
         TOOLS.add(Items.MUSIC_DISC_13);
         TOOLS.add(Items.MUSIC_DISC_CAT);
         TOOLS.add(Items.MUSIC_DISC_BLOCKS);
@@ -1070,7 +1070,7 @@ public class NewItemGroups {
         TOOLS.add(Items.MUSIC_DISC_11);
         TOOLS.add(Items.MUSIC_DISC_WAIT);
         TOOLS.add(Items.MUSIC_DISC_OTHERSIDE);
-        //TOOLS.add(Items.MUSIC_DISC_5);//1.19
+        TOOLS.add(Items.MUSIC_DISC_5);//1.19
         TOOLS.add(Items.MUSIC_DISC_PIGSTEP);
 
         COMBAT.add(Items.WOODEN_SWORD);
@@ -1220,8 +1220,8 @@ public class NewItemGroups {
         INGREDIENTS.add(Items.ENDER_EYE);
         INGREDIENTS.add(Items.SHULKER_SHELL);
         INGREDIENTS.add(Items.POPPED_CHORUS_FRUIT);
-        //INGREDIENTS.add(Items.ECHO_SHARD);//1.19
-        //INGREDIENTS.add(Items.DISC_FRAGMENT_5);//1.19
+        INGREDIENTS.add(Items.ECHO_SHARD);//1.19
+        INGREDIENTS.add(Items.DISC_FRAGMENT_5);//1.19
         INGREDIENTS.add(Items.WHITE_DYE);
         INGREDIENTS.add(Items.LIGHT_GRAY_DYE);
         INGREDIENTS.add(Items.GRAY_DYE);
@@ -1272,7 +1272,7 @@ public class NewItemGroups {
         INGREDIENTS.addMaxLevelEnchantedBooks();
 
         SPAWN_EGGS.add(Items.SPAWNER);
-        //SPAWN_EGGS.add(Items.ALLAY_SPAWN_EGG);//1.19
+        SPAWN_EGGS.add(Items.ALLAY_SPAWN_EGG);//1.19
         SPAWN_EGGS.add(Items.AXOLOTL_SPAWN_EGG);
         SPAWN_EGGS.add(Items.BAT_SPAWN_EGG);
         SPAWN_EGGS.add(Items.BEE_SPAWN_EGG);
@@ -1291,7 +1291,7 @@ public class NewItemGroups {
         SPAWN_EGGS.add(Items.ENDERMITE_SPAWN_EGG);
         SPAWN_EGGS.add(Items.EVOKER_SPAWN_EGG);
         SPAWN_EGGS.add(Items.FOX_SPAWN_EGG);
-        //SPAWN_EGGS.add(Items.FROG_SPAWN_EGG);//1.19
+        SPAWN_EGGS.add(Items.FROG_SPAWN_EGG);//1.19
         SPAWN_EGGS.add(Items.GHAST_SPAWN_EGG);
         SPAWN_EGGS.add(Items.GLOW_SQUID_SPAWN_EGG);
         SPAWN_EGGS.add(Items.GOAT_SPAWN_EGG);
@@ -1326,7 +1326,7 @@ public class NewItemGroups {
         SPAWN_EGGS.add(Items.SQUID_SPAWN_EGG);
         SPAWN_EGGS.add(Items.STRAY_SPAWN_EGG);
         SPAWN_EGGS.add(Items.STRIDER_SPAWN_EGG);
-        //SPAWN_EGGS.add(Items.TADPOLE_SPAWN_EGG);//1.19
+        SPAWN_EGGS.add(Items.TADPOLE_SPAWN_EGG);//1.19
         SPAWN_EGGS.add(Items.TRADER_LLAMA_SPAWN_EGG);
         SPAWN_EGGS.add(Items.TROPICAL_FISH_SPAWN_EGG);
         SPAWN_EGGS.add(Items.TURTLE_SPAWN_EGG);
@@ -1334,7 +1334,7 @@ public class NewItemGroups {
         SPAWN_EGGS.add(Items.VILLAGER_SPAWN_EGG);
         SPAWN_EGGS.add(Items.VINDICATOR_SPAWN_EGG);
         SPAWN_EGGS.add(Items.WANDERING_TRADER_SPAWN_EGG);
-        //SPAWN_EGGS.add(Items.WARDEN_SPAWN_EGG);//1.19
+        SPAWN_EGGS.add(Items.WARDEN_SPAWN_EGG);//1.19
         SPAWN_EGGS.add(Items.WITCH_SPAWN_EGG);
         SPAWN_EGGS.add(Items.WITHER_SKELETON_SPAWN_EGG);
         SPAWN_EGGS.add(Items.WOLF_SPAWN_EGG);

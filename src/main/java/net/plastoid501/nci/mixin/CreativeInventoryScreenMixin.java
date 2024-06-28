@@ -212,7 +212,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         List<Text> newItemGroup = this.getNewItemGroup(stack);
         List<Text> list2 = localRef.get();
         for (Text text : newItemGroup) {
-            list2.add(1, text.shallowCopy().formatted(Formatting.BLUE));
+            list2.add(1, text.copy().formatted(Formatting.BLUE));
         }
         localRef.set(list2);
     }

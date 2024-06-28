@@ -3,7 +3,7 @@ package net.plastoid501.nci.item;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentLevelEntry;
-import net.minecraft.entity.decoration.painting.PaintingMotive;
+import net.minecraft.entity.decoration.painting.PaintingVariant;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
@@ -13,6 +13,7 @@ import net.minecraft.potion.Potions;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntry;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -128,10 +129,10 @@ public class NewItemGroup {
     }
 
     public void addPaintings() {
-        for (PaintingMotive paintingMotive : Registry.PAINTING_MOTIVE) {
+        for (PaintingVariant paintingMotive : Registry.PAINTING_VARIANT) {
             ItemStack itemStack = new ItemStack(Items.PAINTING);
             NbtCompound nbt = itemStack.getOrCreateSubNbt("EntityTag");
-            nbt.putString("Motive", Registry.PAINTING_MOTIVE.getId(paintingMotive).toString());
+            nbt.putString("Variant", Registry.PAINTING_VARIANT.getId(paintingMotive).toString());
             this.add(itemStack);
         }
     }
@@ -152,7 +153,10 @@ public class NewItemGroup {
     }
 
     public void addInstruments() {
-
+        for (RegistryEntry<Instrument> instrument : Registry.INSTRUMENT.getIndexedEntries()) {
+            ItemStack itemStack = GoatHornItem.getStackForInstrument(Items.GOAT_HORN, instrument);
+            this.add(itemStack);
+        }
     }
 
     public void addSuspiciousStews() {

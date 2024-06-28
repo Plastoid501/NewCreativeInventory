@@ -15,7 +15,6 @@ import net.minecraft.potion.PotionUtil;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -42,7 +41,7 @@ public class SuspiciousStewItemMixin extends Item {
             List<Text> list2 = Lists.newArrayList(list);
             int row = this.getItemNameRow(list2);
             list2.remove(row);
-            list2.add(row, (new TranslatableText(Items.SUSPICIOUS_STEW.getTranslationKey())).copy().setStyle(Style.EMPTY).formatted(Formatting.WHITE));
+            list2.add(row, (Text.translatable(Items.SUSPICIOUS_STEW.getTranslationKey())).copy().setStyle(Style.EMPTY).formatted(Formatting.WHITE));
             int row2 = this.getItemIdRow(list2);
             if (client.options.advancedItemTooltips && list2.size() - 1 > row2) {
                 list2.remove(row2);
@@ -80,12 +79,12 @@ public class SuspiciousStewItemMixin extends Item {
 
     private int getItemNameRow(List<Text> list) {
         Text text = Text.of("");
-        text.getSiblings().add(new TranslatableText("item.minecraft.potion.effect.empty"));
-        text = text.shallowCopy().fillStyle(Style.EMPTY.withColor(TextColor.fromFormatting(Formatting.WHITE)));
+        text.getSiblings().add(Text.translatable("item.minecraft.potion.effect.empty"));
+        text = text.copy().fillStyle(Style.EMPTY.withColor(TextColor.fromFormatting(Formatting.WHITE)));
         return list.indexOf(text);
     }
 
     private int getItemIdRow(List<Text> list) {
-        return list.indexOf(Text.of(Registry.ITEM.getId(Items.POTION).toString()).shallowCopy().formatted(Formatting.DARK_GRAY));
+        return list.indexOf(Text.of(Registry.ITEM.getId(Items.POTION).toString()).copy().formatted(Formatting.DARK_GRAY));
     }
 }
