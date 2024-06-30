@@ -209,7 +209,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
 
     @Inject(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen;renderTooltip(Lnet/minecraft/client/util/math/MatrixStack;Ljava/util/List;Ljava/util/Optional;II)V"))
     private void modifyRenderTooltip4(MatrixStack matrices, ItemStack stack, int x, int y, CallbackInfo ci, @Local(ordinal = 1) LocalRef<List<Text>> localRef) {
-        List<Text> newItemGroup = this.getNewItemGroup(stack);
+        List<Text> newItemGroup = this.getNewItemGroups(stack);
         List<Text> list2 = localRef.get();
         for (Text text : newItemGroup) {
             list2.add(1, text.copy().formatted(Formatting.BLUE));
@@ -218,7 +218,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     }
 
     @Unique
-    private List<Text> getNewItemGroup(ItemStack itemStack) {
+    private List<Text> getNewItemGroups(ItemStack itemStack) {
         List<Text> groups = new ArrayList<>();
         if (itemStack.isOf(Items.ENCHANTED_BOOK)) {
             groups.add(NewItemGroups.INGREDIENTS.getDisplayName());
@@ -382,6 +382,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         return stack;
     }
 
+    @Unique
     private NewItemGroup getNewItemGroup(ItemGroup itemGroup) {
         return NewItemGroups.GROUPS[itemGroup.getIcon().getCount() - 1];
     }
