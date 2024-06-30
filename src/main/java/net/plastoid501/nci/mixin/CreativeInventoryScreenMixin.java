@@ -101,7 +101,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     @Redirect(method = "search", at = @At(value = "INVOKE", target = "Ljava/util/Iterator;hasNext()Z"))
     private boolean modifySearch(Iterator<Item> instance) {
         for (NewItemGroup itemGroup : NewItemGroups.GROUPS) {
-            for (ItemStack itemStack : itemGroup.getItemGroup()) {
+            for (ItemStack itemStack : itemGroup.getItems()) {
                 itemGroup.appendStacksWithoutSameItemStack(this.handler.itemList, itemStack);
             }
         }
@@ -227,7 +227,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
 
         for (int i = NewItemGroups.GROUPS.length - 1; 0 <= i; i--) {
             NewItemGroup itemGroup = NewItemGroups.GROUPS[i];
-            if (itemGroup.containsItemStack(itemGroup.getItemGroup(), itemStack)) {
+            if (itemGroup.containsItemStack(itemGroup.getItems(), itemStack)) {
                 groups.add(itemGroup.getDisplayName());
             }
         }

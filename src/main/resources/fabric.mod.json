@@ -3,7 +3,7 @@
 	"id": "new-creative-inventory",
 	"version": "${version}",
 	"name": "New Creative Inventory",
-	"description": "Creative Inventory in version 1.19.3",
+	"description": "A recreation of the creative inventory from version 1.19.3",
 	"authors": [
 		"Plastoid501"
 	],

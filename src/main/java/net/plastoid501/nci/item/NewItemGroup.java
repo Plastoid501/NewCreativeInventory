@@ -13,6 +13,7 @@ import net.minecraft.potion.Potions;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntry;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -25,14 +26,14 @@ public class NewItemGroup {
     private final int index;
     private final Text displayName;
     private final ItemStack icon;
-    private final Collection<ItemStack> itemGroup;
+    private final Collection<ItemStack> items;
 
     public NewItemGroup(String id, int index, Text displayName, ItemStack icon) {
         this.id = id;
         this.index = index;
         this.displayName = displayName;
         this.icon = icon;
-        this.itemGroup = new LinkedHashSet<>();
+        this.items = new LinkedHashSet<>();
     }
 
     public String getId() {
@@ -51,8 +52,8 @@ public class NewItemGroup {
         return icon;
     }
 
-    public Collection<ItemStack> getItemGroup() {
-        return itemGroup;
+    public Collection<ItemStack> getItems() {
+        return items;
     }
 
     public String getTexture() {
@@ -78,11 +79,11 @@ public class NewItemGroup {
     }
 
     public boolean isSpecial() {
-        return this.index % 7 >= 5;
+        return this.getColumn() >= 5;
     }
 
     public void appendStacks(DefaultedList<ItemStack> list) {
-        list.addAll(this.itemGroup);
+        list.addAll(this.items);
     }
 
     public void appendStacksWithoutSameItemStack(DefaultedList<ItemStack> list, ItemStack itemStack) {
@@ -120,11 +121,11 @@ public class NewItemGroup {
     }
 
     public void add(Item item) {
-        this.itemGroup.add(new ItemStack(item));
+        this.items.add(new ItemStack(item));
     }
 
     public void add(ItemStack stack) {
-        this.itemGroup.add(stack);
+        this.items.add(stack);
     }
 
     public void addPaintings() {
@@ -151,9 +152,14 @@ public class NewItemGroup {
         this.addPotions(Items.TIPPED_ARROW);
     }
 
+    /*
     public void addInstruments() {
-
+        for (RegistryEntry<Instrument> instrument : Registry.INSTRUMENT.getIndexedEntries()) {
+            ItemStack itemStack = GoatHornItem.getStackForInstrument(Items.GOAT_HORN, instrument);
+            this.add(itemStack);
+        }
     }
+     */
 
     public void addSuspiciousStews() {
         ItemStack itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
