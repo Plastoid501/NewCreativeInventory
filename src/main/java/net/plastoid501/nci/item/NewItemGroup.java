@@ -4,12 +4,14 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentLevelEntry;
 import net.minecraft.entity.decoration.painting.PaintingVariant;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
+import net.minecraft.stat.Stat;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
@@ -18,6 +20,7 @@ import net.minecraft.util.registry.RegistryEntry;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Objects;
 
 import static net.minecraft.block.LightBlock.LEVEL_15;
 
@@ -132,8 +135,20 @@ public class NewItemGroup {
         for (PaintingVariant paintingMotive : Registry.PAINTING_VARIANT) {
             ItemStack itemStack = new ItemStack(Items.PAINTING);
             NbtCompound nbt = itemStack.getOrCreateSubNbt("EntityTag");
-            nbt.putString("Variant", Registry.PAINTING_VARIANT.getId(paintingMotive).toString());
-            this.add(itemStack);
+            String title = Registry.PAINTING_VARIANT.getId(paintingMotive).toString();
+            boolean bl = this.index == NewItemGroups.SEARCH.getIndex();
+            boolean bl2 = this.index == NewItemGroups.OPERATOR.getIndex();
+            boolean bl3 = Objects.equals(title, "minecraft:earth") || Objects.equals(title, "minecraft:wind") || Objects.equals(title, "minecraft:water") || Objects.equals(title, "minecraft:fire");
+            if (bl) {
+                nbt.putString("variant", title);
+                this.add(itemStack);
+            } else if (bl2 && bl3) {
+                nbt.putString("variant", title);
+                this.add(itemStack);
+            } else if (!bl2 && !bl3) {
+                nbt.putString("variant", title);
+                this.add(itemStack);
+            }
         }
     }
 
@@ -160,33 +175,21 @@ public class NewItemGroup {
     }
 
     public void addSuspiciousStews() {
-        ItemStack itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.SATURATION, 7);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.NIGHT_VISION, 100);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.FIRE_RESISTANCE, 80);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.BLINDNESS, 160);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.WEAKNESS, 180);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.RESISTANCE, 160);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.JUMP_BOOST, 120);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.POISON, 240);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.WITHER, 160);
-        this.add(itemStack);
+        this.add(createSuspiciousStew(StatusEffects.SATURATION, 7));
+        this.add(createSuspiciousStew(StatusEffects.NIGHT_VISION, 100));
+        this.add(createSuspiciousStew(StatusEffects.FIRE_RESISTANCE, 80));
+        this.add(createSuspiciousStew(StatusEffects.BLINDNESS, 160));
+        this.add(createSuspiciousStew(StatusEffects.WEAKNESS, 180));
+        this.add(createSuspiciousStew(StatusEffects.RESISTANCE, 160));
+        this.add(createSuspiciousStew(StatusEffects.JUMP_BOOST, 120));
+        this.add(createSuspiciousStew(StatusEffects.POISON, 240));
+        this.add(createSuspiciousStew(StatusEffects.WITHER, 160));
+    }
+
+    private ItemStack createSuspiciousStew(StatusEffect effect, int duration) {
+        ItemStack stack = new ItemStack(Items.SUSPICIOUS_STEW);
+        SuspiciousStewItem.addEffectToStew(stack, effect, duration);
+        return stack;
     }
 
     public void addPotions(Item item) {

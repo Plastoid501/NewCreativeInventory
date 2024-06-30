@@ -1354,6 +1354,7 @@ public class NewItemGroups {
         OPERATOR.add(Items.BARRIER);
         OPERATOR.add(Items.DEBUG_STICK);
         OPERATOR.addLightBlocks();
+        OPERATOR.addPaintings();
 
         GROUPS[0] = BUILDING_BLOCKS;
         GROUPS[1] = COLORED_BLOCKS;

@@ -36,8 +36,8 @@ public class DecorationItemMixin extends Item {
         NbtCompound nbtCompound = stack.getNbt();
         if (nbtCompound != null && nbtCompound.contains("EntityTag", NbtElement.COMPOUND_TYPE)) {
             NbtCompound nbtCompound2 = nbtCompound.getCompound("EntityTag");
-            if (nbtCompound2 != null && nbtCompound2.contains("Motive", NbtElement.STRING_TYPE)) {
-                String title = nbtCompound2.getString("Motive");
+            if (nbtCompound2 != null && nbtCompound2.contains("variant", NbtElement.STRING_TYPE)) {
+                String title = nbtCompound2.getString("variant");
                 PaintingVariant paintingMotive = Registry.PAINTING_VARIANT.get(new Identifier(title));
                 title = title.replace(":", ".");
                 tooltip.add((Text.translatable("painting." + title + ".title")).formatted(Formatting.YELLOW));
@@ -49,6 +49,11 @@ public class DecorationItemMixin extends Item {
                 if (client.player != null && client.player.isCreative()) {
                     tooltip.add((Text.translatable("painting.random")).formatted(Formatting.GRAY));
                 }
+            }
+        } else {
+            MinecraftClient client = MinecraftClient.getInstance();
+            if (client.player != null && client.player.isCreative()) {
+                tooltip.add((Text.translatable("painting.random")).formatted(Formatting.GRAY));
             }
         }
     }
