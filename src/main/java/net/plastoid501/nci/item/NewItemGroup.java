@@ -13,7 +13,6 @@ import net.minecraft.potion.Potions;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
