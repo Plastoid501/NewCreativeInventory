@@ -26,14 +26,14 @@ public class NewItemGroup {
     private final int index;
     private final Text displayName;
     private final ItemStack icon;
-    private final Collection<ItemStack> itemGroup;
+    private final Collection<ItemStack> items;
 
     public NewItemGroup(String id, int index, Text displayName, ItemStack icon) {
         this.id = id;
         this.index = index;
         this.displayName = displayName;
         this.icon = icon;
-        this.itemGroup = new LinkedHashSet<>();
+        this.items = new LinkedHashSet<>();
     }
 
     public String getId() {
@@ -52,8 +52,8 @@ public class NewItemGroup {
         return icon;
     }
 
-    public Collection<ItemStack> getItemGroup() {
-        return itemGroup;
+    public Collection<ItemStack> getItems() {
+        return items;
     }
 
     public String getTexture() {
@@ -79,11 +79,11 @@ public class NewItemGroup {
     }
 
     public boolean isSpecial() {
-        return this.index % 7 >= 5;
+        return this.getColumn() >= 5;
     }
 
     public void appendStacks(DefaultedList<ItemStack> list) {
-        list.addAll(this.itemGroup);
+        list.addAll(this.items);
     }
 
     public void appendStacksWithoutSameItemStack(DefaultedList<ItemStack> list, ItemStack itemStack) {
@@ -121,11 +121,11 @@ public class NewItemGroup {
     }
 
     public void add(Item item) {
-        this.itemGroup.add(new ItemStack(item));
+        this.items.add(new ItemStack(item));
     }
 
     public void add(ItemStack stack) {
-        this.itemGroup.add(stack);
+        this.items.add(stack);
     }
 
     public void addPaintings() {
