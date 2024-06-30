@@ -41,6 +41,9 @@ public class SuspiciousStewItemMixin extends Item {
             List<Text> list = this.setEffect(stack).getTooltip(client.player, client.options.advancedItemTooltips ? TooltipContext.Default.ADVANCED : TooltipContext.Default.NORMAL);
             List<Text> list2 = Lists.newArrayList(list);
             int row = this.getItemNameRow(list2);
+            if (row == -1) {
+                return;
+            }
             list2.remove(row);
             list2.add(row, (new TranslatableText(Items.SUSPICIOUS_STEW.getTranslationKey())).copy().setStyle(Style.EMPTY).formatted(Formatting.WHITE));
             int row2 = this.getItemIdRow(list2);
