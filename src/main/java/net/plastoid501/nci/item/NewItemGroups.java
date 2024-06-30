@@ -748,10 +748,10 @@ public class NewItemGroups {
         NATURAL.add(Items.CARVED_PUMPKIN);
         NATURAL.add(Items.JACK_O_LANTERN);
         NATURAL.add(Items.HAY_BLOCK);
-        NATURAL.add(Items.BEE_NEST);
-        NATURAL.add(Items.HONEYCOMB_BLOCK);
+        //NATURAL.add(Items.BEE_NEST);//1.15
+        //NATURAL.add(Items.HONEYCOMB_BLOCK);//1.15
         NATURAL.add(Items.SLIME_BLOCK);
-        NATURAL.add(Items.HONEY_BLOCK);
+        //NATURAL.add(Items.HONEY_BLOCK);//1.15
         //NATURAL.add(Items.OCHRE_FROGLIGHT);//1.19
         //NATURAL.add(Items.VERDANT_FROGLIGHT);//1.19
         //NATURAL.add(Items.PEARLESCENT_FROGLIGHT);//1.19
@@ -808,8 +808,8 @@ public class NewItemGroups {
         //FUNCTIONAL.add(Items.LODESTONE);//1.16
         FUNCTIONAL.add(Items.LADDER);
         FUNCTIONAL.add(Items.SCAFFOLDING);
-        FUNCTIONAL.add(Items.BEE_NEST);
-        FUNCTIONAL.add(Items.BEEHIVE);
+        //FUNCTIONAL.add(Items.BEE_NEST);//1.15
+        //FUNCTIONAL.add(Items.BEEHIVE);//1.15
         //FUNCTIONAL.add(Items.LIGHTNING_ROD);//1.17
         FUNCTIONAL.add(Items.FLOWER_POT);
         FUNCTIONAL.add(Items.ARMOR_STAND);
@@ -942,7 +942,7 @@ public class NewItemGroups {
         REDSTONE.add(Items.PISTON);
         REDSTONE.add(Items.STICKY_PISTON);
         REDSTONE.add(Items.SLIME_BLOCK);
-        REDSTONE.add(Items.HONEY_BLOCK);
+        //REDSTONE.add(Items.HONEY_BLOCK);//1.15
         REDSTONE.add(Items.DISPENSER);
         REDSTONE.add(Items.DROPPER);
         REDSTONE.add(Items.HOPPER);
@@ -1169,7 +1169,7 @@ public class NewItemGroups {
         FOOD_AND_DRINK.add(Items.RABBIT_STEW);
         FOOD_AND_DRINK.addSuspiciousStews();
         FOOD_AND_DRINK.add(Items.MILK_BUCKET);
-        FOOD_AND_DRINK.add(Items.HONEY_BOTTLE);
+        //FOOD_AND_DRINK.add(Items.HONEY_BOTTLE);//1.15
         FOOD_AND_DRINK.addPotions(Items.POTION);
         FOOD_AND_DRINK.addPotions(Items.SPLASH_POTION);
         FOOD_AND_DRINK.addPotions(Items.LINGERING_POTION);
@@ -1203,7 +1203,7 @@ public class NewItemGroups {
         INGREDIENTS.add(Items.EGG);
         INGREDIENTS.add(Items.LEATHER);
         INGREDIENTS.add(Items.RABBIT_HIDE);
-        INGREDIENTS.add(Items.HONEYCOMB);
+        //INGREDIENTS.add(Items.HONEYCOMB);//1.15
         INGREDIENTS.add(Items.INK_SAC);
         //INGREDIENTS.add(Items.GLOW_INK_SAC);//1.17
         INGREDIENTS.add(Items.SCUTE);
@@ -1275,7 +1275,7 @@ public class NewItemGroups {
         //SPAWN_EGGS.add(Items.ALLAY_SPAWN_EGG);//1.19
         //SPAWN_EGGS.add(Items.AXOLOTL_SPAWN_EGG);//1.17
         SPAWN_EGGS.add(Items.BAT_SPAWN_EGG);
-        SPAWN_EGGS.add(Items.BEE_SPAWN_EGG);
+        //SPAWN_EGGS.add(Items.BEE_SPAWN_EGG);//1.15
         SPAWN_EGGS.add(Items.BLAZE_SPAWN_EGG);
         SPAWN_EGGS.add(Items.CAT_SPAWN_EGG);
         SPAWN_EGGS.add(Items.CAVE_SPIDER_SPAWN_EGG);
