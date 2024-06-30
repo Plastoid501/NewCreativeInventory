@@ -39,6 +39,9 @@ public class SuspiciousStewItemMixin extends Item {
             List<Text> list2 = Lists.newArrayList(list);
 
             int row = this.getItemNameRow(list2);
+            if (row == -1) {
+                return;
+            }
             list2.remove(row);
             list2.add(row, (new TranslatableText(Items.SUSPICIOUS_STEW.getTranslationKey())).copy().setStyle(new Style()).formatted(Formatting.WHITE));
             int row2 = this.getItemIdRow(list2);
@@ -77,9 +80,13 @@ public class SuspiciousStewItemMixin extends Item {
     }
 
     private int getItemNameRow(List<Text> list) {
-        //Text text = new TranslatableText(I18n.translate("" + Formatting.WHITE + "item.minecraft.potion.effect.empty"));
-        //return list.indexOf(text);
-        return 0;
+        for (int i = 0; i < list.size(); i++) {
+            Text text = list.get(i);
+            if (text.getString().equals(new TranslatableText("item.minecraft.potion.effect.empty").getString())) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     private int getItemIdRow(List<Text> list) {
