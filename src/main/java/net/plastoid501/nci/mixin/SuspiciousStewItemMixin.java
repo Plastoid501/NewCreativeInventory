@@ -9,13 +9,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.SuspiciousStewItem;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.potion.PotionUtil;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -40,9 +37,10 @@ public class SuspiciousStewItemMixin extends Item {
         if (client.player != null && client.player.isCreative()) {
             List<Text> list = this.setEffect(stack).getTooltip(client.player, client.options.advancedItemTooltips ? TooltipContext.Default.ADVANCED : TooltipContext.Default.NORMAL);
             List<Text> list2 = Lists.newArrayList(list);
+
             int row = this.getItemNameRow(list2);
             list2.remove(row);
-            list2.add(row, (new TranslatableText(Items.SUSPICIOUS_STEW.getTranslationKey())).copy().setStyle(Style.EMPTY).formatted(Formatting.WHITE));
+            list2.add(row, (new TranslatableText(Items.SUSPICIOUS_STEW.getTranslationKey())).copy().setStyle(new Style()).formatted(Formatting.WHITE));
             int row2 = this.getItemIdRow(list2);
             if (client.options.advancedItemTooltips && list2.size() - 1 > row2) {
                 list2.remove(row2);
@@ -57,13 +55,13 @@ public class SuspiciousStewItemMixin extends Item {
     private ItemStack setEffect(ItemStack itemStack) {
         ItemStack itemStack2 = new ItemStack(Items.POTION);
         Collection<StatusEffectInstance> list = new ArrayList<>();
-        NbtCompound nbtCompound = itemStack.getTag();
+        CompoundTag nbtCompound = itemStack.getTag();
         if (nbtCompound != null && nbtCompound.contains("Effects", 9)) {
-            NbtList nbtList = nbtCompound.getList("Effects", 10);
+            ListTag nbtList = nbtCompound.getList("Effects", 10);
 
             for(int i = 0; i < nbtList.size(); ++i) {
                 int j = 160;
-                NbtCompound nbtCompound2 = nbtList.getCompound(i);
+                CompoundTag nbtCompound2 = nbtList.getCompound(i);
                 if (nbtCompound2.contains("EffectDuration", 3)) {
                     j = nbtCompound2.getInt("EffectDuration");
                 }
@@ -79,13 +77,12 @@ public class SuspiciousStewItemMixin extends Item {
     }
 
     private int getItemNameRow(List<Text> list) {
-        Text text = Text.of("");
-        text.getSiblings().add(new TranslatableText("item.minecraft.potion.effect.empty"));
-        text = text.shallowCopy().fillStyle(Style.EMPTY.withColor(TextColor.fromFormatting(Formatting.WHITE)));
-        return list.indexOf(text);
+        //Text text = new TranslatableText(I18n.translate("" + Formatting.WHITE + "item.minecraft.potion.effect.empty"));
+        //return list.indexOf(text);
+        return 0;
     }
 
     private int getItemIdRow(List<Text> list) {
-        return list.indexOf(Text.of(Registry.ITEM.getId(Items.POTION).toString()).shallowCopy().formatted(Formatting.DARK_GRAY));
+        return list.indexOf(new LiteralText(Registry.ITEM.getId(Items.POTION).toString()).copy().formatted(Formatting.DARK_GRAY));
     }
 }

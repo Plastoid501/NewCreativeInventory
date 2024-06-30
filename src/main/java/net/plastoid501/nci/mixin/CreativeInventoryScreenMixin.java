@@ -8,22 +8,18 @@ import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.resource.language.I18n;
+import net.minecraft.container.Slot;
+import net.minecraft.container.SlotActionType;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.screen.slot.Slot;
-import net.minecraft.screen.slot.SlotActionType;
-import net.minecraft.text.BaseText;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DefaultedList;
 import net.plastoid501.nci.item.NewItemGroup;
 import net.plastoid501.nci.item.NewItemGroups;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,12 +34,12 @@ import java.util.Iterator;
 import java.util.List;
 
 @Mixin(CreativeInventoryScreen.class)
-public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScreen<CreativeInventoryScreen.CreativeScreenHandler> {
+public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScreen<CreativeInventoryScreen.CreativeContainer> {
     @Shadow private static int selectedTab;
     @Shadow private float scrollPosition;
     @Shadow private TextFieldWidget searchBox;
     @Shadow public abstract boolean hasScrollbar();
-    @Shadow protected abstract void renderTabIcon(MatrixStack matrices, ItemGroup group);
+    @Shadow protected abstract void renderTabIcon(ItemGroup group);
 
     @Shadow protected abstract void applyStatusEffectOffset();
 
@@ -66,7 +62,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     private static final ItemGroup OPERATOR;
     private static final ItemGroup INVENTORY2;
 
-    public CreativeInventoryScreenMixin(CreativeInventoryScreen.CreativeScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
+    public CreativeInventoryScreenMixin(CreativeInventoryScreen.CreativeContainer screenHandler, PlayerInventory playerInventory, Text text) {
         super(screenHandler, playerInventory, text);
     }
 
@@ -75,12 +71,12 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         return NewItemGroups.INVENTORY.getIndex();
     }
 
-    @Inject(method = "onMouseClick", at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/PlayerScreenHandler;getStacks()Lnet/minecraft/util/collection/DefaultedList;"))
-    private void modifyOnMouseClick2(Slot slot, int slotId, int button, SlotActionType actionType, CallbackInfo ci) {
-        if (this.client == null || this.client.player == null) {
+    @Inject(method = "onMouseClick", at = @At(value = "INVOKE", target = "Lnet/minecraft/container/PlayerContainer;getStacks()Lnet/minecraft/util/DefaultedList;"))
+    private void modifyOnMouseClick2(Slot slot, int invSlot, int button, SlotActionType slotActionType, CallbackInfo ci) {
+        if (this.minecraft == null || this.minecraft.player == null) {
             return;
         }
-        this.client.player.inventory.clear();
+        this.minecraft.player.inventory.clear();
     }
 
     @Redirect(method = "init()V", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
@@ -107,7 +103,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     private boolean modifySearch(Iterator<Item> instance) {
         for (NewItemGroup itemGroup : NewItemGroups.GROUPS) {
             for (ItemStack itemStack : itemGroup.getItems()) {
-                itemGroup.appendStacksWithoutSameItemStack(this.handler.itemList, itemStack);
+                itemGroup.appendStacksWithoutSameItemStack(this.container.itemList, itemStack);
             }
         }
         return false;
@@ -118,14 +114,14 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         return GROUPS;
     }
 
-    @Redirect(method = "drawForeground", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;shouldRenderName()Z"))
+    @Redirect(method = "drawForeground", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;hasTooltip()Z"))
     protected boolean modifyDrawForeground2(ItemGroup instance) {
         return instance != INVENTORY2;
     }
 
-    @Redirect(method = "drawForeground", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getTranslationKey()Lnet/minecraft/text/Text;"))
-    protected Text modifyDrawForeground3(ItemGroup instance) {
-        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].getDisplayName();
+    @Redirect(method = "drawForeground", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getTranslationKey()Ljava/lang/String;"))
+    protected String modifyDrawForeground3(ItemGroup instance) {
+        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].getDisplayName().getString();
     }
 
     @Redirect(method = "mouseClicked", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
@@ -145,7 +141,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
 
     @Inject(method = "hasScrollbar", at = @At("HEAD"), cancellable = true)
     private void modifyHasScrollbar(CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(selectedTab != NewItemGroups.INVENTORY.getIndex() && this.handler.shouldShowScrollbar());
+        cir.setReturnValue(selectedTab != NewItemGroups.INVENTORY.getIndex() && this.container.shouldShowScrollbar());
         cir.cancel();
     }
 
@@ -159,7 +155,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         return SEARCH;
     }
 
-    @Redirect(method = "setSelectedTab", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;appendStacks(Lnet/minecraft/util/collection/DefaultedList;)V"))
+    @Redirect(method = "setSelectedTab", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;appendStacks(Lnet/minecraft/util/DefaultedList;)V"))
     private void modifySetSelectedTab3(ItemGroup instance, DefaultedList<ItemStack> stacks) {
         NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].appendStacks(stacks);
     }
@@ -211,35 +207,35 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     private void modifyRenderTooltip3(List<Text> instance, int i, Object e) {
     }
 
-    @Inject(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen;renderTooltip(Lnet/minecraft/client/util/math/MatrixStack;Ljava/util/List;II)V"))
-    private void modifyRenderTooltip4(MatrixStack matrices, ItemStack stack, int x, int y, CallbackInfo ci, @Local(ordinal = 1) LocalRef<List<Text>> localRef) {
-        List<Text> newItemGroup = this.getNewItemGroup(stack);
-        List<Text> list2 = localRef.get();
-        for (Text text : newItemGroup) {
-            list2.add(1, text.shallowCopy().formatted(Formatting.BLUE));
+    @Inject(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen;renderTooltip(Ljava/util/List;II)V"))
+    private void modifyRenderTooltip4(ItemStack stack, int x, int y, CallbackInfo ci, @Local(ordinal = 1) LocalRef<List<String>> localRef) {
+        List<String> newItemGroup = this.getNewItemGroup(stack);
+        List<String> list2 = localRef.get();
+        for (String text : newItemGroup) {
+            list2.add(1, "" + Formatting.BOLD + Formatting.BLUE + text);
         }
         localRef.set(list2);
     }
 
     @Unique
-    private List<Text> getNewItemGroup(ItemStack itemStack) {
-        List<Text> groups = new ArrayList<>();
+    private List<String> getNewItemGroup(ItemStack itemStack) {
+        List<String> groups = new ArrayList<>();
         if (itemStack.getItem() == Items.ENCHANTED_BOOK) {
-            groups.add(NewItemGroups.INGREDIENTS.getDisplayName());
+            groups.add(I18n.translate(NewItemGroups.INGREDIENTS.getDisplayName().getString()));
             return groups;
         }
 
         for (int i = NewItemGroups.GROUPS.length - 1; 0 <= i; i--) {
             NewItemGroup itemGroup = NewItemGroups.GROUPS[i];
             if (itemGroup.containsItemStack(itemGroup.getItems(), itemStack)) {
-                groups.add(itemGroup.getDisplayName());
+                groups.add(I18n.translate(itemGroup.getDisplayName().getString()));
             }
         }
         return groups;
     }
 
     @Inject(method = "drawBackground", at = @At(value = "HEAD"), cancellable = true)
-    private void modifyDrawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY, CallbackInfo ci) {
+    private void modifyDrawBackground(float delta, int mouseX, int mouseY, CallbackInfo ci) {
         ci.cancel();
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         ItemGroup itemGroup = GROUPS[selectedTab];
@@ -247,32 +243,32 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
 
         int k;
         for(ItemGroup itemGroup3 : GROUPS) {
-            this.client.getTextureManager().bindTexture(TEXTURE);
+            this.minecraft.getTextureManager().bindTexture(TEXTURE);
             if (itemGroup3.getIcon().getCount() - 1 != selectedTab) {
-                this.renderTabIcon(matrices, itemGroup3);
+                this.renderTabIcon(itemGroup3);
             }
         }
 
-        this.client.getTextureManager().bindTexture(new Identifier("textures/gui/container/creative_inventory/tab_" + itemGroup2.getTexture()));
-        this.drawTexture(matrices, this.x, this.y, 0, 0, this.backgroundWidth, this.backgroundHeight);
-        this.searchBox.render(matrices, mouseX, mouseY, delta);
+        this.minecraft.getTextureManager().bindTexture(new Identifier("textures/gui/container/creative_inventory/tab_" + itemGroup2.getTexture()));
+        this.blit(this.x, this.y, 0, 0, this.containerWidth, this.containerHeight);
+        this.searchBox.render(mouseX, mouseY, delta);
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         int i = this.x + 175;
         int y = this.y + 18;
         k = y + 112;
-        this.client.getTextureManager().bindTexture(TEXTURE);
+        this.minecraft.getTextureManager().bindTexture(TEXTURE);
         if (itemGroup != INVENTORY2) {
-            this.drawTexture(matrices, i, y + (int)((float)(k - y - 17) * this.scrollPosition), 232 + (this.hasScrollbar() ? 0 : 12), 0, 12, 15);
+            this.blit(i, y + (int)((float)(k - y - 17) * this.scrollPosition), 232 + (this.hasScrollbar() ? 0 : 12), 0, 12, 15);
         }
 
-        this.renderTabIcon(matrices, itemGroup);
+        this.renderTabIcon(itemGroup);
         if (itemGroup == INVENTORY2) {
-            InventoryScreen.drawEntity(this.x + 88, this.y + 45, 20, (float)(this.x + 88 - mouseX), (float)(this.y + 45 - 30 - mouseY), this.client.player);
+            InventoryScreen.drawEntity(this.x + 88, this.y + 45, 20, (float)(this.x + 88 - mouseX), (float)(this.y + 45 - 30 - mouseY), this.minecraft.player);
         }
     }
 
     @Override
-    public void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
+    public void drawBackground(float delta, int mouseX, int mouseY) {
     }
 
     @ModifyConstant(method = "isClickInTab", constant = @Constant(intValue = 28))
@@ -325,9 +321,9 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].isTopRow();
     }
 
-    @Redirect(method = "renderTabTooltipIfHovered", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getTranslationKey()Lnet/minecraft/text/Text;"))
-    private Text modifyRenderTabTooltipIfHovered6(ItemGroup instance) {
-        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].getDisplayName();
+    @Redirect(method = "renderTabTooltipIfHovered", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getTranslationKey()Ljava/lang/String;"))
+    private String modifyRenderTabTooltipIfHovered6(ItemGroup instance) {
+        return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].getDisplayName().getString();
     }
 
     @Redirect(method = "renderTabIcon", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
@@ -355,16 +351,16 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         return 0;
     }
 
-    @Redirect(method = "renderTabIcon", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen;drawTexture(Lnet/minecraft/client/util/math/MatrixStack;IIIIII)V"))
-    private void modifyRenderTabIcon6(CreativeInventoryScreen instance, MatrixStack matrixStack, int x, int y, int u, int v, int width, int height) {
+    @Redirect(method = "renderTabIcon", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen;blit(IIIIII)V"))
+    private void modifyRenderTabIcon6(CreativeInventoryScreen instance, int x, int y, int u, int v, int width, int height) {
         int index = u / 28;
         NewItemGroup group = NewItemGroups.GROUPS[index];
         x = this.x + this.getTabX(group);
         int j = (u / 28) % 7;
-        this.renderTab(matrixStack, x, y, j == 6 ? 5 * 28 : j * 28, v);
+        this.renderTab(x, y, j == 6 ? 5 * 28 : j * 28, v);
     }
 
-    @ModifyArg(method = "renderTabIcon", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/ItemRenderer;renderInGuiWithOverrides(Lnet/minecraft/item/ItemStack;II)V"), index = 1)
+    @ModifyArg(method = "renderTabIcon", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/ItemRenderer;renderGuiItem(Lnet/minecraft/item/ItemStack;II)V"), index = 1)
     private int modifyRenderTabIcon7(int x, @Local(ordinal = 1) int u) {
         NewItemGroup group = NewItemGroups.GROUPS[u / 28];
         return this.x + this.getTabX(group) + 5;
@@ -388,15 +384,15 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         int i = group.getColumn();
         int k = (TAB_WIDTH + 1) * i;
         if (group.isSpecial()) {
-            k = this.backgroundWidth - (TAB_WIDTH + 1) * (7 - i) + 1;
+            k = this.containerWidth - (TAB_WIDTH + 1) * (7 - i) + 1;
         }
         return k;
     }
 
     @Unique
-    private void renderTab(MatrixStack matrices, int x, int y, int u, int v) {
-        this.drawTexture(matrices, x, y, u, v, 5, TAB_HEIGHT);
-        this.drawTexture(matrices, x + 5, y, u + 7, v, TAB_WIDTH - 5, TAB_HEIGHT);
+    private void renderTab(int x, int y, int u, int v) {
+        this.blit(x, y, u, v, 5, TAB_HEIGHT);
+        this.blit(x + 5, y, u + 7, v, TAB_WIDTH - 5, TAB_HEIGHT);
     }
 
     @Redirect(method = "<clinit>", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
@@ -472,7 +468,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         COMBAT = new ItemGroup(0, "combat") {
             @Override
             public ItemStack createIcon() {
-                ItemStack stack = new ItemStack(Items.NETHERITE_SWORD);
+                ItemStack stack = new ItemStack(Items.DIAMOND_SWORD);
                 stack.setCount(9);
                 return stack;
             }

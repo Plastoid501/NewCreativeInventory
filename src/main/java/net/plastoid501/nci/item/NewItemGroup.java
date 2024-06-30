@@ -2,16 +2,16 @@ package net.plastoid501.nci.item;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.EnchantmentLevelEntry;
+import net.minecraft.enchantment.InfoEnchantment;
 import net.minecraft.entity.decoration.painting.PaintingMotive;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.text.Text;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.DefaultedList;
 import net.minecraft.util.registry.Registry;
 
 import java.util.Collection;
@@ -82,13 +82,13 @@ public class NewItemGroup {
 
     public void appendStacksWithoutSameItemStack(DefaultedList<ItemStack> list, ItemStack itemStack) {
         if (itemStack.getItem() == Items.ENCHANTED_BOOK) {
-            Map<Enchantment, Integer> enchantments = EnchantmentHelper.get(itemStack);
+            Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(itemStack);
             if (enchantments.keySet().size() != 1) {
                 return;
             }
             for (Enchantment enchantment : enchantments.keySet()) {
-                for (int lvl = enchantment.getMinLevel(); lvl <= enchantment.getMaxLevel(); lvl++) {
-                    list.add(EnchantedBookItem.forEnchantment(new EnchantmentLevelEntry(enchantment, lvl)));
+                for (int lvl = enchantment.getMinimumLevel(); lvl <= enchantment.getMaximumLevel(); lvl++) {
+                    list.add(EnchantedBookItem.forEnchantment(new InfoEnchantment(enchantment, lvl)));
                 }
             }
         } else if (!this.containsItemStack(list, itemStack)) {
@@ -98,7 +98,7 @@ public class NewItemGroup {
 
     private boolean containsItemStack(DefaultedList<ItemStack> list, ItemStack itemStack) {
         for (ItemStack itemStack2 : list) {
-            if (ItemStack.areEqual(itemStack, itemStack2)) {
+            if (ItemStack.areEqualIgnoreDamage(itemStack, itemStack2)) {
                 return true;
             }
         }
@@ -125,7 +125,7 @@ public class NewItemGroup {
     public void addPaintings() {
         for (PaintingMotive paintingMotive : Registry.PAINTING_MOTIVE) {
             ItemStack itemStack = new ItemStack(Items.PAINTING);
-            NbtCompound nbt = itemStack.getOrCreateSubTag("EntityTag");
+            CompoundTag nbt = itemStack.getOrCreateSubTag("EntityTag");
             nbt.putString("Motive", Registry.PAINTING_MOTIVE.getId(paintingMotive).toString());
             this.add(itemStack);
         }
@@ -196,14 +196,14 @@ public class NewItemGroup {
 
     public void addMaxLevelEnchantedBooks() {
         for (Enchantment enchantment : Registry.ENCHANTMENT) {
-            this.add(EnchantedBookItem.forEnchantment(new EnchantmentLevelEntry(enchantment, enchantment.getMaxLevel())));
+            this.add(EnchantedBookItem.forEnchantment(new InfoEnchantment(enchantment, enchantment.getMaximumLevel())));
         }
     }
 
     public void addAllLevelEnchantedBooks() {
         for (Enchantment enchantment : Registry.ENCHANTMENT) {
-            for (int lvl = enchantment.getMinLevel(); lvl <= enchantment.getMaxLevel(); lvl++) {
-                this.add(EnchantedBookItem.forEnchantment(new EnchantmentLevelEntry(enchantment, lvl)));
+            for (int lvl = enchantment.getMinimumLevel(); lvl <= enchantment.getMaximumLevel(); lvl++) {
+                this.add(EnchantedBookItem.forEnchantment(new InfoEnchantment(enchantment, lvl)));
             }
         }
     }
