@@ -4,6 +4,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentLevelEntry;
 import net.minecraft.entity.decoration.painting.PaintingMotive;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
@@ -156,33 +157,21 @@ public class NewItemGroup {
      */
 
     public void addSuspiciousStews() {
-        ItemStack itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.SATURATION, 7);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.NIGHT_VISION, 100);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.FIRE_RESISTANCE, 80);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.BLINDNESS, 160);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.WEAKNESS, 180);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.RESISTANCE, 160);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.JUMP_BOOST, 120);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.POISON, 240);
-        this.add(itemStack);
-        itemStack = new ItemStack(Items.SUSPICIOUS_STEW);
-        SuspiciousStewItem.addEffectToStew(itemStack, StatusEffects.WITHER, 160);
-        this.add(itemStack);
+        this.add(createSuspiciousStew(StatusEffects.SATURATION, 7));
+        this.add(createSuspiciousStew(StatusEffects.NIGHT_VISION, 100));
+        this.add(createSuspiciousStew(StatusEffects.FIRE_RESISTANCE, 80));
+        this.add(createSuspiciousStew(StatusEffects.BLINDNESS, 160));
+        this.add(createSuspiciousStew(StatusEffects.WEAKNESS, 180));
+        this.add(createSuspiciousStew(StatusEffects.RESISTANCE, 160));
+        this.add(createSuspiciousStew(StatusEffects.JUMP_BOOST, 120));
+        this.add(createSuspiciousStew(StatusEffects.POISON, 240));
+        this.add(createSuspiciousStew(StatusEffects.WITHER, 160));
+    }
+
+    private ItemStack createSuspiciousStew(StatusEffect effect, int duration) {
+        ItemStack stack = new ItemStack(Items.SUSPICIOUS_STEW);
+        SuspiciousStewItem.addEffectToStew(stack, effect, duration);
+        return stack;
     }
 
     public void addPotions(Item item) {

@@ -51,6 +51,11 @@ public class DecorationItemMixin extends Item {
                     tooltip.add((new TranslatableText("painting.random")).formatted(Formatting.GRAY));
                 }
             }
+        } else {
+            MinecraftClient client = MinecraftClient.getInstance();
+            if (client.player != null && client.player.isCreative()) {
+                tooltip.add((new TranslatableText("painting.random")).formatted(Formatting.GRAY));
+            }
         }
     }
 }

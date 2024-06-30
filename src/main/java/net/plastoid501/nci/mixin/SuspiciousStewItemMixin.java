@@ -79,10 +79,13 @@ public class SuspiciousStewItemMixin extends Item {
     }
 
     private int getItemNameRow(List<Text> list) {
-        Text text = Text.of("");
-        text.getSiblings().add(new TranslatableText("item.minecraft.potion.effect.empty"));
-        text = text.shallowCopy().fillStyle(Style.EMPTY.withColor(TextColor.fromFormatting(Formatting.WHITE)));
-        return list.indexOf(text);
+        for (int i = 0; i < list.size(); i++) {
+            Text text = list.get(i);
+            if (text.getString().equals(new TranslatableText("item.minecraft.potion.effect.empty").getString())) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     private int getItemIdRow(List<Text> list) {
