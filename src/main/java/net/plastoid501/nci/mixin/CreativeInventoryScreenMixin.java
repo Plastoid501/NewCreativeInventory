@@ -17,6 +17,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
+import net.minecraft.text.BaseText;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -41,6 +44,8 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     @Shadow private TextFieldWidget searchBox;
     @Shadow public abstract boolean hasScrollbar();
     @Shadow protected abstract void renderTabIcon(MatrixStack matrices, ItemGroup group);
+
+    @Shadow protected abstract void applyStatusEffectOffset();
 
     private static final Identifier TEXTURE = new Identifier("textures/gui/container/creative_inventory/tabs.png");
     private static final int TAB_WIDTH = 26;
@@ -75,7 +80,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         if (this.client == null || this.client.player == null) {
             return;
         }
-        this.client.player.getInventory().clear();
+        this.client.player.inventory.clear();
     }
 
     @Redirect(method = "init()V", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
@@ -199,15 +204,14 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
 
     @Redirect(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;getGroup()Lnet/minecraft/item/ItemGroup;"))
     private ItemGroup modifyRenderTooltip2(Item instance) {
-        return null;
+        return BUILDING_BLOCKS;
     }
 
-    @Redirect(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z"))
-    private boolean modifyRenderTooltip3(ItemStack instance, Item item) {
-        return false;
+    @Redirect(method = "renderTooltip", at = @At(value = "INVOKE", target = "Ljava/util/List;add(ILjava/lang/Object;)V"))
+    private void modifyRenderTooltip3(List<Text> instance, int i, Object e) {
     }
 
-    @Inject(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen;renderTooltip(Lnet/minecraft/client/util/math/MatrixStack;Ljava/util/List;Ljava/util/Optional;II)V"))
+    @Inject(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen;renderTooltip(Lnet/minecraft/client/util/math/MatrixStack;Ljava/util/List;II)V"))
     private void modifyRenderTooltip4(MatrixStack matrices, ItemStack stack, int x, int y, CallbackInfo ci, @Local(ordinal = 1) LocalRef<List<Text>> localRef) {
         List<Text> newItemGroup = this.getNewItemGroup(stack);
         List<Text> list2 = localRef.get();
@@ -220,7 +224,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     @Unique
     private List<Text> getNewItemGroup(ItemStack itemStack) {
         List<Text> groups = new ArrayList<>();
-        if (itemStack.isOf(Items.ENCHANTED_BOOK)) {
+        if (itemStack.getItem() == Items.ENCHANTED_BOOK) {
             groups.add(NewItemGroups.INGREDIENTS.getDisplayName());
             return groups;
         }
@@ -237,29 +241,26 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     @Inject(method = "drawBackground", at = @At(value = "HEAD"), cancellable = true)
     private void modifyDrawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY, CallbackInfo ci) {
         ci.cancel();
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         ItemGroup itemGroup = GROUPS[selectedTab];
         NewItemGroup itemGroup2 = NewItemGroups.GROUPS[selectedTab];
 
         int k;
         for(ItemGroup itemGroup3 : GROUPS) {
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            RenderSystem.setShaderTexture(0, TEXTURE);
+            this.client.getTextureManager().bindTexture(TEXTURE);
             if (itemGroup3.getIcon().getCount() - 1 != selectedTab) {
                 this.renderTabIcon(matrices, itemGroup3);
             }
         }
 
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderTexture(0, new Identifier("textures/gui/container/creative_inventory/tab_" + itemGroup2.getTexture()));
+        this.client.getTextureManager().bindTexture(new Identifier("textures/gui/container/creative_inventory/tab_" + itemGroup2.getTexture()));
         this.drawTexture(matrices, this.x, this.y, 0, 0, this.backgroundWidth, this.backgroundHeight);
         this.searchBox.render(matrices, mouseX, mouseY, delta);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         int i = this.x + 175;
         int y = this.y + 18;
         k = y + 112;
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderTexture(0, TEXTURE);
+        this.client.getTextureManager().bindTexture(TEXTURE);
         if (itemGroup != INVENTORY2) {
             this.drawTexture(matrices, i, y + (int)((float)(k - y - 17) * this.scrollPosition), 232 + (this.hasScrollbar() ? 0 : 12), 0, 12, 15);
         }

@@ -34,10 +34,10 @@ public class DecorationItemMixin extends Item {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        NbtCompound nbtCompound = stack.getNbt();
-        if (nbtCompound != null && nbtCompound.contains("EntityTag", NbtElement.COMPOUND_TYPE)) {
+        NbtCompound nbtCompound = stack.getTag();
+        if (nbtCompound != null && nbtCompound.contains("EntityTag", 10)) {
             NbtCompound nbtCompound2 = nbtCompound.getCompound("EntityTag");
-            if (nbtCompound2 != null && nbtCompound2.contains("Motive", NbtElement.STRING_TYPE)) {
+            if (nbtCompound2 != null && nbtCompound2.contains("Motive", 8)) {
                 String title = nbtCompound2.getString("Motive");
                 PaintingMotive paintingMotive = Registry.PAINTING_MOTIVE.get(new Identifier(title));
                 title = title.replace(":", ".");

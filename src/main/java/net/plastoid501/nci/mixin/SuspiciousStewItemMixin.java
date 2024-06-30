@@ -57,7 +57,7 @@ public class SuspiciousStewItemMixin extends Item {
     private ItemStack setEffect(ItemStack itemStack) {
         ItemStack itemStack2 = new ItemStack(Items.POTION);
         Collection<StatusEffectInstance> list = new ArrayList<>();
-        NbtCompound nbtCompound = itemStack.getNbt();
+        NbtCompound nbtCompound = itemStack.getTag();
         if (nbtCompound != null && nbtCompound.contains("Effects", 9)) {
             NbtList nbtList = nbtCompound.getList("Effects", 10);
 

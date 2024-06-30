@@ -18,8 +18,6 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Map;
 
-import static net.minecraft.block.LightBlock.LEVEL_15;
-
 public class NewItemGroup {
     private final String id;
     private final int index;
@@ -86,7 +84,7 @@ public class NewItemGroup {
     }
 
     public void appendStacksWithoutSameItemStack(DefaultedList<ItemStack> list, ItemStack itemStack) {
-        if (itemStack.isOf(Items.ENCHANTED_BOOK)) {
+        if (itemStack.getItem() == Items.ENCHANTED_BOOK) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.get(itemStack);
             if (enchantments.keySet().size() != 1) {
                 return;
@@ -130,7 +128,7 @@ public class NewItemGroup {
     public void addPaintings() {
         for (PaintingMotive paintingMotive : Registry.PAINTING_MOTIVE) {
             ItemStack itemStack = new ItemStack(Items.PAINTING);
-            NbtCompound nbt = itemStack.getOrCreateSubNbt("EntityTag");
+            NbtCompound nbt = itemStack.getOrCreateSubTag("EntityTag");
             nbt.putString("Motive", Registry.PAINTING_MOTIVE.getId(paintingMotive).toString());
             this.add(itemStack);
         }
@@ -141,7 +139,7 @@ public class NewItemGroup {
 
         for (byte level : flight_level) {
             ItemStack itemStack = new ItemStack(Items.FIREWORK_ROCKET);
-            itemStack.getOrCreateSubNbt("Fireworks").putByte("Flight", level);
+            itemStack.getOrCreateSubTag("Fireworks").putByte("Flight", level);
             this.add(itemStack);
         }
 
@@ -213,6 +211,7 @@ public class NewItemGroup {
         }
     }
 
+    /*
     public void addLightBlocks() {
         for(int i = 15; i >= 0; --i) {
             ItemStack itemStack = new ItemStack(Items.LIGHT);
@@ -224,5 +223,7 @@ public class NewItemGroup {
             this.add(itemStack);
         }
     }
+
+     */
 
 }
