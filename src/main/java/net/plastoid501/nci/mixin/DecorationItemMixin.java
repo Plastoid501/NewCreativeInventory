@@ -44,7 +44,7 @@ public class DecorationItemMixin extends Item {
                 tooltip.add((new TranslatableText("painting." + title + ".title")).formatted(Formatting.YELLOW));
                 tooltip.add((new TranslatableText("painting." + title + ".author")).formatted(Formatting.GRAY));
 
-                tooltip.add(new TranslatableText("painting.dimensions", MathHelper.ceilDiv(paintingMotive.getWidth(), 16), MathHelper.ceilDiv(paintingMotive.getHeight(), 16)));
+                tooltip.add(new TranslatableText("painting.dimensions", -Math.floorDiv(paintingMotive.getWidth(), 16), -Math.floorDiv(paintingMotive.getHeight(), 16)));
             } else {
                 MinecraftClient client = MinecraftClient.getInstance();
                 if (client.player != null && client.player.isCreative()) {

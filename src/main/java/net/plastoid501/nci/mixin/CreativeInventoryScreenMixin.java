@@ -118,7 +118,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         return instance != INVENTORY2;
     }
 
-    @Redirect(method = "drawForeground", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getDisplayName()Lnet/minecraft/text/Text;"))
+    @Redirect(method = "drawForeground", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getTranslationKey()Lnet/minecraft/text/Text;"))
     protected Text modifyDrawForeground3(ItemGroup instance) {
         return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].getDisplayName();
     }
@@ -324,7 +324,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].isTopRow();
     }
 
-    @Redirect(method = "renderTabTooltipIfHovered", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getDisplayName()Lnet/minecraft/text/Text;"))
+    @Redirect(method = "renderTabTooltipIfHovered", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getTranslationKey()Lnet/minecraft/text/Text;"))
     private Text modifyRenderTabTooltipIfHovered6(ItemGroup instance) {
         return NewItemGroups.GROUPS[instance.getIcon().getCount() - 1].getDisplayName();
     }

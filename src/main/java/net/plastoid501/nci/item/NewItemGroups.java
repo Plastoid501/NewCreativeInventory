@@ -191,7 +191,7 @@ public class NewItemGroups {
         BUILDING_BLOCKS.add(Items.COBBLED_DEEPSLATE);
         BUILDING_BLOCKS.add(Items.COBBLED_DEEPSLATE_STAIRS);
         BUILDING_BLOCKS.add(Items.COBBLED_DEEPSLATE_SLAB);
-        BUILDING_BLOCKS.add(Items.COBBLED_DEEPSLATE_WALL);
+        BUILDING_BLOCKS.add(Items.DEEPSLATE_WALL);
         BUILDING_BLOCKS.add(Items.CHISELED_DEEPSLATE);
         BUILDING_BLOCKS.add(Items.POLISHED_DEEPSLATE);
         BUILDING_BLOCKS.add(Items.POLISHED_DEEPSLATE_STAIRS);
@@ -329,7 +329,7 @@ public class NewItemGroups {
         BUILDING_BLOCKS.add(Items.OXIDIZED_CUT_COPPER);
         BUILDING_BLOCKS.add(Items.OXIDIZED_CUT_COPPER_STAIRS);
         BUILDING_BLOCKS.add(Items.OXIDIZED_CUT_COPPER_SLAB);
-        BUILDING_BLOCKS.add(Items.WAXED_COPPER_BLOCK);
+        BUILDING_BLOCKS.add(Items.WAXED_COPPER);
         BUILDING_BLOCKS.add(Items.WAXED_CUT_COPPER);
         BUILDING_BLOCKS.add(Items.WAXED_CUT_COPPER_STAIRS);
         BUILDING_BLOCKS.add(Items.WAXED_CUT_COPPER_SLAB);
@@ -639,7 +639,7 @@ public class NewItemGroups {
         NATURAL.add(Items.DARK_OAK_LEAVES);
         //NATURAL.add(Items.MANGROVE_LEAVES);//1.19
         NATURAL.add(Items.AZALEA_LEAVES);
-        NATURAL.add(Items.FLOWERING_AZALEA_LEAVES);
+        NATURAL.add(Items.AZALEA_LEAVES_FLOWERS);
         NATURAL.add(Items.BROWN_MUSHROOM_BLOCK);
         NATURAL.add(Items.RED_MUSHROOM_BLOCK);
         NATURAL.add(Items.NETHER_WART_BLOCK);
@@ -1069,7 +1069,7 @@ public class NewItemGroups {
         TOOLS.add(Items.MUSIC_DISC_WARD);
         TOOLS.add(Items.MUSIC_DISC_11);
         TOOLS.add(Items.MUSIC_DISC_WAIT);
-        TOOLS.add(Items.MUSIC_DISC_OTHERSIDE);
+        //TOOLS.add(Items.MUSIC_DISC_OTHERSIDE);//1.18
         //TOOLS.add(Items.MUSIC_DISC_5);//1.19
         TOOLS.add(Items.MUSIC_DISC_PIGSTEP);
 
