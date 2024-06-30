@@ -55,15 +55,12 @@ public class NewItemGroup {
 
     public String getTexture() {
         switch (this.id) {
-            case "inventory" -> {
+            case("inventory"):
                 return "inventory.png";
-            }
-            case "search" -> {
+            case("search"):
                 return "item_search.png";
-            }
-            default -> {
+            default:
                 return "items.png";
-            }
         }
     }
 
