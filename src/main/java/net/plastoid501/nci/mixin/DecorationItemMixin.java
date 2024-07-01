@@ -49,6 +49,11 @@ public class DecorationItemMixin extends Item {
                     tooltip.add((new TranslatableComponent("painting.random")).applyFormat(ChatFormat.GRAY));
                 }
             }
+        } else {
+            MinecraftClient client = MinecraftClient.getInstance();
+            if (client.player != null && client.player.isCreative()) {
+                tooltip.add((new TranslatableComponent("painting.random")).applyFormat(ChatFormat.GRAY));
+            }
         }
     }
 }
