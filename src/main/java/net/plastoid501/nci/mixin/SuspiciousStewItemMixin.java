@@ -1,6 +1,7 @@
 package net.plastoid501.nci.mixin;
 
 import com.google.common.collect.Lists;
+import net.minecraft.ChatFormat;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffect;
@@ -11,9 +12,11 @@ import net.minecraft.item.Items;
 import net.minecraft.item.SuspiciousStewItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.potion.PotionUtil;
-import net.minecraft.text.*;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -31,16 +34,16 @@ public class SuspiciousStewItemMixin extends Item {
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Component> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player != null && client.player.isCreative()) {
-            List<Text> list = this.setEffect(stack).getTooltip(client.player, client.options.advancedItemTooltips ? TooltipContext.Default.ADVANCED : TooltipContext.Default.NORMAL);
-            List<Text> list2 = Lists.newArrayList(list);
+            List<Component> list = this.setEffect(stack).getTooltip(client.player, client.options.advancedItemTooltips ? TooltipContext.Default.ADVANCED : TooltipContext.Default.NORMAL);
+            List<Component> list2 = Lists.newArrayList(list);
 
             int row = this.getItemNameRow(list2);
             list2.remove(row);
-            list2.add(row, (new TranslatableText(Items.SUSPICIOUS_STEW.getTranslationKey())).copy().setStyle(new Style()).formatted(Formatting.WHITE));
+            list2.add(row, (new TranslatableComponent(Items.SUSPICIOUS_STEW.getTranslationKey())).copy().setStyle(new Style()).applyFormat(ChatFormat.WHITE));
             int row2 = this.getItemIdRow(list2);
             if (client.options.advancedItemTooltips && list2.size() - 1 > row2) {
                 list2.remove(row2);
@@ -56,13 +59,13 @@ public class SuspiciousStewItemMixin extends Item {
         ItemStack itemStack2 = new ItemStack(Items.POTION);
         Collection<StatusEffectInstance> list = new ArrayList<>();
         CompoundTag nbtCompound = itemStack.getTag();
-        if (nbtCompound != null && nbtCompound.contains("Effects", 9)) {
+        if (nbtCompound != null && nbtCompound.containsKey("Effects", 9)) {
             ListTag nbtList = nbtCompound.getList("Effects", 10);
 
             for(int i = 0; i < nbtList.size(); ++i) {
                 int j = 160;
-                CompoundTag nbtCompound2 = nbtList.getCompound(i);
-                if (nbtCompound2.contains("EffectDuration", 3)) {
+                CompoundTag nbtCompound2 = nbtList.getCompoundTag(i);
+                if (nbtCompound2.containsKey("EffectDuration", 3)) {
                     j = nbtCompound2.getInt("EffectDuration");
                 }
 
@@ -76,13 +79,13 @@ public class SuspiciousStewItemMixin extends Item {
         return itemStack2;
     }
 
-    private int getItemNameRow(List<Text> list) {
+    private int getItemNameRow(List<Component> list) {
         //Text text = new TranslatableText(I18n.translate("" + Formatting.WHITE + "item.minecraft.potion.effect.empty"));
         //return list.indexOf(text);
         return 0;
     }
 
-    private int getItemIdRow(List<Text> list) {
-        return list.indexOf(new LiteralText(Registry.ITEM.getId(Items.POTION).toString()).copy().formatted(Formatting.DARK_GRAY));
+    private int getItemIdRow(List<Component> list) {
+        return list.indexOf(new TextComponent(Registry.ITEM.getId(Items.POTION).toString()).copy().applyFormat(ChatFormat.DARK_GRAY));
     }
 }

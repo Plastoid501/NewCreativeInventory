@@ -3,23 +3,23 @@ package net.plastoid501.nci.mixin;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.ChatFormat;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.render.DiffuseLighting;
+import net.minecraft.client.render.GuiLighting;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.container.Slot;
 import net.minecraft.container.SlotActionType;
-import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.util.DefaultedList;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.plastoid501.nci.item.NewItemGroup;
 import net.plastoid501.nci.item.NewItemGroups;
@@ -39,7 +39,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     @Shadow private static int selectedTab;
     @Shadow private float scrollPosition;
     @Shadow private TextFieldWidget searchBox;
-    @Shadow public abstract boolean hasScrollbar();
+    @Shadow public abstract boolean doRenderScrollBar();
     @Shadow protected abstract void method_2468(ItemGroup group);
 
     private static final Identifier TEXTURE = new Identifier("textures/gui/container/creative_inventory/tabs.png");
@@ -61,8 +61,8 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     private static final ItemGroup OPERATOR;
     private static final ItemGroup INVENTORY2;
 
-    public CreativeInventoryScreenMixin(CreativeInventoryScreen.CreativeContainer screenHandler, PlayerInventory playerInventory, Text text) {
-        super(screenHandler, playerInventory, text);
+    public CreativeInventoryScreenMixin(PlayerEntity playerEntity) {
+        super(new CreativeInventoryScreen.CreativeContainer(playerEntity), playerEntity.inventory, new TextComponent(""));
     }
 
     @Redirect(method = "onMouseClick", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))
@@ -138,7 +138,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         return GROUPS;
     }
 
-    @Inject(method = "hasScrollbar", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "doRenderScrollBar", at = @At("HEAD"), cancellable = true)
     private void modifyHasScrollbar(CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(selectedTab != NewItemGroups.INVENTORY.getIndex() && this.container.method_2474());
         cir.cancel();
@@ -199,11 +199,12 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
 
     @Redirect(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;getGroup()Lnet/minecraft/item/ItemGroup;"))
     private ItemGroup modifyRenderTooltip2(Item instance) {
-        return BUILDING_BLOCKS;
+        return null;
     }
 
-    @Redirect(method = "renderTooltip", at = @At(value = "INVOKE", target = "Ljava/util/List;add(ILjava/lang/Object;)V"))
-    private void modifyRenderTooltip3(List<Text> instance, int i, Object e) {
+    @Redirect(method = "renderTooltip", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;ENCHANTED_BOOK:Lnet/minecraft/item/Item;"))
+    private Item modifyRenderTooltip3() {
+        return ItemStack.EMPTY.getItem();
     }
 
     @Inject(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen;renderTooltip(Ljava/util/List;II)V"))
@@ -211,7 +212,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         List<String> newItemGroup = this.getNewItemGroup(stack);
         List<String> list2 = localRef.get();
         for (String text : newItemGroup) {
-            list2.add(1, "" + Formatting.BOLD + Formatting.BLUE + text);
+            list2.add(1, "" + ChatFormat.BOLD + ChatFormat.BLUE + text);
         }
         localRef.set(list2);
     }
@@ -237,7 +238,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     private void modifyDrawBackground(float delta, int mouseX, int mouseY, CallbackInfo ci) {
         ci.cancel();
         GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        DiffuseLighting.enableForItems();
+        GuiLighting.enableForItems();
         ItemGroup itemGroup = GROUPS[selectedTab];
         NewItemGroup itemGroup2 = NewItemGroups.GROUPS[selectedTab];
 
@@ -250,20 +251,20 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         }
 
         this.minecraft.getTextureManager().bindTexture(new Identifier("textures/gui/container/creative_inventory/tab_" + itemGroup2.getTexture()));
-        this.blit(this.x, this.y, 0, 0, this.containerWidth, this.containerHeight);
+        this.blit(this.left, this.top, 0, 0, this.containerWidth, this.containerHeight);
         this.searchBox.render(mouseX, mouseY, delta);
         GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        int i = this.x + 175;
-        int y = this.y + 18;
+        int i = this.left + 175;
+        int y = this.top + 18;
         k = y + 112;
         this.minecraft.getTextureManager().bindTexture(TEXTURE);
         if (itemGroup != INVENTORY2) {
-            this.blit(i, y + (int)((float)(k - y - 17) * this.scrollPosition), 232 + (this.hasScrollbar() ? 0 : 12), 0, 12, 15);
+            this.blit(i, y + (int)((float)(k - y - 17) * this.scrollPosition), 232 + (this.doRenderScrollBar() ? 0 : 12), 0, 12, 15);
         }
 
         this.method_2468(itemGroup);
         if (itemGroup == INVENTORY2) {
-            InventoryScreen.drawEntity(this.x + 88, this.y + 45, 20, (float)(this.x + 88 - mouseX), (float)(this.y + 45 - 30 - mouseY), this.minecraft.player);
+            InventoryScreen.drawEntity(this.left + 88, this.top + 45, 20, (float)(this.left + 88 - mouseX), (float)(this.top + 45 - 30 - mouseY), this.minecraft.player);
         }
     }
 
@@ -355,7 +356,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     private void modifyRenderTabIcon6(CreativeInventoryScreen instance, int x, int y, int u, int v, int width, int height) {
         int index = u / 28;
         NewItemGroup group = NewItemGroups.GROUPS[index];
-        x = this.x + this.getTabX(group);
+        x = this.left + this.getTabX(group);
         int j = (u / 28) % 7;
         this.renderTab(x, y, j == 6 ? 5 * 28 : j * 28, v);
     }
@@ -363,13 +364,13 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     @ModifyArg(method = "method_2468", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/ItemRenderer;renderGuiItem(Lnet/minecraft/item/ItemStack;II)V"), index = 1)
     private int modifyRenderTabIcon7(int x, @Local(ordinal = 1) int u) {
         NewItemGroup group = NewItemGroups.GROUPS[u / 28];
-        return this.x + this.getTabX(group) + 5;
+        return this.left + this.getTabX(group) + 5;
     }
 
     @ModifyArg(method = "method_2468", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/ItemRenderer;renderGuiItemOverlay(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;II)V"), index = 2)
     private int modifyRenderTabIcon8(int x, @Local(ordinal = 1) int u) {
         NewItemGroup group = NewItemGroups.GROUPS[u / 28];
-        return this.x + this.getTabX(group) + 5;
+        return this.left + this.getTabX(group) + 5;
     }
 
     @Redirect(method = "method_2468", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIcon()Lnet/minecraft/item/ItemStack;"))

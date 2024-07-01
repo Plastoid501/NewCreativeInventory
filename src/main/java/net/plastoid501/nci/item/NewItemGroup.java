@@ -7,10 +7,11 @@ import net.minecraft.entity.decoration.painting.PaintingMotive;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
-import net.minecraft.text.Text;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.registry.Registry;
 
@@ -21,11 +22,11 @@ import java.util.Map;
 public class NewItemGroup {
     private final String id;
     private final int index;
-    private final Text displayName;
+    private final TranslatableComponent displayName;
     private final ItemStack icon;
     private final Collection<ItemStack> items;
 
-    public NewItemGroup(String id, int index, Text displayName, ItemStack icon) {
+    public NewItemGroup(String id, int index, TranslatableComponent displayName, ItemStack icon) {
         this.id = id;
         this.index = index;
         this.displayName = displayName;
@@ -41,7 +42,7 @@ public class NewItemGroup {
         return index;
     }
 
-    public Text getDisplayName() {
+    public TranslatableComponent getDisplayName() {
         return displayName;
     }
 
@@ -123,10 +124,10 @@ public class NewItemGroup {
     }
 
     public void addPaintings() {
-        for (PaintingMotive paintingMotive : Registry.PAINTING_MOTIVE) {
+        for (PaintingMotive paintingMotive : Registry.MOTIVE) {
             ItemStack itemStack = new ItemStack(Items.PAINTING);
             CompoundTag nbt = itemStack.getOrCreateSubTag("EntityTag");
-            nbt.putString("Motive", Registry.PAINTING_MOTIVE.getId(paintingMotive).toString());
+            nbt.putString("Motive", Registry.MOTIVE.getId(paintingMotive).toString());
             this.add(itemStack);
         }
     }

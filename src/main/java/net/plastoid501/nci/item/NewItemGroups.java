@@ -4,24 +4,24 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.raid.Raid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.network.chat.TranslatableComponent;
 
 public class NewItemGroups {
     public static final NewItemGroup[] GROUPS = new NewItemGroup[14];
-    public static final NewItemGroup BUILDING_BLOCKS = new NewItemGroup("building_blocks", 0, new TranslatableText("plastoid501.newItemGroup.buildingBlocks"), new ItemStack(Blocks.BRICKS));
-    public static final NewItemGroup COLORED_BLOCKS = new NewItemGroup("colored_blocks", 1, new TranslatableText("plastoid501.newItemGroup.coloredBlocks"), new ItemStack(Blocks.CYAN_WOOL));
-    public static final NewItemGroup NATURAL = new NewItemGroup("natural_blocks", 2, new TranslatableText("plastoid501.newItemGroup.natural"), new ItemStack(Blocks.GRASS_BLOCK));
-    public static final NewItemGroup FUNCTIONAL = new NewItemGroup("functional_blocks", 3, new TranslatableText("plastoid501.newItemGroup.functional"), new ItemStack(Items.OAK_SIGN));
-    public static final NewItemGroup REDSTONE = new NewItemGroup("redstone_blocks", 4, new TranslatableText("plastoid501.newItemGroup.redstone"), new ItemStack(Items.REDSTONE));
-    public static final NewItemGroup HOTBAR = new NewItemGroup("hotbar", 5, new TranslatableText("plastoid501.newItemGroup.hotbar"), new ItemStack(Blocks.BOOKSHELF));
-    public static final NewItemGroup SEARCH = new NewItemGroup("search", 6, new TranslatableText("plastoid501.newItemGroup.search"), new ItemStack(Items.COMPASS));
-    public static final NewItemGroup TOOLS = new NewItemGroup("tools_and_utilities", 7, new TranslatableText("plastoid501.newItemGroup.tools"), new ItemStack(Items.DIAMOND_PICKAXE));
-    public static final NewItemGroup COMBAT = new NewItemGroup("combat", 8, new TranslatableText("plastoid501.newItemGroup.combat"), new ItemStack(Items.DIAMOND_SWORD));
-    public static final NewItemGroup FOOD_AND_DRINK = new NewItemGroup("food_and_drinks", 9, new TranslatableText("plastoid501.newItemGroup.foodAndDrink"), new ItemStack(Items.GOLDEN_APPLE));
-    public static final NewItemGroup INGREDIENTS = new NewItemGroup("ingredients", 10, new TranslatableText("plastoid501.newItemGroup.ingredients"), new ItemStack(Items.IRON_INGOT));
-    public static final NewItemGroup SPAWN_EGGS = new NewItemGroup("spawn_eggs", 11, new TranslatableText("plastoid501.newItemGroup.spawnEggs"), new ItemStack(Items.PIG_SPAWN_EGG));
-    public static final NewItemGroup OPERATOR = new NewItemGroup("op_blocks", 12, new TranslatableText("plastoid501.newItemGroup.op"), new ItemStack(Items.COMMAND_BLOCK));
-    public static final NewItemGroup INVENTORY = new NewItemGroup("inventory", 13, new TranslatableText("plastoid501.newItemGroup.inventory"), new ItemStack(Blocks.CHEST));
+    public static final NewItemGroup BUILDING_BLOCKS = new NewItemGroup("building_blocks", 0, new TranslatableComponent("plastoid501.newItemGroup.buildingBlocks"), new ItemStack(Blocks.BRICKS));
+    public static final NewItemGroup COLORED_BLOCKS = new NewItemGroup("colored_blocks", 1, new TranslatableComponent("plastoid501.newItemGroup.coloredBlocks"), new ItemStack(Blocks.CYAN_WOOL));
+    public static final NewItemGroup NATURAL = new NewItemGroup("natural_blocks", 2, new TranslatableComponent("plastoid501.newItemGroup.natural"), new ItemStack(Blocks.GRASS_BLOCK));
+    public static final NewItemGroup FUNCTIONAL = new NewItemGroup("functional_blocks", 3, new TranslatableComponent("plastoid501.newItemGroup.functional"), new ItemStack(Items.OAK_SIGN));
+    public static final NewItemGroup REDSTONE = new NewItemGroup("redstone_blocks", 4, new TranslatableComponent("plastoid501.newItemGroup.redstone"), new ItemStack(Items.REDSTONE));
+    public static final NewItemGroup HOTBAR = new NewItemGroup("hotbar", 5, new TranslatableComponent("plastoid501.newItemGroup.hotbar"), new ItemStack(Blocks.BOOKSHELF));
+    public static final NewItemGroup SEARCH = new NewItemGroup("search", 6, new TranslatableComponent("plastoid501.newItemGroup.search"), new ItemStack(Items.COMPASS));
+    public static final NewItemGroup TOOLS = new NewItemGroup("tools_and_utilities", 7, new TranslatableComponent("plastoid501.newItemGroup.tools"), new ItemStack(Items.DIAMOND_PICKAXE));
+    public static final NewItemGroup COMBAT = new NewItemGroup("combat", 8, new TranslatableComponent("plastoid501.newItemGroup.combat"), new ItemStack(Items.DIAMOND_SWORD));
+    public static final NewItemGroup FOOD_AND_DRINK = new NewItemGroup("food_and_drinks", 9, new TranslatableComponent("plastoid501.newItemGroup.foodAndDrink"), new ItemStack(Items.GOLDEN_APPLE));
+    public static final NewItemGroup INGREDIENTS = new NewItemGroup("ingredients", 10, new TranslatableComponent("plastoid501.newItemGroup.ingredients"), new ItemStack(Items.IRON_INGOT));
+    public static final NewItemGroup SPAWN_EGGS = new NewItemGroup("spawn_eggs", 11, new TranslatableComponent("plastoid501.newItemGroup.spawnEggs"), new ItemStack(Items.PIG_SPAWN_EGG));
+    public static final NewItemGroup OPERATOR = new NewItemGroup("op_blocks", 12, new TranslatableComponent("plastoid501.newItemGroup.op"), new ItemStack(Items.COMMAND_BLOCK));
+    public static final NewItemGroup INVENTORY = new NewItemGroup("inventory", 13, new TranslatableComponent("plastoid501.newItemGroup.inventory"), new ItemStack(Blocks.CHEST));
 
     static {
         BUILDING_BLOCKS.add(Items.OAK_LOG);
@@ -899,7 +899,7 @@ public class NewItemGroups {
         FUNCTIONAL.add(Items.PURPLE_BANNER);
         FUNCTIONAL.add(Items.MAGENTA_BANNER);
         FUNCTIONAL.add(Items.PINK_BANNER);
-        FUNCTIONAL.add(Raid.getOminousBanner());
+        FUNCTIONAL.add(Raid.OMINOUS_BANNER);
         FUNCTIONAL.add(Items.SKELETON_SKULL);
         FUNCTIONAL.add(Items.WITHER_SKELETON_SKULL);
         FUNCTIONAL.add(Items.PLAYER_HEAD);
