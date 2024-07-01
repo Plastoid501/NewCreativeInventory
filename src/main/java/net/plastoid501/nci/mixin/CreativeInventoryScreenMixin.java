@@ -114,14 +114,14 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         return GROUPS;
     }
 
-    @Redirect(method = "drawForeground", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;shouldRenderName()Z"))
+    @Redirect(method = "drawForeground", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;hasTooltip()Z"))
     protected boolean modifyDrawForeground2(ItemGroup instance) {
         return instance != INVENTORY2;
     }
 
-    @Redirect(method = "drawForeground", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getTranslationKey()Lnet/minecraft/text/Text;"))
-    protected Text modifyDrawForeground3(ItemGroup instance) {
-        return this.getNewItemGroup(instance).getDisplayName();
+    @Redirect(method = "drawForeground", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getTranslationKey()Ljava/lang/String;"))
+    protected String modifyDrawForeground3(ItemGroup instance) {
+        return this.getNewItemGroup(instance).getDisplayName().getString();
     }
 
     @Redirect(method = "mouseClicked", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroup;GROUPS:[Lnet/minecraft/item/ItemGroup;"))
@@ -321,9 +321,9 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
         return this.getNewItemGroup(instance).isTopRow();
     }
 
-    @Redirect(method = "renderTabTooltipIfHovered", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getTranslationKey()Lnet/minecraft/text/Text;"))
-    private Text modifyRenderTabTooltipIfHovered6(ItemGroup instance) {
-        return this.getNewItemGroup(instance).getDisplayName();
+    @Redirect(method = "renderTabTooltipIfHovered", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getTranslationKey()Ljava/lang/String;"))
+    private String modifyRenderTabTooltipIfHovered6(ItemGroup instance) {
+        return this.getNewItemGroup(instance).getDisplayName().getString();
     }
 
     @Redirect(method = "renderTabIcon", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemGroup;getIndex()I"))

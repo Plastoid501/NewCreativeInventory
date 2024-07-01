@@ -1309,7 +1309,7 @@ public class NewItemGroups {
         SPAWN_EGGS.add(Items.PHANTOM_SPAWN_EGG);
         SPAWN_EGGS.add(Items.PIG_SPAWN_EGG);
         SPAWN_EGGS.add(Items.PIGLIN_SPAWN_EGG);
-        SPAWN_EGGS.add(Items.PIGLIN_BRUTE_SPAWN_EGG);
+        //SPAWN_EGGS.add(Items.PIGLIN_BRUTE_SPAWN_EGG);//1.16.2
         SPAWN_EGGS.add(Items.PILLAGER_SPAWN_EGG);
         SPAWN_EGGS.add(Items.POLAR_BEAR_SPAWN_EGG);
         SPAWN_EGGS.add(Items.PUFFERFISH_SPAWN_EGG);

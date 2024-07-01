@@ -8,13 +8,11 @@ import net.minecraft.entity.decoration.painting.PaintingMotive;
 import net.minecraft.item.DecorationItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -34,9 +32,9 @@ public class DecorationItemMixin extends Item {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        NbtCompound nbtCompound = stack.getTag();
+        CompoundTag nbtCompound = stack.getTag();
         if (nbtCompound != null && nbtCompound.contains("EntityTag", 10)) {
-            NbtCompound nbtCompound2 = nbtCompound.getCompound("EntityTag");
+            CompoundTag nbtCompound2 = nbtCompound.getCompound("EntityTag");
             if (nbtCompound2 != null && nbtCompound2.contains("Motive", 8)) {
                 String title = nbtCompound2.getString("Motive");
                 PaintingMotive paintingMotive = Registry.PAINTING_MOTIVE.get(new Identifier(title));

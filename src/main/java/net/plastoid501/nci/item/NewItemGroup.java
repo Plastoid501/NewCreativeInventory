@@ -7,7 +7,7 @@ import net.minecraft.entity.decoration.painting.PaintingMotive;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
@@ -126,7 +126,7 @@ public class NewItemGroup {
     public void addPaintings() {
         for (PaintingMotive paintingMotive : Registry.PAINTING_MOTIVE) {
             ItemStack itemStack = new ItemStack(Items.PAINTING);
-            NbtCompound nbt = itemStack.getOrCreateSubTag("EntityTag");
+            CompoundTag nbt = itemStack.getOrCreateSubTag("EntityTag");
             nbt.putString("Motive", Registry.PAINTING_MOTIVE.getId(paintingMotive).toString());
             this.add(itemStack);
         }
