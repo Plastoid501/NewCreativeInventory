@@ -200,11 +200,12 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
 
     @Redirect(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;getGroup()Lnet/minecraft/item/ItemGroup;"))
     private ItemGroup modifyRenderTooltip2(Item instance) {
-        return BUILDING_BLOCKS;
+        return null;
     }
 
-    @Redirect(method = "renderTooltip", at = @At(value = "INVOKE", target = "Ljava/util/List;add(ILjava/lang/Object;)V"))
-    private void modifyRenderTooltip3(List<Text> instance, int i, Object e) {
+    @Redirect(method = "renderTooltip", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;ENCHANTED_BOOK:Lnet/minecraft/item/Item;"))
+    private Item modifyRenderTooltip3() {
+        return ItemStack.EMPTY.getItem();
     }
 
     @Inject(method = "renderTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen;renderTooltip(Lnet/minecraft/client/util/math/MatrixStack;Ljava/util/List;II)V"))
