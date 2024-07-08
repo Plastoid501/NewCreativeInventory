@@ -3,25 +3,197 @@ package net.plastoid501.nci.item;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.text.TranslatableText;
+//? if <=1.14.2 {
+/*import net.minecraft.network.chat.TranslatableComponent;*/
+//?} elif <=1.18.2 {
+/*import net.minecraft.text.TranslatableText;*/
+//?} elif <=1.19.2 {
+import net.minecraft.text.Text;
+//?}
+//? if >1.14.2 {
+//? if <=1.15.2 {
+/*import net.minecraft.entity.raid.Raid;*/
+//?} else {
 import net.minecraft.village.raid.Raid;
+//?}
+//?}
+
 
 public class NewItemGroups {
     public static final NewItemGroup[] GROUPS = new NewItemGroup[14];
-    public static final NewItemGroup BUILDING_BLOCKS = new NewItemGroup("building_blocks", 0, new TranslatableText("plastoid501.newItemGroup.buildingBlocks"), new ItemStack(Blocks.BRICKS));
-    public static final NewItemGroup COLORED_BLOCKS = new NewItemGroup("colored_blocks", 1, new TranslatableText("plastoid501.newItemGroup.coloredBlocks"), new ItemStack(Blocks.CYAN_WOOL));
-    public static final NewItemGroup NATURAL = new NewItemGroup("natural_blocks", 2, new TranslatableText("plastoid501.newItemGroup.natural"), new ItemStack(Blocks.GRASS_BLOCK));
-    public static final NewItemGroup FUNCTIONAL = new NewItemGroup("functional_blocks", 3, new TranslatableText("plastoid501.newItemGroup.functional"), new ItemStack(Items.OAK_SIGN));
-    public static final NewItemGroup REDSTONE = new NewItemGroup("redstone_blocks", 4, new TranslatableText("plastoid501.newItemGroup.redstone"), new ItemStack(Items.REDSTONE));
-    public static final NewItemGroup HOTBAR = new NewItemGroup("hotbar", 5, new TranslatableText("plastoid501.newItemGroup.hotbar"), new ItemStack(Blocks.BOOKSHELF));
-    public static final NewItemGroup SEARCH = new NewItemGroup("search", 6, new TranslatableText("plastoid501.newItemGroup.search"), new ItemStack(Items.COMPASS));
-    public static final NewItemGroup TOOLS = new NewItemGroup("tools_and_utilities", 7, new TranslatableText("plastoid501.newItemGroup.tools"), new ItemStack(Items.DIAMOND_PICKAXE));
-    public static final NewItemGroup COMBAT = new NewItemGroup("combat", 8, new TranslatableText("plastoid501.newItemGroup.combat"), new ItemStack(Items.NETHERITE_SWORD));
-    public static final NewItemGroup FOOD_AND_DRINK = new NewItemGroup("food_and_drinks", 9, new TranslatableText("plastoid501.newItemGroup.foodAndDrink"), new ItemStack(Items.GOLDEN_APPLE));
-    public static final NewItemGroup INGREDIENTS = new NewItemGroup("ingredients", 10, new TranslatableText("plastoid501.newItemGroup.ingredients"), new ItemStack(Items.IRON_INGOT));
-    public static final NewItemGroup SPAWN_EGGS = new NewItemGroup("spawn_eggs", 11, new TranslatableText("plastoid501.newItemGroup.spawnEggs"), new ItemStack(Items.PIG_SPAWN_EGG));
-    public static final NewItemGroup OPERATOR = new NewItemGroup("op_blocks", 12, new TranslatableText("plastoid501.newItemGroup.op"), new ItemStack(Items.COMMAND_BLOCK));
-    public static final NewItemGroup INVENTORY = new NewItemGroup("inventory", 13, new TranslatableText("plastoid501.newItemGroup.inventory"), new ItemStack(Blocks.CHEST));
+    public static final NewItemGroup BUILDING_BLOCKS = new NewItemGroup("building_blocks",
+            0,
+            //? if <=1.14.2 {
+            /*new TranslatableComponent*/
+            //?} elif <=1.18.2 {
+            /*new TranslatableText*/
+            //?} elif <=1.19.2 {
+            Text.translatable
+            //?}
+                    ("plastoid501.newItemGroup.buildingBlocks"),
+            new ItemStack(Blocks.BRICKS));
+
+    public static final NewItemGroup COLORED_BLOCKS = new NewItemGroup("colored_blocks",
+            1,
+            //? if <=1.14.2 {
+            /*new TranslatableComponent*/
+            //?} elif <=1.18.2 {
+            /*new TranslatableText*/
+            //?} elif <=1.19.2 {
+            Text.translatable
+            //?}
+                    ("plastoid501.newItemGroup.coloredBlocks"),
+            new ItemStack(Blocks.CYAN_WOOL));
+
+    public static final NewItemGroup NATURAL = new NewItemGroup("natural_blocks",
+            2,
+            //? if <=1.14.2 {
+            /*new TranslatableComponent*/
+            //?} elif <=1.18.2 {
+            /*new TranslatableText*/
+            //?} elif <=1.19.2 {
+            Text.translatable
+            //?}
+                    ("plastoid501.newItemGroup.natural"),
+            new ItemStack(Blocks.GRASS_BLOCK));
+
+    public static final NewItemGroup FUNCTIONAL = new NewItemGroup("functional_blocks",
+            3,
+            //? if <=1.14.2 {
+            /*new TranslatableComponent*/
+            //?} elif <=1.18.2 {
+            /*new TranslatableText*/
+            //?} elif <=1.19.2 {
+            Text.translatable
+            //?}
+                    ("plastoid501.newItemGroup.functional"),
+            new ItemStack(Items.OAK_SIGN));
+
+    public static final NewItemGroup REDSTONE = new NewItemGroup("redstone_blocks",
+            4,
+            //? if <=1.14.2 {
+            /*new TranslatableComponent*/
+            //?} elif <=1.18.2 {
+            /*new TranslatableText*/
+            //?} elif <=1.19.2 {
+            Text.translatable
+            //?}
+                    ("plastoid501.newItemGroup.redstone"),
+            new ItemStack(Items.REDSTONE));
+
+    public static final NewItemGroup HOTBAR = new NewItemGroup("hotbar",
+            5,
+            //? if <=1.14.2 {
+            /*new TranslatableComponent*/
+            //?} elif <=1.18.2 {
+            /*new TranslatableText*/
+            //?} elif <=1.19.2 {
+            Text.translatable
+            //?}
+                    ("plastoid501.newItemGroup.hotbar"),
+            new ItemStack(Blocks.BOOKSHELF));
+
+    public static final NewItemGroup SEARCH = new NewItemGroup("search",
+            6,
+            //? if <=1.14.2 {
+            /*new TranslatableComponent*/
+            //?} elif <=1.18.2 {
+            /*new TranslatableText*/
+            //?} elif <=1.19.2 {
+            Text.translatable
+            //?}
+                    ("plastoid501.newItemGroup.search"),
+            new ItemStack(Items.COMPASS));
+
+    public static final NewItemGroup TOOLS = new NewItemGroup("tools_and_utilities",
+            7,
+            //? if <=1.14.2 {
+            /*new TranslatableComponent*/
+            //?} elif <=1.18.2 {
+            /*new TranslatableText*/
+            //?} elif <=1.19.2 {
+            Text.translatable
+            //?}
+                    ("plastoid501.newItemGroup.tools"),
+            new ItemStack(Items.DIAMOND_PICKAXE));
+
+    public static final NewItemGroup COMBAT = new NewItemGroup("combat",
+            8,
+            //? if <=1.14.2 {
+            /*new TranslatableComponent*/
+            //?} elif <=1.18.2 {
+            /*new TranslatableText*/
+            //?} elif <=1.19.2 {
+            Text.translatable
+            //?}
+                    ("plastoid501.newItemGroup.combat"),
+            new ItemStack(
+                    //? if <1.16 {
+                    /*Items.DIAMOND_SWORD*/
+                    //?} else {
+                    Items.NETHERITE_SWORD
+                    //?}
+            ));
+
+    public static final NewItemGroup FOOD_AND_DRINK = new NewItemGroup("food_and_drinks",
+            9,
+            //? if <=1.14.2 {
+            /*new TranslatableComponent*/
+            //?} elif <=1.18.2 {
+            /*new TranslatableText*/
+            //?} elif <=1.19.2 {
+            Text.translatable
+            //?}
+                    ("plastoid501.newItemGroup.foodAndDrink"),
+            new ItemStack(Items.GOLDEN_APPLE));
+
+    public static final NewItemGroup INGREDIENTS = new NewItemGroup("ingredients",
+            10,
+            //? if <=1.14.2 {
+            /*new TranslatableComponent*/
+            //?} elif <=1.18.2 {
+            /*new TranslatableText*/
+            //?} elif <=1.19.2 {
+            Text.translatable
+            //?}
+                    ("plastoid501.newItemGroup.ingredients"),
+            new ItemStack(Items.IRON_INGOT));
+
+    public static final NewItemGroup SPAWN_EGGS = new NewItemGroup("spawn_eggs",
+            11,
+            //? if <=1.14.2 {
+            /*new TranslatableComponent*/
+            //?} elif <=1.18.2 {
+            /*new TranslatableText*/
+            //?} elif <=1.19.2 {
+            Text.translatable
+            //?}
+                    ("plastoid501.newItemGroup.spawnEggs"),
+            new ItemStack(Items.PIG_SPAWN_EGG));
+
+    public static final NewItemGroup OPERATOR = new NewItemGroup("op_blocks",
+            12,
+            //? if <=1.14.2 {
+            /*new TranslatableComponent*/
+            //?} elif <=1.18.2 {
+            /*new TranslatableText*/
+            //?} elif <=1.19.2 {
+            Text.translatable
+            //?}
+                    ("plastoid501.newItemGroup.op"),
+            new ItemStack(Items.COMMAND_BLOCK));
+
+    public static final NewItemGroup INVENTORY = new NewItemGroup("inventory",
+            13,
+            //? if <=1.14.2 {
+            /*new TranslatableComponent*/
+            //?} elif <=1.18.2 {
+            /*new TranslatableText*/
+            //?} elif <=1.19.2 {
+            Text.translatable
+            //?}
+                            ("plastoid501.newItemGroup.inventory"),
+            new ItemStack(Blocks.CHEST));
 
     static {
         BUILDING_BLOCKS.add(Items.OAK_LOG);
@@ -102,45 +274,49 @@ public class NewItemGroups {
         BUILDING_BLOCKS.add(Items.DARK_OAK_TRAPDOOR);
         BUILDING_BLOCKS.add(Items.DARK_OAK_PRESSURE_PLATE);
         BUILDING_BLOCKS.add(Items.DARK_OAK_BUTTON);
-        //BUILDING_BLOCKS.add(Items.MANGROVE_LOG);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_WOOD);//1.19
-        //BUILDING_BLOCKS.add(Items.STRIPPED_MANGROVE_LOG);//1.19
-        //BUILDING_BLOCKS.add(Items.STRIPPED_MANGROVE_WOOD);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_PLANKS);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_STAIRS);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_SLAB);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_FENCE);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_FENCE_GATE);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_DOOR);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_TRAPDOOR);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_PRESSURE_PLATE);//1.19
-        //BUILDING_BLOCKS.add(Items.MANGROVE_BUTTON);//1.19
-        BUILDING_BLOCKS.add(Items.CRIMSON_STEM);
-        BUILDING_BLOCKS.add(Items.CRIMSON_HYPHAE);
-        BUILDING_BLOCKS.add(Items.STRIPPED_CRIMSON_STEM);
-        BUILDING_BLOCKS.add(Items.STRIPPED_CRIMSON_HYPHAE);
-        BUILDING_BLOCKS.add(Items.CRIMSON_PLANKS);
-        BUILDING_BLOCKS.add(Items.CRIMSON_STAIRS);
-        BUILDING_BLOCKS.add(Items.CRIMSON_SLAB);
-        BUILDING_BLOCKS.add(Items.CRIMSON_FENCE);
-        BUILDING_BLOCKS.add(Items.CRIMSON_FENCE_GATE);
-        BUILDING_BLOCKS.add(Items.CRIMSON_DOOR);
-        BUILDING_BLOCKS.add(Items.CRIMSON_TRAPDOOR);
-        BUILDING_BLOCKS.add(Items.CRIMSON_PRESSURE_PLATE);
-        BUILDING_BLOCKS.add(Items.CRIMSON_BUTTON);
-        BUILDING_BLOCKS.add(Items.WARPED_STEM);
-        BUILDING_BLOCKS.add(Items.WARPED_HYPHAE);
-        BUILDING_BLOCKS.add(Items.STRIPPED_WARPED_STEM);
-        BUILDING_BLOCKS.add(Items.STRIPPED_WARPED_HYPHAE);
-        BUILDING_BLOCKS.add(Items.WARPED_PLANKS);
-        BUILDING_BLOCKS.add(Items.WARPED_STAIRS);
-        BUILDING_BLOCKS.add(Items.WARPED_SLAB);
-        BUILDING_BLOCKS.add(Items.WARPED_FENCE);
-        BUILDING_BLOCKS.add(Items.WARPED_FENCE_GATE);
-        BUILDING_BLOCKS.add(Items.WARPED_DOOR);
-        BUILDING_BLOCKS.add(Items.WARPED_TRAPDOOR);
-        BUILDING_BLOCKS.add(Items.WARPED_PRESSURE_PLATE);
-        BUILDING_BLOCKS.add(Items.WARPED_BUTTON);
+        //? if >=1.19 {
+        BUILDING_BLOCKS.add(Items.MANGROVE_LOG);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_WOOD);//1.19
+        BUILDING_BLOCKS.add(Items.STRIPPED_MANGROVE_LOG);//1.19
+        BUILDING_BLOCKS.add(Items.STRIPPED_MANGROVE_WOOD);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_PLANKS);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_STAIRS);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_SLAB);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_FENCE);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_FENCE_GATE);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_DOOR);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_TRAPDOOR);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_PRESSURE_PLATE);//1.19
+        BUILDING_BLOCKS.add(Items.MANGROVE_BUTTON);//1.19
+        //?}
+        //? if >=1.16 {
+        BUILDING_BLOCKS.add(Items.CRIMSON_STEM);//1.16
+        BUILDING_BLOCKS.add(Items.CRIMSON_HYPHAE);//1.16
+        BUILDING_BLOCKS.add(Items.STRIPPED_CRIMSON_STEM);//1.16
+        BUILDING_BLOCKS.add(Items.STRIPPED_CRIMSON_HYPHAE);//1.16
+        BUILDING_BLOCKS.add(Items.CRIMSON_PLANKS);//1.16
+        BUILDING_BLOCKS.add(Items.CRIMSON_STAIRS);//1.16
+        BUILDING_BLOCKS.add(Items.CRIMSON_SLAB);//1.16
+        BUILDING_BLOCKS.add(Items.CRIMSON_FENCE);//1.16
+        BUILDING_BLOCKS.add(Items.CRIMSON_FENCE_GATE);//1.16
+        BUILDING_BLOCKS.add(Items.CRIMSON_DOOR);//1.16
+        BUILDING_BLOCKS.add(Items.CRIMSON_TRAPDOOR);//1.16
+        BUILDING_BLOCKS.add(Items.CRIMSON_PRESSURE_PLATE);//1.16
+        BUILDING_BLOCKS.add(Items.CRIMSON_BUTTON);//1.16
+        BUILDING_BLOCKS.add(Items.WARPED_STEM);//1.16
+        BUILDING_BLOCKS.add(Items.WARPED_HYPHAE);//1.16
+        BUILDING_BLOCKS.add(Items.STRIPPED_WARPED_STEM);//1.16
+        BUILDING_BLOCKS.add(Items.STRIPPED_WARPED_HYPHAE);//1.16
+        BUILDING_BLOCKS.add(Items.WARPED_PLANKS);//1.16
+        BUILDING_BLOCKS.add(Items.WARPED_STAIRS);//1.16
+        BUILDING_BLOCKS.add(Items.WARPED_SLAB);//1.16
+        BUILDING_BLOCKS.add(Items.WARPED_FENCE);//1.16
+        BUILDING_BLOCKS.add(Items.WARPED_FENCE_GATE);//1.16
+        BUILDING_BLOCKS.add(Items.WARPED_DOOR);//1.16
+        BUILDING_BLOCKS.add(Items.WARPED_TRAPDOOR);//1.16
+        BUILDING_BLOCKS.add(Items.WARPED_PRESSURE_PLATE);//1.16
+        BUILDING_BLOCKS.add(Items.WARPED_BUTTON);//1.16
+        //?}
         BUILDING_BLOCKS.add(Items.STONE);
         BUILDING_BLOCKS.add(Items.STONE_STAIRS);
         BUILDING_BLOCKS.add(Items.STONE_SLAB);
@@ -187,36 +363,48 @@ public class NewItemGroups {
         BUILDING_BLOCKS.add(Items.POLISHED_ANDESITE);
         BUILDING_BLOCKS.add(Items.POLISHED_ANDESITE_STAIRS);
         BUILDING_BLOCKS.add(Items.POLISHED_ANDESITE_SLAB);
-        BUILDING_BLOCKS.add(Items.DEEPSLATE);
-        BUILDING_BLOCKS.add(Items.COBBLED_DEEPSLATE);
-        BUILDING_BLOCKS.add(Items.COBBLED_DEEPSLATE_STAIRS);
-        BUILDING_BLOCKS.add(Items.COBBLED_DEEPSLATE_SLAB);
-        BUILDING_BLOCKS.add(Items.COBBLED_DEEPSLATE_WALL);
-        BUILDING_BLOCKS.add(Items.CHISELED_DEEPSLATE);
-        BUILDING_BLOCKS.add(Items.POLISHED_DEEPSLATE);
-        BUILDING_BLOCKS.add(Items.POLISHED_DEEPSLATE_STAIRS);
-        BUILDING_BLOCKS.add(Items.POLISHED_DEEPSLATE_SLAB);
-        BUILDING_BLOCKS.add(Items.POLISHED_DEEPSLATE_WALL);
-        BUILDING_BLOCKS.add(Items.DEEPSLATE_BRICKS);
-        BUILDING_BLOCKS.add(Items.CRACKED_DEEPSLATE_BRICKS);
-        BUILDING_BLOCKS.add(Items.DEEPSLATE_BRICK_STAIRS);
-        BUILDING_BLOCKS.add(Items.DEEPSLATE_BRICK_SLAB);
-        BUILDING_BLOCKS.add(Items.DEEPSLATE_BRICK_WALL);
-        BUILDING_BLOCKS.add(Items.DEEPSLATE_TILES);
-        BUILDING_BLOCKS.add(Items.CRACKED_DEEPSLATE_TILES);
-        BUILDING_BLOCKS.add(Items.DEEPSLATE_TILE_STAIRS);
-        BUILDING_BLOCKS.add(Items.DEEPSLATE_TILE_SLAB);
-        BUILDING_BLOCKS.add(Items.DEEPSLATE_TILE_WALL);
-        //BUILDING_BLOCKS.add(Items.REINFORCED_DEEPSLATE);//1.19
+        //? if >=1.17 {
+        BUILDING_BLOCKS.add(Items.DEEPSLATE);//1.17
+        BUILDING_BLOCKS.add(Items.COBBLED_DEEPSLATE);//1.17
+        BUILDING_BLOCKS.add(Items.COBBLED_DEEPSLATE_STAIRS);//1.17
+        BUILDING_BLOCKS.add(Items.COBBLED_DEEPSLATE_SLAB);//1.17
+        BUILDING_BLOCKS.add(
+                //? if <=1.17.1 {
+                /*Items.DEEPSLATE_WALL*///1.17
+                //?} elif >=1.18 {
+                Items.COBBLED_DEEPSLATE_WALL
+                //?}
+        );
+        BUILDING_BLOCKS.add(Items.CHISELED_DEEPSLATE);//1.17
+        BUILDING_BLOCKS.add(Items.POLISHED_DEEPSLATE);//1.17
+        BUILDING_BLOCKS.add(Items.POLISHED_DEEPSLATE_STAIRS);//1.17
+        BUILDING_BLOCKS.add(Items.POLISHED_DEEPSLATE_SLAB);//1.17
+        BUILDING_BLOCKS.add(Items.POLISHED_DEEPSLATE_WALL);//1.17
+        BUILDING_BLOCKS.add(Items.DEEPSLATE_BRICKS);//1.17
+        BUILDING_BLOCKS.add(Items.CRACKED_DEEPSLATE_BRICKS);//1.17
+        BUILDING_BLOCKS.add(Items.DEEPSLATE_BRICK_STAIRS);//1.17
+        BUILDING_BLOCKS.add(Items.DEEPSLATE_BRICK_SLAB);//1.17
+        BUILDING_BLOCKS.add(Items.DEEPSLATE_BRICK_WALL);//1.17
+        BUILDING_BLOCKS.add(Items.DEEPSLATE_TILES);//1.17
+        BUILDING_BLOCKS.add(Items.CRACKED_DEEPSLATE_TILES);//1.17
+        BUILDING_BLOCKS.add(Items.DEEPSLATE_TILE_STAIRS);//1.17
+        BUILDING_BLOCKS.add(Items.DEEPSLATE_TILE_SLAB);//1.17
+        BUILDING_BLOCKS.add(Items.DEEPSLATE_TILE_WALL);//1.17
+        //?}
+        //? if >=1.19 {
+        BUILDING_BLOCKS.add(Items.REINFORCED_DEEPSLATE);//1.19
+        //?}
         BUILDING_BLOCKS.add(Items.BRICKS);
         BUILDING_BLOCKS.add(Items.BRICK_STAIRS);
         BUILDING_BLOCKS.add(Items.BRICK_SLAB);
         BUILDING_BLOCKS.add(Items.BRICK_WALL);
-        //BUILDING_BLOCKS.add(Items.PACKED_MUD);//1.19
-        //BUILDING_BLOCKS.add(Items.MUD_BRICKS);//1.19
-        //BUILDING_BLOCKS.add(Items.MUD_BRICK_STAIRS);//1.19
-        //BUILDING_BLOCKS.add(Items.MUD_BRICK_SLAB);//1.19
-        //BUILDING_BLOCKS.add(Items.MUD_BRICK_WALL);//1.19
+        //? if >=1.19 {
+        BUILDING_BLOCKS.add(Items.PACKED_MUD);//1.19
+        BUILDING_BLOCKS.add(Items.MUD_BRICKS);//1.19
+        BUILDING_BLOCKS.add(Items.MUD_BRICK_STAIRS);//1.19
+        BUILDING_BLOCKS.add(Items.MUD_BRICK_SLAB);//1.19
+        BUILDING_BLOCKS.add(Items.MUD_BRICK_WALL);//1.19
+        //?}
         BUILDING_BLOCKS.add(Items.SANDSTONE);
         BUILDING_BLOCKS.add(Items.SANDSTONE_STAIRS);
         BUILDING_BLOCKS.add(Items.SANDSTONE_SLAB);
@@ -250,36 +438,46 @@ public class NewItemGroups {
         BUILDING_BLOCKS.add(Items.DARK_PRISMARINE_SLAB);
         BUILDING_BLOCKS.add(Items.NETHERRACK);
         BUILDING_BLOCKS.add(Items.NETHER_BRICKS);
-        BUILDING_BLOCKS.add(Items.CRACKED_NETHER_BRICKS);
+        //? if >=1.16 {
+        BUILDING_BLOCKS.add(Items.CRACKED_NETHER_BRICKS);//1.16
+        //?}
         BUILDING_BLOCKS.add(Items.NETHER_BRICK_STAIRS);
         BUILDING_BLOCKS.add(Items.NETHER_BRICK_SLAB);
         BUILDING_BLOCKS.add(Items.NETHER_BRICK_WALL);
         BUILDING_BLOCKS.add(Items.NETHER_BRICK_FENCE);
-        BUILDING_BLOCKS.add(Items.CHISELED_NETHER_BRICKS);
+        //? if >=1.16 {
+        BUILDING_BLOCKS.add(Items.CHISELED_NETHER_BRICKS);//1.16
+        //?}
         BUILDING_BLOCKS.add(Items.RED_NETHER_BRICKS);
         BUILDING_BLOCKS.add(Items.RED_NETHER_BRICK_STAIRS);
         BUILDING_BLOCKS.add(Items.RED_NETHER_BRICK_SLAB);
         BUILDING_BLOCKS.add(Items.RED_NETHER_BRICK_WALL);
-        BUILDING_BLOCKS.add(Items.BASALT);
-        BUILDING_BLOCKS.add(Items.SMOOTH_BASALT);
-        BUILDING_BLOCKS.add(Items.POLISHED_BASALT);
-        BUILDING_BLOCKS.add(Items.BLACKSTONE);
-        BUILDING_BLOCKS.add(Items.GILDED_BLACKSTONE);
-        BUILDING_BLOCKS.add(Items.BLACKSTONE_STAIRS);
-        BUILDING_BLOCKS.add(Items.BLACKSTONE_SLAB);
-        BUILDING_BLOCKS.add(Items.BLACKSTONE_WALL);
-        BUILDING_BLOCKS.add(Items.CHISELED_POLISHED_BLACKSTONE);
-        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE);
-        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_STAIRS);
-        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_SLAB);
-        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_WALL);
-        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_PRESSURE_PLATE);
-        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_BUTTON);
-        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_BRICKS);
-        BUILDING_BLOCKS.add(Items.CRACKED_POLISHED_BLACKSTONE_BRICKS);
-        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_BRICK_STAIRS);
-        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_BRICK_SLAB);
-        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_BRICK_WALL);
+        //? if >=1.16 {
+        BUILDING_BLOCKS.add(Items.BASALT);//1.16
+        //?}
+        //? if >=1.17 {
+        BUILDING_BLOCKS.add(Items.SMOOTH_BASALT);//1.17
+        //?}
+        //? if >=1.16 {
+        BUILDING_BLOCKS.add(Items.POLISHED_BASALT);//1.16
+        BUILDING_BLOCKS.add(Items.BLACKSTONE);//1.16
+        BUILDING_BLOCKS.add(Items.GILDED_BLACKSTONE);//1.16
+        BUILDING_BLOCKS.add(Items.BLACKSTONE_STAIRS);//1.16
+        BUILDING_BLOCKS.add(Items.BLACKSTONE_SLAB);//1.16
+        BUILDING_BLOCKS.add(Items.BLACKSTONE_WALL);//1.16
+        BUILDING_BLOCKS.add(Items.CHISELED_POLISHED_BLACKSTONE);//1.16
+        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE);//1.16
+        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_STAIRS);//1.16
+        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_SLAB);//1.16
+        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_WALL);//1.16
+        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_PRESSURE_PLATE);//1.16
+        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_BUTTON);//1.16
+        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_BRICKS);//1.16
+        BUILDING_BLOCKS.add(Items.CRACKED_POLISHED_BLACKSTONE_BRICKS);//1.16
+        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_BRICK_STAIRS);//1.16
+        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_BRICK_SLAB);//1.16
+        BUILDING_BLOCKS.add(Items.POLISHED_BLACKSTONE_BRICK_WALL);//1.16
+        //?}
         BUILDING_BLOCKS.add(Items.END_STONE);
         BUILDING_BLOCKS.add(Items.END_STONE_BRICKS);
         BUILDING_BLOCKS.add(Items.END_STONE_BRICK_STAIRS);
@@ -295,56 +493,70 @@ public class NewItemGroups {
         BUILDING_BLOCKS.add(Items.IRON_DOOR);
         BUILDING_BLOCKS.add(Items.IRON_TRAPDOOR);
         BUILDING_BLOCKS.add(Items.HEAVY_WEIGHTED_PRESSURE_PLATE);
-        BUILDING_BLOCKS.add(Items.CHAIN);
+        //? if >=1.16 {
+        BUILDING_BLOCKS.add(Items.CHAIN);//1.16
+        //?}
         BUILDING_BLOCKS.add(Items.GOLD_BLOCK);
         BUILDING_BLOCKS.add(Items.LIGHT_WEIGHTED_PRESSURE_PLATE);
         BUILDING_BLOCKS.add(Items.REDSTONE_BLOCK);
         BUILDING_BLOCKS.add(Items.EMERALD_BLOCK);
         BUILDING_BLOCKS.add(Items.LAPIS_BLOCK);
         BUILDING_BLOCKS.add(Items.DIAMOND_BLOCK);
-        BUILDING_BLOCKS.add(Items.NETHERITE_BLOCK);
+        //? if >=1.16 {
+        BUILDING_BLOCKS.add(Items.NETHERITE_BLOCK);//1.16
+        //?}
         BUILDING_BLOCKS.add(Items.QUARTZ_BLOCK);
         BUILDING_BLOCKS.add(Items.QUARTZ_STAIRS);
         BUILDING_BLOCKS.add(Items.QUARTZ_SLAB);
         BUILDING_BLOCKS.add(Items.CHISELED_QUARTZ_BLOCK);
-        BUILDING_BLOCKS.add(Items.QUARTZ_BRICKS);
+        //? if >=1.16 {
+        BUILDING_BLOCKS.add(Items.QUARTZ_BRICKS);//1.16
+        //?}
         BUILDING_BLOCKS.add(Items.QUARTZ_PILLAR);
         BUILDING_BLOCKS.add(Items.SMOOTH_QUARTZ);
         BUILDING_BLOCKS.add(Items.SMOOTH_QUARTZ_STAIRS);
         BUILDING_BLOCKS.add(Items.SMOOTH_QUARTZ_SLAB);
-        BUILDING_BLOCKS.add(Items.AMETHYST_BLOCK);
-        BUILDING_BLOCKS.add(Items.COPPER_BLOCK);
-        BUILDING_BLOCKS.add(Items.CUT_COPPER);
-        BUILDING_BLOCKS.add(Items.CUT_COPPER_STAIRS);
-        BUILDING_BLOCKS.add(Items.CUT_COPPER_SLAB);
-        BUILDING_BLOCKS.add(Items.EXPOSED_COPPER);
-        BUILDING_BLOCKS.add(Items.EXPOSED_CUT_COPPER);
-        BUILDING_BLOCKS.add(Items.EXPOSED_CUT_COPPER_STAIRS);
-        BUILDING_BLOCKS.add(Items.EXPOSED_CUT_COPPER_SLAB);
-        BUILDING_BLOCKS.add(Items.WEATHERED_COPPER);
-        BUILDING_BLOCKS.add(Items.WEATHERED_CUT_COPPER);
-        BUILDING_BLOCKS.add(Items.WEATHERED_CUT_COPPER_STAIRS);
-        BUILDING_BLOCKS.add(Items.WEATHERED_CUT_COPPER_SLAB);
-        BUILDING_BLOCKS.add(Items.OXIDIZED_COPPER);
-        BUILDING_BLOCKS.add(Items.OXIDIZED_CUT_COPPER);
-        BUILDING_BLOCKS.add(Items.OXIDIZED_CUT_COPPER_STAIRS);
-        BUILDING_BLOCKS.add(Items.OXIDIZED_CUT_COPPER_SLAB);
-        BUILDING_BLOCKS.add(Items.WAXED_COPPER_BLOCK);
-        BUILDING_BLOCKS.add(Items.WAXED_CUT_COPPER);
-        BUILDING_BLOCKS.add(Items.WAXED_CUT_COPPER_STAIRS);
-        BUILDING_BLOCKS.add(Items.WAXED_CUT_COPPER_SLAB);
-        BUILDING_BLOCKS.add(Items.WAXED_EXPOSED_COPPER);
-        BUILDING_BLOCKS.add(Items.WAXED_EXPOSED_CUT_COPPER);
-        BUILDING_BLOCKS.add(Items.WAXED_EXPOSED_CUT_COPPER_STAIRS);
-        BUILDING_BLOCKS.add(Items.WAXED_EXPOSED_CUT_COPPER_SLAB);
-        BUILDING_BLOCKS.add(Items.WAXED_WEATHERED_COPPER);
-        BUILDING_BLOCKS.add(Items.WAXED_WEATHERED_CUT_COPPER);
-        BUILDING_BLOCKS.add(Items.WAXED_WEATHERED_CUT_COPPER_STAIRS);
-        BUILDING_BLOCKS.add(Items.WAXED_WEATHERED_CUT_COPPER_SLAB);
-        BUILDING_BLOCKS.add(Items.WAXED_OXIDIZED_COPPER);
-        BUILDING_BLOCKS.add(Items.WAXED_OXIDIZED_CUT_COPPER);
-        BUILDING_BLOCKS.add(Items.WAXED_OXIDIZED_CUT_COPPER_STAIRS);
-        BUILDING_BLOCKS.add(Items.WAXED_OXIDIZED_CUT_COPPER_SLAB);
+        //? if >=1.17 {
+        BUILDING_BLOCKS.add(Items.AMETHYST_BLOCK);//1.17
+        BUILDING_BLOCKS.add(Items.COPPER_BLOCK);//1.17
+        BUILDING_BLOCKS.add(Items.CUT_COPPER);//1.17
+        BUILDING_BLOCKS.add(Items.CUT_COPPER_STAIRS);//1.17
+        BUILDING_BLOCKS.add(Items.CUT_COPPER_SLAB);//1.17
+        BUILDING_BLOCKS.add(Items.EXPOSED_COPPER);//1.17
+        BUILDING_BLOCKS.add(Items.EXPOSED_CUT_COPPER);//1.17
+        BUILDING_BLOCKS.add(Items.EXPOSED_CUT_COPPER_STAIRS);//1.17
+        BUILDING_BLOCKS.add(Items.EXPOSED_CUT_COPPER_SLAB);//1.17
+        BUILDING_BLOCKS.add(Items.WEATHERED_COPPER);//1.17
+        BUILDING_BLOCKS.add(Items.WEATHERED_CUT_COPPER);//1.17
+        BUILDING_BLOCKS.add(Items.WEATHERED_CUT_COPPER_STAIRS);//1.17
+        BUILDING_BLOCKS.add(Items.WEATHERED_CUT_COPPER_SLAB);//1.17
+        BUILDING_BLOCKS.add(Items.OXIDIZED_COPPER);//1.17
+        BUILDING_BLOCKS.add(Items.OXIDIZED_CUT_COPPER);//1.17
+        BUILDING_BLOCKS.add(Items.OXIDIZED_CUT_COPPER_STAIRS);//1.17
+        BUILDING_BLOCKS.add(Items.OXIDIZED_CUT_COPPER_SLAB);//1.17
+        BUILDING_BLOCKS.add(
+                //? if <=1.17.1 {
+                /*Items.WAXED_COPPER*///1.17
+                //?} elif >=1.18 {
+                Items.WAXED_COPPER_BLOCK
+                //?}
+        );
+        BUILDING_BLOCKS.add(Items.WAXED_CUT_COPPER);//1.17
+        BUILDING_BLOCKS.add(Items.WAXED_CUT_COPPER_STAIRS);//1.17
+        BUILDING_BLOCKS.add(Items.WAXED_CUT_COPPER_SLAB);//1.17
+        BUILDING_BLOCKS.add(Items.WAXED_EXPOSED_COPPER);//1.17
+        BUILDING_BLOCKS.add(Items.WAXED_EXPOSED_CUT_COPPER);//1.17
+        BUILDING_BLOCKS.add(Items.WAXED_EXPOSED_CUT_COPPER_STAIRS);//1.17
+        BUILDING_BLOCKS.add(Items.WAXED_EXPOSED_CUT_COPPER_SLAB);//1.17
+        BUILDING_BLOCKS.add(Items.WAXED_WEATHERED_COPPER);//1.17
+        BUILDING_BLOCKS.add(Items.WAXED_WEATHERED_CUT_COPPER);//1.17
+        BUILDING_BLOCKS.add(Items.WAXED_WEATHERED_CUT_COPPER_STAIRS);//1.17
+        BUILDING_BLOCKS.add(Items.WAXED_WEATHERED_CUT_COPPER_SLAB);//1.17
+        BUILDING_BLOCKS.add(Items.WAXED_OXIDIZED_COPPER);//1.17
+        BUILDING_BLOCKS.add(Items.WAXED_OXIDIZED_CUT_COPPER);//1.17
+        BUILDING_BLOCKS.add(Items.WAXED_OXIDIZED_CUT_COPPER_STAIRS);//1.17
+        BUILDING_BLOCKS.add(Items.WAXED_OXIDIZED_CUT_COPPER_SLAB);//1.17
+        //?}
 
         COLORED_BLOCKS.add(Items.WHITE_WOOL);
         COLORED_BLOCKS.add(Items.LIGHT_GRAY_WOOL);
@@ -444,7 +656,9 @@ public class NewItemGroups {
         COLORED_BLOCKS.add(Items.MAGENTA_GLAZED_TERRACOTTA);
         COLORED_BLOCKS.add(Items.PINK_GLAZED_TERRACOTTA);
         COLORED_BLOCKS.add(Items.GLASS);
-        COLORED_BLOCKS.add(Items.TINTED_GLASS);
+        //? if >=1.17 {
+        COLORED_BLOCKS.add(Items.TINTED_GLASS);//1.17
+        //?}
         COLORED_BLOCKS.add(Items.WHITE_STAINED_GLASS);
         COLORED_BLOCKS.add(Items.LIGHT_GRAY_STAINED_GLASS);
         COLORED_BLOCKS.add(Items.GRAY_STAINED_GLASS);
@@ -511,23 +725,25 @@ public class NewItemGroups {
         COLORED_BLOCKS.add(Items.PURPLE_BED);
         COLORED_BLOCKS.add(Items.MAGENTA_BED);
         COLORED_BLOCKS.add(Items.PINK_BED);
-        COLORED_BLOCKS.add(Items.CANDLE);
-        COLORED_BLOCKS.add(Items.WHITE_CANDLE);
-        COLORED_BLOCKS.add(Items.LIGHT_GRAY_CANDLE);
-        COLORED_BLOCKS.add(Items.GRAY_CANDLE);
-        COLORED_BLOCKS.add(Items.BLACK_CANDLE);
-        COLORED_BLOCKS.add(Items.BROWN_CANDLE);
-        COLORED_BLOCKS.add(Items.RED_CANDLE);
-        COLORED_BLOCKS.add(Items.ORANGE_CANDLE);
-        COLORED_BLOCKS.add(Items.YELLOW_CANDLE);
-        COLORED_BLOCKS.add(Items.LIME_CANDLE);
-        COLORED_BLOCKS.add(Items.GREEN_CANDLE);
-        COLORED_BLOCKS.add(Items.CYAN_CANDLE);
-        COLORED_BLOCKS.add(Items.LIGHT_BLUE_CANDLE);
-        COLORED_BLOCKS.add(Items.BLUE_CANDLE);
-        COLORED_BLOCKS.add(Items.PURPLE_CANDLE);
-        COLORED_BLOCKS.add(Items.MAGENTA_CANDLE);
-        COLORED_BLOCKS.add(Items.PINK_CANDLE);
+        //? if >=1.17 {
+        COLORED_BLOCKS.add(Items.CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.WHITE_CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.LIGHT_GRAY_CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.GRAY_CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.BLACK_CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.BROWN_CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.RED_CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.ORANGE_CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.YELLOW_CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.LIME_CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.GREEN_CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.CYAN_CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.LIGHT_BLUE_CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.BLUE_CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.PURPLE_CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.MAGENTA_CANDLE);//1.17
+        COLORED_BLOCKS.add(Items.PINK_CANDLE);//1.17
+        //?}
         COLORED_BLOCKS.add(Items.WHITE_BANNER);
         COLORED_BLOCKS.add(Items.LIGHT_GRAY_BANNER);
         COLORED_BLOCKS.add(Items.GRAY_BANNER);
@@ -548,12 +764,18 @@ public class NewItemGroups {
         NATURAL.add(Items.GRASS_BLOCK);
         NATURAL.add(Items.PODZOL);
         NATURAL.add(Items.MYCELIUM);
-        NATURAL.add(Items.DIRT_PATH);
+        //? if >=1.17 {
+        NATURAL.add(Items.DIRT_PATH);//1.17
+        //?}
         NATURAL.add(Items.DIRT);
         NATURAL.add(Items.COARSE_DIRT);
-        NATURAL.add(Items.ROOTED_DIRT);
+        //? if >=1.17 {
+        NATURAL.add(Items.ROOTED_DIRT);//1.17
+        //?}
         NATURAL.add(Items.FARMLAND);
-        //NATURAL.add(Items.MUD);//1.19
+        //? if >=1.19 {
+        NATURAL.add(Items.MUD);//1.19
+        //?}
         NATURAL.add(Items.CLAY);
         NATURAL.add(Items.GRAVEL);
         NATURAL.add(Items.SAND);
@@ -565,99 +787,158 @@ public class NewItemGroups {
         NATURAL.add(Items.BLUE_ICE);
         NATURAL.add(Items.SNOW_BLOCK);
         NATURAL.add(Items.SNOW);
-        NATURAL.add(Items.MOSS_BLOCK);
-        NATURAL.add(Items.MOSS_CARPET);
+        //? if >=1.17 {
+        NATURAL.add(Items.MOSS_BLOCK);//1.17
+        NATURAL.add(Items.MOSS_CARPET);//1.17
+        //?}
         NATURAL.add(Items.STONE);
-        NATURAL.add(Items.DEEPSLATE);
+        //? if >=1.17 {
+        NATURAL.add(Items.DEEPSLATE);//1.17
+        //?}
         NATURAL.add(Items.GRANITE);
         NATURAL.add(Items.DIORITE);
         NATURAL.add(Items.ANDESITE);
-        NATURAL.add(Items.CALCITE);
-        NATURAL.add(Items.TUFF);
-        NATURAL.add(Items.DRIPSTONE_BLOCK);
-        NATURAL.add(Items.POINTED_DRIPSTONE);
+        //? if >=1.17 {
+        NATURAL.add(Items.CALCITE);//1.17
+        NATURAL.add(Items.TUFF);//1.17
+        NATURAL.add(Items.DRIPSTONE_BLOCK);//1.17
+        NATURAL.add(Items.POINTED_DRIPSTONE);//1.17
+        //?}
         NATURAL.add(Items.PRISMARINE);
         NATURAL.add(Items.MAGMA_BLOCK);
         NATURAL.add(Items.OBSIDIAN);
-        NATURAL.add(Items.CRYING_OBSIDIAN);
+        //? if >=1.16 {
+        NATURAL.add(Items.CRYING_OBSIDIAN);//1.16
+        //?}
         NATURAL.add(Items.NETHERRACK);
-        NATURAL.add(Items.CRIMSON_NYLIUM);
-        NATURAL.add(Items.WARPED_NYLIUM);
+        //? if >=1.16 {
+        NATURAL.add(Items.CRIMSON_NYLIUM);//1.16
+        NATURAL.add(Items.WARPED_NYLIUM);//1.16
+        //?}
         NATURAL.add(Items.SOUL_SAND);
-        NATURAL.add(Items.SOUL_SOIL);
+        //? if >=1.16 {
+        NATURAL.add(Items.SOUL_SOIL);//1.16
+        //?}
         NATURAL.add(Items.BONE_BLOCK);
-        NATURAL.add(Items.BLACKSTONE);
-        NATURAL.add(Items.BASALT);
-        NATURAL.add(Items.SMOOTH_BASALT);
+        //? if >=1.16 {
+        NATURAL.add(Items.BLACKSTONE);//1.16
+        NATURAL.add(Items.BASALT);//1.16
+        //?}
+        //? if >=1.17 {
+        NATURAL.add(Items.SMOOTH_BASALT);//1.17
+        //?}
         NATURAL.add(Items.END_STONE);
         NATURAL.add(Items.COAL_ORE);
-        NATURAL.add(Items.DEEPSLATE_COAL_ORE);
+        //? if >=1.17 {
+        NATURAL.add(Items.DEEPSLATE_COAL_ORE);//1.17
+        //?}
         NATURAL.add(Items.IRON_ORE);
-        NATURAL.add(Items.DEEPSLATE_IRON_ORE);
-        NATURAL.add(Items.COPPER_ORE);
-        NATURAL.add(Items.DEEPSLATE_COPPER_ORE);
+        //? if >=1.17 {
+        NATURAL.add(Items.DEEPSLATE_IRON_ORE);//1.17
+        NATURAL.add(Items.COPPER_ORE);//1.17
+        NATURAL.add(Items.DEEPSLATE_COPPER_ORE);//1.17
+        //?}
         NATURAL.add(Items.GOLD_ORE);
-        NATURAL.add(Items.DEEPSLATE_GOLD_ORE);
+        //? if >=1.17 {
+        NATURAL.add(Items.DEEPSLATE_GOLD_ORE);//1.17
+        //?}
         NATURAL.add(Items.REDSTONE_ORE);
-        NATURAL.add(Items.DEEPSLATE_REDSTONE_ORE);
+        //? if >=1.17 {
+        NATURAL.add(Items.DEEPSLATE_REDSTONE_ORE);//1.17
+        //?}
         NATURAL.add(Items.EMERALD_ORE);
-        NATURAL.add(Items.DEEPSLATE_EMERALD_ORE);
+        //? if >=1.17 {
+        NATURAL.add(Items.DEEPSLATE_EMERALD_ORE);//1.17
+        //?}
         NATURAL.add(Items.LAPIS_ORE);
-        NATURAL.add(Items.DEEPSLATE_LAPIS_ORE);
+        //? if >=1.17 {
+        NATURAL.add(Items.DEEPSLATE_LAPIS_ORE);//1.17
+        //?}
         NATURAL.add(Items.DIAMOND_ORE);
-        NATURAL.add(Items.DEEPSLATE_DIAMOND_ORE);
-        NATURAL.add(Items.NETHER_GOLD_ORE);
+        //? if >=1.17 {
+        NATURAL.add(Items.DEEPSLATE_DIAMOND_ORE);//1.17
+        //?}
+        //? if >=1.16 {
+        NATURAL.add(Items.NETHER_GOLD_ORE);//1.16
+        //?}
         NATURAL.add(Items.NETHER_QUARTZ_ORE);
-        NATURAL.add(Items.ANCIENT_DEBRIS);
-        NATURAL.add(Items.RAW_IRON_BLOCK);
-        NATURAL.add(Items.RAW_COPPER_BLOCK);
-        NATURAL.add(Items.RAW_GOLD_BLOCK);
+        //? if >=1.16 {
+        NATURAL.add(Items.ANCIENT_DEBRIS);//1.16
+        //?}
+        //? if >=1.17 {
+        NATURAL.add(Items.RAW_IRON_BLOCK);//1.17
+        NATURAL.add(Items.RAW_COPPER_BLOCK);//1.17
+        NATURAL.add(Items.RAW_GOLD_BLOCK);//1.17
+        //?}
         NATURAL.add(Items.GLOWSTONE);
-        NATURAL.add(Items.AMETHYST_BLOCK);
-        NATURAL.add(Items.BUDDING_AMETHYST);
-        NATURAL.add(Items.SMALL_AMETHYST_BUD);
-        NATURAL.add(Items.MEDIUM_AMETHYST_BUD);
-        NATURAL.add(Items.LARGE_AMETHYST_BUD);
-        NATURAL.add(Items.AMETHYST_CLUSTER);
+        //? if >=1.17 {
+        NATURAL.add(Items.AMETHYST_BLOCK);//1.17
+        NATURAL.add(Items.BUDDING_AMETHYST);//1.17
+        NATURAL.add(Items.SMALL_AMETHYST_BUD);//1.17
+        NATURAL.add(Items.MEDIUM_AMETHYST_BUD);//1.17
+        NATURAL.add(Items.LARGE_AMETHYST_BUD);//1.17
+        NATURAL.add(Items.AMETHYST_CLUSTER);//1.17
+        //?}
         NATURAL.add(Items.OAK_LOG);
         NATURAL.add(Items.SPRUCE_LOG);
         NATURAL.add(Items.BIRCH_LOG);
         NATURAL.add(Items.JUNGLE_LOG);
         NATURAL.add(Items.ACACIA_LOG);
         NATURAL.add(Items.DARK_OAK_LOG);
-        //NATURAL.add(Items.MANGROVE_LOG);//1.19
-        //NATURAL.add(Items.MANGROVE_ROOTS);//1.19
-        //NATURAL.add(Items.MUDDY_MANGROVE_ROOTS);//1.19
+        //? if >=1.19 {
+        NATURAL.add(Items.MANGROVE_LOG);//1.19
+        NATURAL.add(Items.MANGROVE_ROOTS);//1.19
+        NATURAL.add(Items.MUDDY_MANGROVE_ROOTS);//1.19
+        //?}
         NATURAL.add(Items.MUSHROOM_STEM);
-        NATURAL.add(Items.CRIMSON_STEM);
-        NATURAL.add(Items.WARPED_STEM);
+        //? if >=1.16 {
+        NATURAL.add(Items.CRIMSON_STEM);//1.16
+        NATURAL.add(Items.WARPED_STEM);//1.16
+        //?}
         NATURAL.add(Items.OAK_LEAVES);
         NATURAL.add(Items.SPRUCE_LEAVES);
         NATURAL.add(Items.BIRCH_LEAVES);
         NATURAL.add(Items.JUNGLE_LEAVES);
         NATURAL.add(Items.ACACIA_LEAVES);
         NATURAL.add(Items.DARK_OAK_LEAVES);
-        //NATURAL.add(Items.MANGROVE_LEAVES);//1.19
-        NATURAL.add(Items.AZALEA_LEAVES);
-        NATURAL.add(Items.FLOWERING_AZALEA_LEAVES);
+        //? if >=1.19 {
+        NATURAL.add(Items.MANGROVE_LEAVES);//1.19
+        //?}
+        //? if >=1.17 {
+        NATURAL.add(Items.AZALEA_LEAVES);//1.17
+        NATURAL.add(
+                //? if <=1.17.1 {
+                //*Items.AZALEA_LEAVES_FLOWERS*///1.17
+                //?} elif >=1.18 {
+                Items.FLOWERING_AZALEA_LEAVES
+                //?}
+        );
         NATURAL.add(Items.BROWN_MUSHROOM_BLOCK);
         NATURAL.add(Items.RED_MUSHROOM_BLOCK);
         NATURAL.add(Items.NETHER_WART_BLOCK);
-        NATURAL.add(Items.WARPED_WART_BLOCK);
-        NATURAL.add(Items.SHROOMLIGHT);
+        //? if >=1.16 {
+        NATURAL.add(Items.WARPED_WART_BLOCK);//1.16
+        NATURAL.add(Items.SHROOMLIGHT);//1.16
+        //?}
         NATURAL.add(Items.OAK_SAPLING);
         NATURAL.add(Items.SPRUCE_SAPLING);
         NATURAL.add(Items.BIRCH_SAPLING);
         NATURAL.add(Items.JUNGLE_SAPLING);
         NATURAL.add(Items.ACACIA_SAPLING);
         NATURAL.add(Items.DARK_OAK_SAPLING);
-        //NATURAL.add(Items.MANGROVE_PROPAGULE);//1.19
-        NATURAL.add(Items.AZALEA);
-        NATURAL.add(Items.FLOWERING_AZALEA);
+        //? if >=1.19 {
+        NATURAL.add(Items.MANGROVE_PROPAGULE);//1.19
+        //?}
+        //? if >=1.17 {
+        NATURAL.add(Items.AZALEA);//1.17
+        NATURAL.add(Items.FLOWERING_AZALEA);//1.17
+        //?}
         NATURAL.add(Items.BROWN_MUSHROOM);
         NATURAL.add(Items.RED_MUSHROOM);
-        NATURAL.add(Items.CRIMSON_FUNGUS);
-        NATURAL.add(Items.WARPED_FUNGUS);
+        //? if >=1.16 {
+        NATURAL.add(Items.CRIMSON_FUNGUS);//1.16
+        NATURAL.add(Items.WARPED_FUNGUS);//1.16
+        //?}
         NATURAL.add(Items.GRASS);
         NATURAL.add(Items.FERN);
         NATURAL.add(Items.DEAD_BUSH);
@@ -674,15 +955,19 @@ public class NewItemGroups {
         NATURAL.add(Items.CORNFLOWER);
         NATURAL.add(Items.LILY_OF_THE_VALLEY);
         NATURAL.add(Items.WITHER_ROSE);
-        NATURAL.add(Items.SPORE_BLOSSOM);
+        //? if >=1.17 {
+        NATURAL.add(Items.SPORE_BLOSSOM);//1.17
+        //?}
         NATURAL.add(Items.BAMBOO);
         NATURAL.add(Items.SUGAR_CANE);
         NATURAL.add(Items.CACTUS);
-        NATURAL.add(Items.CRIMSON_ROOTS);
-        NATURAL.add(Items.WARPED_ROOTS);
-        NATURAL.add(Items.NETHER_SPROUTS);
-        NATURAL.add(Items.WEEPING_VINES);
-        NATURAL.add(Items.TWISTING_VINES);
+        //? if >=1.16 {
+        NATURAL.add(Items.CRIMSON_ROOTS);//1.16
+        NATURAL.add(Items.WARPED_ROOTS);//1.16
+        NATURAL.add(Items.NETHER_SPROUTS);//1.16
+        NATURAL.add(Items.WEEPING_VINES);//1.16
+        NATURAL.add(Items.TWISTING_VINES);//1.16
+        //?}
         NATURAL.add(Items.VINE);
         NATURAL.add(Items.TALL_GRASS);
         NATURAL.add(Items.LARGE_FERN);
@@ -690,20 +975,28 @@ public class NewItemGroups {
         NATURAL.add(Items.LILAC);
         NATURAL.add(Items.ROSE_BUSH);
         NATURAL.add(Items.PEONY);
-        NATURAL.add(Items.BIG_DRIPLEAF);
-        NATURAL.add(Items.SMALL_DRIPLEAF);
+        //? if >=1.17 {
+        NATURAL.add(Items.BIG_DRIPLEAF);//1.17
+        NATURAL.add(Items.SMALL_DRIPLEAF);//1.17
+        //?}
         NATURAL.add(Items.CHORUS_PLANT);
         NATURAL.add(Items.CHORUS_FLOWER);
-        NATURAL.add(Items.GLOW_LICHEN);
-        NATURAL.add(Items.HANGING_ROOTS);
-        //NATURAL.add(Items.FROGSPAWN);//1.19
+        //? if >=1.17 {
+        NATURAL.add(Items.GLOW_LICHEN);//1.17
+        NATURAL.add(Items.HANGING_ROOTS);//1.17
+        //?}
+        //? if >=1.19 {
+        NATURAL.add(Items.FROGSPAWN);//1.19
+        //?}
         NATURAL.add(Items.TURTLE_EGG);
         NATURAL.add(Items.WHEAT_SEEDS);
         NATURAL.add(Items.COCOA_BEANS);
         NATURAL.add(Items.PUMPKIN_SEEDS);
         NATURAL.add(Items.MELON_SEEDS);
         NATURAL.add(Items.BEETROOT_SEEDS);
-        NATURAL.add(Items.GLOW_BERRIES);
+        //? if >=1.17 {
+        NATURAL.add(Items.GLOW_BERRIES);//1.17
+        //?}
         NATURAL.add(Items.SWEET_BERRIES);
         NATURAL.add(Items.NETHER_WART);
         NATURAL.add(Items.LILY_PAD);
@@ -748,37 +1041,55 @@ public class NewItemGroups {
         NATURAL.add(Items.CARVED_PUMPKIN);
         NATURAL.add(Items.JACK_O_LANTERN);
         NATURAL.add(Items.HAY_BLOCK);
-        NATURAL.add(Items.BEE_NEST);
-        NATURAL.add(Items.HONEYCOMB_BLOCK);
+        //? if >=1.15 {
+        NATURAL.add(Items.BEE_NEST);//1.15
+        NATURAL.add(Items.HONEYCOMB_BLOCK);//1.15
+        //?}
         NATURAL.add(Items.SLIME_BLOCK);
-        NATURAL.add(Items.HONEY_BLOCK);
-        //NATURAL.add(Items.OCHRE_FROGLIGHT);//1.19
-        //NATURAL.add(Items.VERDANT_FROGLIGHT);//1.19
-        //NATURAL.add(Items.PEARLESCENT_FROGLIGHT);//1.19
-        //NATURAL.add(Items.SCULK);//1.19
-        //NATURAL.add(Items.SCULK_VEIN);//1.19
-        //NATURAL.add(Items.SCULK_CATALYST);//1.19
-        //NATURAL.add(Items.SCULK_SHRIEKER);//1.19
-        //NATURAL.add(Items.SCULK_SENSOR);//1.19
+        //? if >=1.15 {
+        NATURAL.add(Items.HONEY_BLOCK);//1.15
+        //?}
+        //? if >=1.19 {
+        NATURAL.add(Items.OCHRE_FROGLIGHT);//1.19
+        NATURAL.add(Items.VERDANT_FROGLIGHT);//1.19
+        NATURAL.add(Items.PEARLESCENT_FROGLIGHT);//1.19
+        NATURAL.add(Items.SCULK);//1.19
+        NATURAL.add(Items.SCULK_VEIN);//1.19
+        NATURAL.add(Items.SCULK_CATALYST);//1.19
+        NATURAL.add(Items.SCULK_SHRIEKER);//1.19
+        NATURAL.add(Items.SCULK_SENSOR);//1.19
+        //?}
         NATURAL.add(Items.COBWEB);
         NATURAL.add(Items.BEDROCK);
 
         FUNCTIONAL.add(Items.TORCH);
-        FUNCTIONAL.add(Items.SOUL_TORCH);
+        //? if >=1.16 {
+        FUNCTIONAL.add(Items.SOUL_TORCH);//1.16
+        //?}
         FUNCTIONAL.add(Items.REDSTONE_TORCH);
         FUNCTIONAL.add(Items.LANTERN);
-        FUNCTIONAL.add(Items.SOUL_LANTERN);
-        FUNCTIONAL.add(Items.CHAIN);
+        //? if >=1.16 {
+        FUNCTIONAL.add(Items.SOUL_LANTERN);//1.16
+        FUNCTIONAL.add(Items.CHAIN);//1.16
+        //?}
         FUNCTIONAL.add(Items.END_ROD);
         FUNCTIONAL.add(Items.SEA_LANTERN);
         FUNCTIONAL.add(Items.REDSTONE_LAMP);
         FUNCTIONAL.add(Items.GLOWSTONE);
-        FUNCTIONAL.add(Items.SHROOMLIGHT);
-        //FUNCTIONAL.add(Items.OCHRE_FROGLIGHT);//1.19
-        //FUNCTIONAL.add(Items.VERDANT_FROGLIGHT);//1.19
-        //FUNCTIONAL.add(Items.PEARLESCENT_FROGLIGHT);//1.19
-        FUNCTIONAL.add(Items.CRYING_OBSIDIAN);
-        FUNCTIONAL.add(Items.GLOW_LICHEN);
+        //? if >=1.16 {
+        FUNCTIONAL.add(Items.SHROOMLIGHT);//1.16
+        //?}
+        //? if >=1.19 {
+        FUNCTIONAL.add(Items.OCHRE_FROGLIGHT);//1.19
+        FUNCTIONAL.add(Items.VERDANT_FROGLIGHT);//1.19
+        FUNCTIONAL.add(Items.PEARLESCENT_FROGLIGHT);//1.19
+        //?}
+        //? if >=1.16 {
+        FUNCTIONAL.add(Items.CRYING_OBSIDIAN);//1.16
+        //?}
+        //? if >=1.17 {
+        FUNCTIONAL.add(Items.GLOW_LICHEN);//1.17
+        //?}
         FUNCTIONAL.add(Items.MAGMA_BLOCK);
         FUNCTIONAL.add(Items.CRAFTING_TABLE);
         FUNCTIONAL.add(Items.STONECUTTER);
@@ -791,7 +1102,9 @@ public class NewItemGroups {
         FUNCTIONAL.add(Items.SMOKER);
         FUNCTIONAL.add(Items.BLAST_FURNACE);
         FUNCTIONAL.add(Items.CAMPFIRE);
-        FUNCTIONAL.add(Items.SOUL_CAMPFIRE);
+        //? if >=1.16 {
+        FUNCTIONAL.add(Items.SOUL_CAMPFIRE);//1.16
+        //?}
         FUNCTIONAL.add(Items.ANVIL);
         FUNCTIONAL.add(Items.CHIPPED_ANVIL);
         FUNCTIONAL.add(Items.DAMAGED_ANVIL);
@@ -805,30 +1118,44 @@ public class NewItemGroups {
         FUNCTIONAL.add(Items.BELL);
         FUNCTIONAL.add(Items.BEACON);
         FUNCTIONAL.add(Items.CONDUIT);
-        FUNCTIONAL.add(Items.LODESTONE);
+        //? if >=1.16 {
+        FUNCTIONAL.add(Items.LODESTONE);//1.16
+        //?}
         FUNCTIONAL.add(Items.LADDER);
         FUNCTIONAL.add(Items.SCAFFOLDING);
-        FUNCTIONAL.add(Items.BEE_NEST);
-        FUNCTIONAL.add(Items.BEEHIVE);
-        FUNCTIONAL.add(Items.LIGHTNING_ROD);
+        //? if >=1.15 {
+        FUNCTIONAL.add(Items.BEE_NEST);//1.15
+        FUNCTIONAL.add(Items.BEEHIVE);//1.15
+        //?}
+        //? if >=1.17 {
+        FUNCTIONAL.add(Items.LIGHTNING_ROD);//1.17
+        //?}
         FUNCTIONAL.add(Items.FLOWER_POT);
         FUNCTIONAL.add(Items.ARMOR_STAND);
         FUNCTIONAL.add(Items.ITEM_FRAME);
-        FUNCTIONAL.add(Items.GLOW_ITEM_FRAME);
+        //? if >=1.17 {
+        FUNCTIONAL.add(Items.GLOW_ITEM_FRAME);//1.17
+        //?}
         FUNCTIONAL.add(Items.PAINTING);
         FUNCTIONAL.addPaintings();
         FUNCTIONAL.add(Items.BOOKSHELF);
         FUNCTIONAL.add(Items.LECTERN);
-        FUNCTIONAL.add(Items.TINTED_GLASS);
+        //? if >=1.17 {
+        FUNCTIONAL.add(Items.TINTED_GLASS);//1.17
+        //?}
         FUNCTIONAL.add(Items.OAK_SIGN);
         FUNCTIONAL.add(Items.SPRUCE_SIGN);
         FUNCTIONAL.add(Items.BIRCH_SIGN);
         FUNCTIONAL.add(Items.JUNGLE_SIGN);
         FUNCTIONAL.add(Items.ACACIA_SIGN);
         FUNCTIONAL.add(Items.DARK_OAK_SIGN);
-        //FUNCTIONAL.add(Items.MANGROVE_SIGN);//1.19
-        FUNCTIONAL.add(Items.CRIMSON_SIGN);
-        FUNCTIONAL.add(Items.WARPED_SIGN);
+        //? if >=1.19 {
+        FUNCTIONAL.add(Items.MANGROVE_SIGN);//1.19
+        //?}
+        //? if >=1.16 {
+        FUNCTIONAL.add(Items.CRIMSON_SIGN);//1.16
+        FUNCTIONAL.add(Items.WARPED_SIGN);//1.16
+        //?}
         FUNCTIONAL.add(Items.CHEST);
         FUNCTIONAL.add(Items.BARREL);
         FUNCTIONAL.add(Items.ENDER_CHEST);
@@ -849,7 +1176,9 @@ public class NewItemGroups {
         FUNCTIONAL.add(Items.PURPLE_SHULKER_BOX);
         FUNCTIONAL.add(Items.MAGENTA_SHULKER_BOX);
         FUNCTIONAL.add(Items.PINK_SHULKER_BOX);
-        FUNCTIONAL.add(Items.RESPAWN_ANCHOR);
+        //? if >=1.16 {
+        FUNCTIONAL.add(Items.RESPAWN_ANCHOR);//1.16
+        //?}
         FUNCTIONAL.add(Items.WHITE_BED);
         FUNCTIONAL.add(Items.LIGHT_GRAY_BED);
         FUNCTIONAL.add(Items.GRAY_BED);
@@ -866,23 +1195,25 @@ public class NewItemGroups {
         FUNCTIONAL.add(Items.PURPLE_BED);
         FUNCTIONAL.add(Items.MAGENTA_BED);
         FUNCTIONAL.add(Items.PINK_BED);
-        FUNCTIONAL.add(Items.CANDLE);
-        FUNCTIONAL.add(Items.WHITE_CANDLE);
-        FUNCTIONAL.add(Items.LIGHT_GRAY_CANDLE);
-        FUNCTIONAL.add(Items.GRAY_CANDLE);
-        FUNCTIONAL.add(Items.BLACK_CANDLE);
-        FUNCTIONAL.add(Items.BROWN_CANDLE);
-        FUNCTIONAL.add(Items.RED_CANDLE);
-        FUNCTIONAL.add(Items.ORANGE_CANDLE);
-        FUNCTIONAL.add(Items.YELLOW_CANDLE);
-        FUNCTIONAL.add(Items.LIME_CANDLE);
-        FUNCTIONAL.add(Items.GREEN_CANDLE);
-        FUNCTIONAL.add(Items.CYAN_CANDLE);
-        FUNCTIONAL.add(Items.LIGHT_BLUE_CANDLE);
-        FUNCTIONAL.add(Items.BLUE_CANDLE);
-        FUNCTIONAL.add(Items.PURPLE_CANDLE);
-        FUNCTIONAL.add(Items.MAGENTA_CANDLE);
-        FUNCTIONAL.add(Items.PINK_CANDLE);
+        //? if >=1.17 {
+        FUNCTIONAL.add(Items.CANDLE);//1.17
+        FUNCTIONAL.add(Items.WHITE_CANDLE);//1.17
+        FUNCTIONAL.add(Items.LIGHT_GRAY_CANDLE);//1.17
+        FUNCTIONAL.add(Items.GRAY_CANDLE);//1.17
+        FUNCTIONAL.add(Items.BLACK_CANDLE);//1.17
+        FUNCTIONAL.add(Items.BROWN_CANDLE);//1.17
+        FUNCTIONAL.add(Items.RED_CANDLE);//1.17
+        FUNCTIONAL.add(Items.ORANGE_CANDLE);//1.17
+        FUNCTIONAL.add(Items.YELLOW_CANDLE);//1.17
+        FUNCTIONAL.add(Items.LIME_CANDLE);//1.17
+        FUNCTIONAL.add(Items.GREEN_CANDLE);//1.17
+        FUNCTIONAL.add(Items.CYAN_CANDLE);//1.17
+        FUNCTIONAL.add(Items.LIGHT_BLUE_CANDLE);//1.17
+        FUNCTIONAL.add(Items.BLUE_CANDLE);//1.17
+        FUNCTIONAL.add(Items.PURPLE_CANDLE);//1.17
+        FUNCTIONAL.add(Items.MAGENTA_CANDLE);//1.17
+        FUNCTIONAL.add(Items.PINK_CANDLE);//1.17
+        //?}
         FUNCTIONAL.add(Items.WHITE_BANNER);
         FUNCTIONAL.add(Items.LIGHT_GRAY_BANNER);
         FUNCTIONAL.add(Items.GRAY_BANNER);
@@ -899,7 +1230,13 @@ public class NewItemGroups {
         FUNCTIONAL.add(Items.PURPLE_BANNER);
         FUNCTIONAL.add(Items.MAGENTA_BANNER);
         FUNCTIONAL.add(Items.PINK_BANNER);
-        FUNCTIONAL.add(Raid.getOminousBanner());
+        FUNCTIONAL.add(
+                //? if <=1.14.2 {
+                /*Raid.OMINOUS_BANNER*/
+                //?} else {
+                Raid.getOminousBanner()
+                //?}
+        );
         FUNCTIONAL.add(Items.SKELETON_SKULL);
         FUNCTIONAL.add(Items.WITHER_SKELETON_SKULL);
         FUNCTIONAL.add(Items.PLAYER_HEAD);
@@ -915,14 +1252,18 @@ public class NewItemGroups {
         FUNCTIONAL.add(Items.INFESTED_MOSSY_STONE_BRICKS);
         FUNCTIONAL.add(Items.INFESTED_CRACKED_STONE_BRICKS);
         FUNCTIONAL.add(Items.INFESTED_CHISELED_STONE_BRICKS);
-        FUNCTIONAL.add(Items.INFESTED_DEEPSLATE);
+        //? if >=1.17 {
+        FUNCTIONAL.add(Items.INFESTED_DEEPSLATE);//1.17
+        //?}
 
         REDSTONE.add(Items.REDSTONE);
         REDSTONE.add(Items.REDSTONE_TORCH);
         REDSTONE.add(Items.REDSTONE_BLOCK);
         REDSTONE.add(Items.REPEATER);
         REDSTONE.add(Items.COMPARATOR);
-        REDSTONE.add(Items.TARGET);
+        //? if >=1.16 {
+        REDSTONE.add(Items.TARGET);//1.16
+        //?}
         REDSTONE.add(Items.LEVER);
         REDSTONE.add(Items.OAK_BUTTON);
         REDSTONE.add(Items.STONE_BUTTON);
@@ -930,19 +1271,27 @@ public class NewItemGroups {
         REDSTONE.add(Items.STONE_PRESSURE_PLATE);
         REDSTONE.add(Items.LIGHT_WEIGHTED_PRESSURE_PLATE);
         REDSTONE.add(Items.HEAVY_WEIGHTED_PRESSURE_PLATE);
-        //REDSTONE.add(Items.SCULK_SENSOR);//1.19
-        //REDSTONE.add(Items.SCULK_SHRIEKER);//1.19
-        REDSTONE.add(Items.AMETHYST_BLOCK);
+        //? if >=1.19 {
+        REDSTONE.add(Items.SCULK_SENSOR);//1.19
+        REDSTONE.add(Items.SCULK_SHRIEKER);//1.19
+        //?}
+        //? if >=1.17 {
+        REDSTONE.add(Items.AMETHYST_BLOCK);//1.17
+        //?}
         REDSTONE.add(Items.WHITE_WOOL);
         REDSTONE.add(Items.TRIPWIRE_HOOK);
         REDSTONE.add(Items.STRING);
         REDSTONE.add(Items.LECTERN);
         REDSTONE.add(Items.DAYLIGHT_DETECTOR);
-        REDSTONE.add(Items.LIGHTNING_ROD);
+        //? if >=1.17 {
+        REDSTONE.add(Items.LIGHTNING_ROD);//1.17
+        //?}
         REDSTONE.add(Items.PISTON);
         REDSTONE.add(Items.STICKY_PISTON);
         REDSTONE.add(Items.SLIME_BLOCK);
-        REDSTONE.add(Items.HONEY_BLOCK);
+        //? if >=1.15 {
+        REDSTONE.add(Items.HONEY_BLOCK);//1.15
+        //?}
         REDSTONE.add(Items.DISPENSER);
         REDSTONE.add(Items.DROPPER);
         REDSTONE.add(Items.HOPPER);
@@ -964,7 +1313,9 @@ public class NewItemGroups {
         REDSTONE.add(Items.CHEST_MINECART);
         REDSTONE.add(Items.FURNACE_MINECART);
         REDSTONE.add(Items.TNT_MINECART);
-        //REDSTONE.add(Items.OAK_CHEST_BOAT);//1.19
+        //? if >=1.19 {
+        REDSTONE.add(Items.OAK_CHEST_BOAT);//1.19
+        //?}
         REDSTONE.add(Items.OAK_DOOR);
         REDSTONE.add(Items.IRON_DOOR);
         REDSTONE.add(Items.OAK_FENCE_GATE);
@@ -973,7 +1324,9 @@ public class NewItemGroups {
         REDSTONE.add(Items.TNT);
         REDSTONE.add(Items.REDSTONE_LAMP);
         REDSTONE.add(Items.BELL);
-        REDSTONE.add(Items.BIG_DRIPLEAF);
+        //? if >=1.17 {
+        REDSTONE.add(Items.BIG_DRIPLEAF);//1.17
+        //?}
         REDSTONE.add(Items.ARMOR_STAND);
         REDSTONE.add(Items.REDSTONE_ORE);
 
@@ -997,20 +1350,28 @@ public class NewItemGroups {
         TOOLS.add(Items.DIAMOND_PICKAXE);
         TOOLS.add(Items.DIAMOND_AXE);
         TOOLS.add(Items.DIAMOND_HOE);
-        TOOLS.add(Items.NETHERITE_SHOVEL);
-        TOOLS.add(Items.NETHERITE_PICKAXE);
-        TOOLS.add(Items.NETHERITE_AXE);
-        TOOLS.add(Items.NETHERITE_HOE);
+        //? if >=1.16 {
+        TOOLS.add(Items.NETHERITE_SHOVEL);//1.16
+        TOOLS.add(Items.NETHERITE_PICKAXE);//1.16
+        TOOLS.add(Items.NETHERITE_AXE);//1.16
+        TOOLS.add(Items.NETHERITE_HOE);//1.16
+        //?}
         TOOLS.add(Items.BUCKET);
         TOOLS.add(Items.WATER_BUCKET);
         TOOLS.add(Items.COD_BUCKET);
         TOOLS.add(Items.SALMON_BUCKET);
         TOOLS.add(Items.TROPICAL_FISH_BUCKET);
         TOOLS.add(Items.PUFFERFISH_BUCKET);
-        TOOLS.add(Items.AXOLOTL_BUCKET);
-        //TOOLS.add(Items.TADPOLE_BUCKET);//1.19
+        //? if >=1.17 {
+        TOOLS.add(Items.AXOLOTL_BUCKET);//1.17
+        //?}
+        //? if >=1.19 {
+        TOOLS.add(Items.TADPOLE_BUCKET);//1.19
+        //?}
         TOOLS.add(Items.LAVA_BUCKET);
-        TOOLS.add(Items.POWDER_SNOW_BUCKET);
+        //? if >=1.17 {
+        TOOLS.add(Items.POWDER_SNOW_BUCKET);//1.17
+        //?}
         TOOLS.add(Items.MILK_BUCKET);
         TOOLS.add(Items.FISHING_ROD);
         TOOLS.add(Items.FLINT_AND_STEEL);
@@ -1019,11 +1380,15 @@ public class NewItemGroups {
         TOOLS.add(Items.SHEARS);
         TOOLS.add(Items.NAME_TAG);
         TOOLS.add(Items.LEAD);
-        //TOOLS.add(Items.BUNDLE);
+        //TOOLS.add(Items.BUNDLE);//x.x.x
         TOOLS.add(Items.COMPASS);
-        //TOOLS.add(Items.RECOVERY_COMPASS);//1.19
+        //? if >=1.19 {
+        TOOLS.add(Items.RECOVERY_COMPASS);//1.19
+        //?}
         TOOLS.add(Items.CLOCK);
-        TOOLS.add(Items.SPYGLASS);
+        //? if >=1.17 {
+        TOOLS.add(Items.SPYGLASS);//1.17
+        //?}
         TOOLS.add(Items.MAP);
         TOOLS.add(Items.WRITABLE_BOOK);
         TOOLS.add(Items.ENDER_PEARL);
@@ -1032,21 +1397,35 @@ public class NewItemGroups {
         TOOLS.addFireworkRockets();
         TOOLS.add(Items.SADDLE);
         TOOLS.add(Items.CARROT_ON_A_STICK);
-        TOOLS.add(Items.WARPED_FUNGUS_ON_A_STICK);
+        //? if >=1.16 {
+        TOOLS.add(Items.WARPED_FUNGUS_ON_A_STICK);//1.16
+        //?}
         TOOLS.add(Items.OAK_BOAT);
-        //TOOLS.add(Items.OAK_CHEST_BOAT);//1.19
+        //? if >=1.19 {
+        TOOLS.add(Items.OAK_CHEST_BOAT);//1.19
+        //?}
         TOOLS.add(Items.SPRUCE_BOAT);
-        //TOOLS.add(Items.SPRUCE_CHEST_BOAT);//1.19
+        //? if >=1.19 {
+        TOOLS.add(Items.SPRUCE_CHEST_BOAT);//1.19
+        //?}
         TOOLS.add(Items.BIRCH_BOAT);
-        //TOOLS.add(Items.BIRCH_CHEST_BOAT);//1.19
+        //? if >=1.19 {
+        TOOLS.add(Items.BIRCH_CHEST_BOAT);//1.19
+        //?}
         TOOLS.add(Items.JUNGLE_BOAT);
-        //TOOLS.add(Items.JUNGLE_CHEST_BOAT);//1.19
+        //? if >=1.19 {
+        TOOLS.add(Items.JUNGLE_CHEST_BOAT);//1.19
+        //?}
         TOOLS.add(Items.ACACIA_BOAT);
-        //TOOLS.add(Items.ACACIA_CHEST_BOAT);//1.19
+        //? if >=1.19 {
+        TOOLS.add(Items.ACACIA_CHEST_BOAT);//1.19
+        //?}
         TOOLS.add(Items.DARK_OAK_BOAT);
-        //TOOLS.add(Items.DARK_OAK_CHEST_BOAT);//1.19
-        //TOOLS.add(Items.MANGROVE_BOAT);//1.19
-        //TOOLS.add(Items.MANGROVE_CHEST_BOAT);//1.19
+        //? if >=1.19 {
+        TOOLS.add(Items.DARK_OAK_CHEST_BOAT);//1.19
+        TOOLS.add(Items.MANGROVE_BOAT);//1.19
+        TOOLS.add(Items.MANGROVE_CHEST_BOAT);//1.19
+        //?}
         TOOLS.add(Items.RAIL);
         TOOLS.add(Items.POWERED_RAIL);
         TOOLS.add(Items.DETECTOR_RAIL);
@@ -1056,7 +1435,9 @@ public class NewItemGroups {
         TOOLS.add(Items.CHEST_MINECART);
         TOOLS.add(Items.FURNACE_MINECART);
         TOOLS.add(Items.TNT_MINECART);
-        //TOOLS.addInstruments();//1.19
+        //? if >=1.19 {
+        TOOLS.addInstruments();//1.19
+        //?}
         TOOLS.add(Items.MUSIC_DISC_13);
         TOOLS.add(Items.MUSIC_DISC_CAT);
         TOOLS.add(Items.MUSIC_DISC_BLOCKS);
@@ -1069,22 +1450,32 @@ public class NewItemGroups {
         TOOLS.add(Items.MUSIC_DISC_WARD);
         TOOLS.add(Items.MUSIC_DISC_11);
         TOOLS.add(Items.MUSIC_DISC_WAIT);
-        TOOLS.add(Items.MUSIC_DISC_OTHERSIDE);
-        //TOOLS.add(Items.MUSIC_DISC_5);//1.19
-        TOOLS.add(Items.MUSIC_DISC_PIGSTEP);
+        //? if >=1.18 {
+        TOOLS.add(Items.MUSIC_DISC_OTHERSIDE);//1.18
+        //?}
+        //? if >=1.19 {
+        TOOLS.add(Items.MUSIC_DISC_5);//1.19
+        //?}
+        //? if >=1.16 {
+        TOOLS.add(Items.MUSIC_DISC_PIGSTEP);//1.16
+        //?}
 
         COMBAT.add(Items.WOODEN_SWORD);
         COMBAT.add(Items.STONE_SWORD);
         COMBAT.add(Items.IRON_SWORD);
         COMBAT.add(Items.GOLDEN_SWORD);
         COMBAT.add(Items.DIAMOND_SWORD);
-        COMBAT.add(Items.NETHERITE_SWORD);
+        //? if >=1.16 {
+        COMBAT.add(Items.NETHERITE_SWORD);//1.16
+        //?}
         COMBAT.add(Items.WOODEN_AXE);
         COMBAT.add(Items.STONE_AXE);
         COMBAT.add(Items.IRON_AXE);
         COMBAT.add(Items.GOLDEN_AXE);
         COMBAT.add(Items.DIAMOND_AXE);
-        COMBAT.add(Items.NETHERITE_AXE);
+        //? if >=1.16 {
+        COMBAT.add(Items.NETHERITE_AXE);//1.16
+        //?}
         COMBAT.add(Items.TRIDENT);
         COMBAT.add(Items.SHIELD);
         COMBAT.add(Items.LEATHER_HELMET);
@@ -1107,10 +1498,12 @@ public class NewItemGroups {
         COMBAT.add(Items.DIAMOND_CHESTPLATE);
         COMBAT.add(Items.DIAMOND_LEGGINGS);
         COMBAT.add(Items.DIAMOND_BOOTS);
-        COMBAT.add(Items.NETHERITE_HELMET);
-        COMBAT.add(Items.NETHERITE_CHESTPLATE);
-        COMBAT.add(Items.NETHERITE_LEGGINGS);
-        COMBAT.add(Items.NETHERITE_BOOTS);
+        //? if >=1.16 {
+        COMBAT.add(Items.NETHERITE_HELMET);//1.16
+        COMBAT.add(Items.NETHERITE_CHESTPLATE);//1.16
+        COMBAT.add(Items.NETHERITE_LEGGINGS);//1.16
+        COMBAT.add(Items.NETHERITE_BOOTS);//1.16
+        //?}
         COMBAT.add(Items.TURTLE_HELMET);
         COMBAT.add(Items.LEATHER_HORSE_ARMOR);
         COMBAT.add(Items.IRON_HORSE_ARMOR);
@@ -1133,7 +1526,9 @@ public class NewItemGroups {
         FOOD_AND_DRINK.add(Items.ENCHANTED_GOLDEN_APPLE);
         FOOD_AND_DRINK.add(Items.MELON_SLICE);
         FOOD_AND_DRINK.add(Items.SWEET_BERRIES);
-        FOOD_AND_DRINK.add(Items.GLOW_BERRIES);
+        //? if >=1.17 {
+        FOOD_AND_DRINK.add(Items.GLOW_BERRIES);//1.17
+        //?}
         FOOD_AND_DRINK.add(Items.CHORUS_FRUIT);
         FOOD_AND_DRINK.add(Items.CARROT);
         FOOD_AND_DRINK.add(Items.GOLDEN_CARROT);
@@ -1169,29 +1564,41 @@ public class NewItemGroups {
         FOOD_AND_DRINK.add(Items.RABBIT_STEW);
         FOOD_AND_DRINK.addSuspiciousStews();
         FOOD_AND_DRINK.add(Items.MILK_BUCKET);
-        FOOD_AND_DRINK.add(Items.HONEY_BOTTLE);
+        //? if >=1.15 {
+        FOOD_AND_DRINK.add(Items.HONEY_BOTTLE);//1.15
+        //?}
         FOOD_AND_DRINK.addPotions(Items.POTION);
         FOOD_AND_DRINK.addPotions(Items.SPLASH_POTION);
         FOOD_AND_DRINK.addPotions(Items.LINGERING_POTION);
 
         INGREDIENTS.add(Items.COAL);
         INGREDIENTS.add(Items.CHARCOAL);
-        INGREDIENTS.add(Items.RAW_IRON);
-        INGREDIENTS.add(Items.RAW_COPPER);
-        INGREDIENTS.add(Items.RAW_GOLD);
+        //? if >=1.17 {
+        INGREDIENTS.add(Items.RAW_IRON);//1.17
+        INGREDIENTS.add(Items.RAW_COPPER);//1.17
+        INGREDIENTS.add(Items.RAW_GOLD);//1.17
+        //?}
         INGREDIENTS.add(Items.EMERALD);
         INGREDIENTS.add(Items.LAPIS_LAZULI);
         INGREDIENTS.add(Items.DIAMOND);
-        INGREDIENTS.add(Items.ANCIENT_DEBRIS);
+        //? if >=1.16 {
+        INGREDIENTS.add(Items.ANCIENT_DEBRIS);//1.16
+        //?}
         INGREDIENTS.add(Items.QUARTZ);
-        INGREDIENTS.add(Items.AMETHYST_SHARD);
+        //? if >=1.17 {
+        INGREDIENTS.add(Items.AMETHYST_SHARD);//1.17
+        //?}
         INGREDIENTS.add(Items.IRON_NUGGET);
         INGREDIENTS.add(Items.GOLD_NUGGET);
         INGREDIENTS.add(Items.IRON_INGOT);
-        INGREDIENTS.add(Items.COPPER_INGOT);
+        //? if >=1.17 {
+        INGREDIENTS.add(Items.COPPER_INGOT);//1.17
+        //?}
         INGREDIENTS.add(Items.GOLD_INGOT);
-        INGREDIENTS.add(Items.NETHERITE_SCRAP);
-        INGREDIENTS.add(Items.NETHERITE_INGOT);
+        //? if >=1.16 {
+        INGREDIENTS.add(Items.NETHERITE_SCRAP);//1.16
+        INGREDIENTS.add(Items.NETHERITE_INGOT);//1.16
+        //?}
         INGREDIENTS.add(Items.STICK);
         INGREDIENTS.add(Items.FLINT);
         INGREDIENTS.add(Items.WHEAT);
@@ -1203,9 +1610,13 @@ public class NewItemGroups {
         INGREDIENTS.add(Items.EGG);
         INGREDIENTS.add(Items.LEATHER);
         INGREDIENTS.add(Items.RABBIT_HIDE);
-        INGREDIENTS.add(Items.HONEYCOMB);
+        //? if >=1.15 {
+        INGREDIENTS.add(Items.HONEYCOMB);//1.15
+        //?}
         INGREDIENTS.add(Items.INK_SAC);
-        INGREDIENTS.add(Items.GLOW_INK_SAC);
+        //? if >=1.17 {
+        INGREDIENTS.add(Items.GLOW_INK_SAC);//1.17
+        //?}
         INGREDIENTS.add(Items.SCUTE);
         INGREDIENTS.add(Items.SLIME_BALL);
         INGREDIENTS.add(Items.CLAY_BALL);
@@ -1220,8 +1631,10 @@ public class NewItemGroups {
         INGREDIENTS.add(Items.ENDER_EYE);
         INGREDIENTS.add(Items.SHULKER_SHELL);
         INGREDIENTS.add(Items.POPPED_CHORUS_FRUIT);
-        //INGREDIENTS.add(Items.ECHO_SHARD);//1.19
-        //INGREDIENTS.add(Items.DISC_FRAGMENT_5);//1.19
+        //? if >=1.19 {
+        INGREDIENTS.add(Items.ECHO_SHARD);//1.19
+        INGREDIENTS.add(Items.DISC_FRAGMENT_5);//1.19
+        //?}
         INGREDIENTS.add(Items.WHITE_DYE);
         INGREDIENTS.add(Items.LIGHT_GRAY_DYE);
         INGREDIENTS.add(Items.GRAY_DYE);
@@ -1267,15 +1680,23 @@ public class NewItemGroups {
         INGREDIENTS.add(Items.SKULL_BANNER_PATTERN);
         INGREDIENTS.add(Items.MOJANG_BANNER_PATTERN);
         INGREDIENTS.add(Items.GLOBE_BANNER_PATTERN);
-        INGREDIENTS.add(Items.PIGLIN_BANNER_PATTERN);
+        //? if >=1.16 {
+        INGREDIENTS.add(Items.PIGLIN_BANNER_PATTERN);//1.16
+        //?}
         INGREDIENTS.add(Items.EXPERIENCE_BOTTLE);
         INGREDIENTS.addMaxLevelEnchantedBooks();
 
         SPAWN_EGGS.add(Items.SPAWNER);
-        //SPAWN_EGGS.add(Items.ALLAY_SPAWN_EGG);//1.19
-        SPAWN_EGGS.add(Items.AXOLOTL_SPAWN_EGG);
+        //? if >=1.19 {
+        SPAWN_EGGS.add(Items.ALLAY_SPAWN_EGG);//1.19
+        //?}
+        //? if >=1.17 {
+        SPAWN_EGGS.add(Items.AXOLOTL_SPAWN_EGG);//1.17
+        //?}
         SPAWN_EGGS.add(Items.BAT_SPAWN_EGG);
-        SPAWN_EGGS.add(Items.BEE_SPAWN_EGG);
+        //? if >=1.15 {
+        SPAWN_EGGS.add(Items.BEE_SPAWN_EGG);//1.15
+        //?}
         SPAWN_EGGS.add(Items.BLAZE_SPAWN_EGG);
         SPAWN_EGGS.add(Items.CAT_SPAWN_EGG);
         SPAWN_EGGS.add(Items.CAVE_SPIDER_SPAWN_EGG);
@@ -1291,12 +1712,18 @@ public class NewItemGroups {
         SPAWN_EGGS.add(Items.ENDERMITE_SPAWN_EGG);
         SPAWN_EGGS.add(Items.EVOKER_SPAWN_EGG);
         SPAWN_EGGS.add(Items.FOX_SPAWN_EGG);
-        //SPAWN_EGGS.add(Items.FROG_SPAWN_EGG);//1.19
+        //? if >=1.19 {
+        SPAWN_EGGS.add(Items.FROG_SPAWN_EGG);//1.19
+        //?}
         SPAWN_EGGS.add(Items.GHAST_SPAWN_EGG);
-        SPAWN_EGGS.add(Items.GLOW_SQUID_SPAWN_EGG);
-        SPAWN_EGGS.add(Items.GOAT_SPAWN_EGG);
+        //? if >=1.17 {
+        SPAWN_EGGS.add(Items.GLOW_SQUID_SPAWN_EGG);//1.17
+        SPAWN_EGGS.add(Items.GOAT_SPAWN_EGG);//1.17
+        //?}
         SPAWN_EGGS.add(Items.GUARDIAN_SPAWN_EGG);
-        SPAWN_EGGS.add(Items.HOGLIN_SPAWN_EGG);
+        //? if >=1.16 {
+        SPAWN_EGGS.add(Items.HOGLIN_SPAWN_EGG);//1.16
+        //?}
         SPAWN_EGGS.add(Items.HORSE_SPAWN_EGG);
         SPAWN_EGGS.add(Items.HUSK_SPAWN_EGG);
         SPAWN_EGGS.add(Items.LLAMA_SPAWN_EGG);
@@ -1308,8 +1735,12 @@ public class NewItemGroups {
         SPAWN_EGGS.add(Items.PARROT_SPAWN_EGG);
         SPAWN_EGGS.add(Items.PHANTOM_SPAWN_EGG);
         SPAWN_EGGS.add(Items.PIG_SPAWN_EGG);
-        SPAWN_EGGS.add(Items.PIGLIN_SPAWN_EGG);
-        SPAWN_EGGS.add(Items.PIGLIN_BRUTE_SPAWN_EGG);
+        //? if >=1.16 {
+        SPAWN_EGGS.add(Items.PIGLIN_SPAWN_EGG);//1.16
+        //?}
+        //? if >=1.16.2 {
+        SPAWN_EGGS.add(Items.PIGLIN_BRUTE_SPAWN_EGG);//1.16.2
+        //?}
         SPAWN_EGGS.add(Items.PILLAGER_SPAWN_EGG);
         SPAWN_EGGS.add(Items.POLAR_BEAR_SPAWN_EGG);
         SPAWN_EGGS.add(Items.PUFFERFISH_SPAWN_EGG);
@@ -1325,8 +1756,12 @@ public class NewItemGroups {
         SPAWN_EGGS.add(Items.SPIDER_SPAWN_EGG);
         SPAWN_EGGS.add(Items.SQUID_SPAWN_EGG);
         SPAWN_EGGS.add(Items.STRAY_SPAWN_EGG);
-        SPAWN_EGGS.add(Items.STRIDER_SPAWN_EGG);
-        //SPAWN_EGGS.add(Items.TADPOLE_SPAWN_EGG);//1.19
+        //? if >=1.16 {
+        SPAWN_EGGS.add(Items.STRIDER_SPAWN_EGG);//1.16
+        //?}
+        //? if >=1.19 {
+        SPAWN_EGGS.add(Items.TADPOLE_SPAWN_EGG);//1.19
+        //?}
         SPAWN_EGGS.add(Items.TRADER_LLAMA_SPAWN_EGG);
         SPAWN_EGGS.add(Items.TROPICAL_FISH_SPAWN_EGG);
         SPAWN_EGGS.add(Items.TURTLE_SPAWN_EGG);
@@ -1334,15 +1769,21 @@ public class NewItemGroups {
         SPAWN_EGGS.add(Items.VILLAGER_SPAWN_EGG);
         SPAWN_EGGS.add(Items.VINDICATOR_SPAWN_EGG);
         SPAWN_EGGS.add(Items.WANDERING_TRADER_SPAWN_EGG);
-        //SPAWN_EGGS.add(Items.WARDEN_SPAWN_EGG);//1.19
+        //? if >=1.19 {
+        SPAWN_EGGS.add(Items.WARDEN_SPAWN_EGG);//1.19
+        //?}
         SPAWN_EGGS.add(Items.WITCH_SPAWN_EGG);
         SPAWN_EGGS.add(Items.WITHER_SKELETON_SPAWN_EGG);
         SPAWN_EGGS.add(Items.WOLF_SPAWN_EGG);
-        SPAWN_EGGS.add(Items.ZOGLIN_SPAWN_EGG);
+        //? if >=1.16 {
+        SPAWN_EGGS.add(Items.ZOGLIN_SPAWN_EGG);//1.16
+        //?}
         SPAWN_EGGS.add(Items.ZOMBIE_SPAWN_EGG);
         SPAWN_EGGS.add(Items.ZOMBIE_HORSE_SPAWN_EGG);
         SPAWN_EGGS.add(Items.ZOMBIE_VILLAGER_SPAWN_EGG);
-        SPAWN_EGGS.add(Items.ZOMBIFIED_PIGLIN_SPAWN_EGG);
+        //? if >=1.16 {
+        SPAWN_EGGS.add(Items.ZOMBIFIED_PIGLIN_SPAWN_EGG);//1.16
+        //?}
 
         OPERATOR.add(Items.COMMAND_BLOCK);
         OPERATOR.add(Items.CHAIN_COMMAND_BLOCK);
@@ -1353,7 +1794,10 @@ public class NewItemGroups {
         OPERATOR.add(Items.STRUCTURE_VOID);
         OPERATOR.add(Items.BARRIER);
         OPERATOR.add(Items.DEBUG_STICK);
-        OPERATOR.addLightBlocks();
+        //? if >=1.17 {
+        OPERATOR.addLightBlocks();//1.17
+        //?}
+        OPERATOR.addPaintings();
 
         GROUPS[0] = BUILDING_BLOCKS;
         GROUPS[1] = COLORED_BLOCKS;

@@ -19,13 +19,12 @@
 			"net.plastoid501.nci.NewCreativeInventory"
 		]
 	},
-	"accessWidener": "new-creative-inventory.accesswidener",
 	"mixins": [
 		"new-creative-inventory.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.12.8",
-		"minecraft": "1.18.x"
+		"fabricloader": ">=0.7.1",
+		"minecraft": "{deps.minecraft}"
 	},
 	"suggests": {
 		"another-mod": "*"
